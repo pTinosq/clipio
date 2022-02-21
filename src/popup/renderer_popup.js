@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 '../edit/edit.html',
                 '_blank',
                 `width=${editor_width},height=${editor_height},x=${w},y=${h},frame=false,nodeIntegration=yes,contextIsolation=false,` +
-                `alwaysOnTop=true,titlebar=transparent,preload=../edit/preload_edit.js`
+                `alwaysOnTop=true,titlebar=transparent`
             );
         }
         if (event.target.id == "browser") {
