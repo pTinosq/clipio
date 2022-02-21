@@ -49,6 +49,14 @@ npm start
 
 <br>
 
+### **Testing**
+
+```bash
+npm test
+```
+
+<br>
+
 ### **Building**
 
 ```bash

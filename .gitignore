@@ -31,7 +31,7 @@ compile_commands.json
 /npm/dist
 /npm/path.txt
 /npm/checksums.json
-
+/coverage
 .npmrc
 
 # Generated API definitions

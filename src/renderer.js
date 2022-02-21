@@ -21,7 +21,7 @@ function create_li(value, parent) {
     var x = document.createElement("li");
     x.innerHTML = value;
     document.getElementById(parent).appendChild(x);
-
+    return x;
 }
 
 function create_li_pair(key, value, parent, blink = false, id = null) {
@@ -96,3 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+
+// UNIT TESTING
+module.exports = {
+    t,
+    create_li,
+    create_li_pair
+};
