@@ -4,9 +4,6 @@ const {
 } = require('electron');
 const path = require('path');
 
-// To start listening
-clipboardListener.startListening();
-console.log('Listening...');
 
 function isValidHttpUrl(string) {
   let url;
@@ -20,11 +17,13 @@ function isValidHttpUrl(string) {
   return url.protocol === "http:" || url.protocol === "https:";
 }
 
+clipboardListener.startListening();
 clipboardListener.on('change', () => {
   const text = clipboard.readText();
 
   localStorage.setItem('clipboard', text);
-  console.log(isValidHttpUrl(text));
+
+
   if (isValidHttpUrl(text)) {
     popup_width = 150;
     popup_height = 75;
@@ -33,7 +32,7 @@ clipboardListener.on('change', () => {
       (__dirname, './popup/popup_url.html'),
       '_blank',
       `width=${popup_width},height=${popup_height},x=${globalThis.screen.availWidth - popup_width},y=${globalThis.screen.availHeight - popup_height},frame=false,nodeIntegration=yes,contextIsolation=false,` +
-      `preload=${path.join(__dirname, '/popup/preload_popup.js')},transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=true`
+      `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=true`
     );
 
   } else {
@@ -44,7 +43,7 @@ clipboardListener.on('change', () => {
       (__dirname, './popup/popup.html'),
       '_blank',
       `width=${popup_width},height=${popup_height},x=${globalThis.screen.availWidth - popup_width},y=${globalThis.screen.availHeight - popup_height},frame=false,nodeIntegration=yes,contextIsolation=false,` +
-      `preload=${path.join(__dirname, '/popup/preload_popup.js')},transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=true`
+      `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=true`
     );
 
   }
@@ -52,7 +51,8 @@ clipboardListener.on('change', () => {
 });
 
 
-
-
-
-
+// UNIT TESTING
+module.exports = {
+  isValidHttpUrl,
+  clipboardListener
+};
