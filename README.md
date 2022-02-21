@@ -13,7 +13,7 @@
 ![GitHub issues](https://img.shields.io/github/issues/ptinosq/clipdit)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ptinosq/clipdit)
 
-Clipdit is built to be a fast and easy way to manage your clipboard. The idea came about when I was working on a project and needed to manually edit the names of certain files to include underscores instead of spaces. I quickly realized that a tool capable of converting spaces to underscores would also be capable of delivering plenty of other useful features.
+Clipdit is a fast and easy way to manage your clipboard. The idea came about when I was working on a project and needed to manually edit the names of certain files to include underscores instead of spaces. I quickly realized that a tool capable of converting spaces to underscores would also be capable of delivering plenty of other useful features.
 
 ## Features
 
