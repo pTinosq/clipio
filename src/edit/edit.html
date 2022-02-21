@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit copied text</title>
+    <link rel="stylesheet" href="edit.css">
+    <script src="../scripts/jquery-3.6.0.min.js"></script>
+    <script src="./renderer_edit.js"></script>
+    <script src="./editor.js"></script>
+
+</head>
+
+<body>
+
+    <div class="titlebar">
+        <div class="flex-options">
+            <div class="flex-option" id="maxi"></div>
+            <div class="flex-option" id="close"></div>
+        </div>
+    </div>
+
+    <div class="main">
+
+        <div class="module">
+            <div class="module-title">
+                <h1>Information</h1>
+            </div>
+            <div class="module-content">
+                <p id="information"></p>
+            </div>
+        </div>
+
+        <div class="module">
+            <div class="module-title">
+                <h1 onclick="replace_module(this)">Replace</h1>
+            </div>
+            <div class="module-content">
+                <input type="text" id="to_replace">
+                <p>-></p>
+                <input type="text" id="replace_with">
+
+            </div>
+        </div>
+        <div class="module">
+            <div class="module-title">
+                <h1 onclick="space_to_underscore_module()">Spaces to underscores</h1>
+            </div>
+        </div>
+        <div class="module">
+            <div class="module-title">
+                <h1 onclick="trailing_spaces_module()">Remove trailing spaces</h1>
+            </div>
+        </div>
+        <div class="module">
+            <div class="module-title">
+                <h1 onclick="lowercase_module()">Lowercase</h1>
+            </div>
+        </div>
+        <div class="module">
+            <div class="module-title">
+                <h1 onclick="uppercase_module()">Uppercase</h1>
+            </div>
+        </div>
+        <div class="module">
+            <div class="module-title">
+                <h1 onclick="remove_formatting_module()">Remove formatting</h1>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

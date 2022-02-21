@@ -1,0 +1,31 @@
+{
+  "name": "clipdit",
+  "version": "1.0.1",
+  "description": "Clipdit is a tool that allows immediate editing of content clipboard content when copying to the clipboard",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "electron .",
+    "app:dir": "electron-builder --dir",
+    "app:dist": "electron-builder"
+  },
+  "author": "Constantinos Psomadakis",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^17.0.1"
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.5",
+    "clipboard-event": "^1.5.0",
+    "electron-store": "^8.0.1",
+    "jquery": "^3.6.0"
+  },
+  "build": {
+    "appId": "com.ptinosq.clipdit",
+    "mac": {
+      "icon": "src/icon.png"
+    },
+    "win": {
+      "icon": "src/icon.png"
+    }
+  }
+}
