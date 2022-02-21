@@ -9,7 +9,7 @@
     "app:dist": "electron-builder"
   },
   "author": "Constantinos Psomadakis",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "devDependencies": {
     "electron": "^17.0.1"
   },
