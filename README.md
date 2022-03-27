@@ -40,6 +40,13 @@ When a user clicks on the clipdit edit popup, it opens a small panel with multip
 
 <br>
 
+### **Prerequisites**
+
+- NodeJS v15+
+- ElectronJS v17+
+
+<br>
+
 ### **Getting Started**
 
 ```bash
