@@ -3,6 +3,7 @@ const {
   BrowserWindow,
   ipcMain,
   Menu,
+  screen,
   Tray
 } = require('electron')
 const path = require('path');
@@ -38,9 +39,32 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'index.html'))
 
   // Open the DevTools.
-  if(store.get('show')){
+  if (store.get('show')) {
     mainWindow.webContents.openDevTools()
   }
+}
+
+const createPopup = () => {
+  // Create the browser window.
+  const popup = new BrowserWindow({
+    width: 300,
+    height: 600,
+    minHeight: 600,
+    minWidth: 300,
+    x: screen.getPrimaryDisplay().workAreaSize.width - 300,
+    y: screen.getPrimaryDisplay().workAreaSize.height - 600,
+    frame: false,
+    alwaysOnTop: true,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
+    }
+  });
+
+
+  // and load the index.html of the app.
+  popup.loadFile(path.join(__dirname, '/edit/edit.html'))
 }
 
 // This method will be called when Electron has finished
@@ -63,7 +87,6 @@ app.whenReady().then(() => {
         store.set('show', !store.get('show'));
       },
       checked: store.get('show')
-      // icon: path.join(__dirname, 'img/button.png')
     },
     {
       label: 'Item2',
@@ -78,7 +101,11 @@ app.whenReady().then(() => {
       }
     }
   ])
+
   appIcon.setToolTip('Clipdit')
+  appIcon.on('click', () => {
+    createPopup();
+  })
 
   // Call this again for Linux because we modified the context menu
   appIcon.setContextMenu(contextMenu)

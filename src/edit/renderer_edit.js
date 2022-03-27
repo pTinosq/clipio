@@ -32,5 +32,11 @@ document.addEventListener('DOMContentLoaded', function (event) {
 });
 
 function close_win() {
-    window.opener.close();
+    try {
+        window.opener.close();
+    } catch (error) {
+        if (error instanceof TypeError) {
+            window.close();
+        }
+    }
 }
