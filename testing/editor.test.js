@@ -130,3 +130,49 @@ test('Uppercase module', () => {
 
     }
 });
+
+test('From Base64 module', () => {
+    // "test_case" : "expected_result"
+    const test_words = {
+        "aGVsbG8=": "hello",
+        "SEVMTE8gV09STEQ=": "HELLO WORLD",
+        "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg==": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        "MTIzNDU2Nzg5MA==": "1234567890",
+        "ISIjJCUmXCcoKSorLC0uLzo7PD0+P0BbXFxdXl9ge3x9fg==": "!\"#$%&\\\'()*+,-./:;<=>?@[\\\\]^_`{|}~",
+        "ICAg": "   ",
+        "8J+YgPCfk4s=": "😀📋"
+    }
+
+    for (var key in test_words) {
+        localStorage.setItem("clipboard", key);
+        expect(
+            editor.from_base64()
+        ).toBe(test_words[key]);
+
+    }
+
+
+});
+
+test('To Base64 module', () => {
+    // "test_case" : "expected_result"
+    const test_words = {
+        "Hello World": "SGVsbG8gV29ybGQ=",
+        "hi": "aGk=",
+        "clipdit": "Y2xpcGRpdA==",
+        "1234567890": "MTIzNDU2Nzg5MA==",
+        "!@#$%^&*()_+-=[]{}|;':,./<>?~": "IUAjJCVeJiooKV8rLT1bXXt9fDsnOiwuLzw+P34=",
+        "(⌐■_■)": "KOKMkOKWoF/ilqAp",
+        "🟥🟧🟨🟩🟦🟪": "8J+fpfCfn6fwn5+o8J+fqfCfn6bwn5+q"
+    }
+
+    for (var key in test_words) {
+        localStorage.setItem("clipboard", key);
+        expect(
+            editor.to_base64()
+        ).toBe(test_words[key]);
+
+    }
+
+
+});

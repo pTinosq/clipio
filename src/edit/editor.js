@@ -9,9 +9,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+function from_base64() {
+    var clip = localStorage.getItem("clipboard");
+
+    // editing section
+    clip = Buffer.from(clip, 'base64').toString('utf-8');
+
+    localStorage.setItem("clipboard", clip);
+    return clip;
+}
+
+function to_base64() {
+    var clip = localStorage.getItem("clipboard");
+
+    // editing section
+    clip = Buffer.from(clip, 'utf-8').toString('base64');
+
+    localStorage.setItem("clipboard", clip);
+    return clip;
+}
+
 function replace_module() {
     var clip = localStorage.getItem("clipboard");
+
+    // editing section
     clip = clip.replaceAll(document.getElementById("to_replace").value, document.getElementById("replace_with").value);
+
     localStorage.setItem("clipboard", clip);
     return clip;
 }
@@ -76,5 +99,7 @@ module.exports = {
     trailing_spaces_module,
     lowercase_module,
     uppercase_module,
-    remove_formatting_module
+    remove_formatting_module,
+    from_base64,
+    to_base64
 };

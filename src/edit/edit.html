@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="main">
+    <div class="main" id="modules">
 
         <div class="module">
             <div class="module-title">
@@ -68,6 +68,11 @@
         <div class="module">
             <div class="module-title">
                 <h1 onclick="clipboard.writeText(remove_formatting_module(this));close_win();">Remove formatting</h1>
+            </div>
+        </div>
+        <div class="module">
+            <div class="module-title">
+                <h1 onclick="clipboard.writeText(to_base64(this));close_win();">Text to base64</h1>
             </div>
         </div>
 

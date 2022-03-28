@@ -1,7 +1,8 @@
 let $ = require('jquery');
 const {
     shell
-} = require('electron')
+} = require('electron');
+
 document.addEventListener('DOMContentLoaded', function () {
 
     var clicked = false;
