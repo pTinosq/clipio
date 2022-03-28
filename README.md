@@ -23,8 +23,9 @@ Clipdit is a fast and easy way to manage your clipboard. The idea came about whe
 - Clipboard spaces counter
 - Character/text replacement
 - Spaces to underscores conversion
-- Trailing spaces removal
 - Lowercase/uppercase conversion
+- Base64 encoding/decoding
+- Trailing spaces removal
 - Text formatting removal
 - Intuitive developer window
 
