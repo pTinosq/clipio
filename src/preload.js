@@ -20,7 +20,9 @@ function isValidHttpUrl(string) {
   return url.protocol === "http:" || url.protocol === "https:";
 }
 
-
+function isValidHexColour(string) {
+  return /#[0-9a-fA-F]{3,6}/.test(string);
+}
 
 clipboardListener.startListening();
 clipboardListener.on('change', () => {
@@ -28,12 +30,11 @@ clipboardListener.on('change', () => {
 
   localStorage.setItem('clipboard', text);
 
-
   if (isValidHttpUrl(text)) {
     popup_width = 150;
     popup_height = 75;
     localStorage.setItem("type", "url");
-    
+
     // URL popup
     window.open(
       (__dirname, './popup/popup_url.html'),
@@ -56,6 +57,18 @@ clipboardListener.on('change', () => {
     );
 
 
+  } else if (isValidHexColour(text)) {
+    popup_width = 75;
+    popup_height = 75;
+
+    // COLOUR popup
+    localStorage.setItem("type", "colour");
+    window.open(
+      (__dirname, './popup/popup.html'),
+      '_blank',
+      `width=${popup_width},height=${popup_height},x=${globalThis.screen.availWidth - popup_width},y=${globalThis.screen.availHeight - popup_height},frame=false,nodeIntegration=yes,contextIsolation=false,` +
+      `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=true`
+    );
   } else {
     popup_width = 75;
     popup_height = 75;
@@ -76,5 +89,6 @@ clipboardListener.on('change', () => {
 // UNIT TESTING
 module.exports = {
   isValidHttpUrl,
-  clipboardListener
+  clipboardListener,
+  isValidHexColour
 };

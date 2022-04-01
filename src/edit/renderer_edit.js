@@ -2,11 +2,17 @@ const {
     ipcRenderer
 } = require('electron')
 
+function getHexColour(string) {
+    try {
+        return string.match(/#[0-9a-fA-F]{3,6}/)[0];
+    } catch (e) {
+        return false;
+    }
+}
+
 function add_clickable_module(module_name, module_function) {
     var module = document.createElement("div");
     module.className = "module";
-    module.id = "eee";
-
     var module_title = document.createElement("div");
     module_title.className = "module-title";
 
@@ -21,6 +27,27 @@ function add_clickable_module(module_name, module_function) {
 
 }
 
+function add_detected_colour() {
+    var detected_colour = document.createElement("p");
+    detected_colour.id = "detected-colour";
+    detected_colour.innerHTML = "Detected colour:"
+
+
+    var colour_display = document.createElement("div");
+    colour_display.className = "colour-display";
+    colour_display.style = `background: ${getHexColour(localStorage.getItem("clipboard"))}`;
+
+    var colour_display_p = document.createElement("p");
+    colour_display_p.innerHTML = getHexColour(localStorage.getItem("clipboard"));
+
+    colour_display.appendChild(colour_display_p);
+
+    if (getHexColour(localStorage.getItem("clipboard")) !== false) {
+        document.getElementById("information-content").appendChild(detected_colour);
+        document.getElementById("information-content").appendChild(colour_display);
+    }
+}
+
 
 
 document.addEventListener('DOMContentLoaded', function (event) {
@@ -32,6 +59,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
             add_clickable_module("Base64 to text", "from_base64()");
             break;
         case 'default':
+            break;
+        case 'colour':
+            add_detected_colour();
             break;
     }
 
@@ -71,3 +101,8 @@ function close_win() {
         }
     }
 }
+
+// UNIT TESTING
+module.exports = {
+    getHexColour
+};
