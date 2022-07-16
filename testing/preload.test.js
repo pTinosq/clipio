@@ -80,5 +80,106 @@ test('Hex colour validity checker', () => {
     ).toBeFalsy();
 });
 
+test('Is Base64 checker', () => {
+    expect(
+        preload.isBase64("Hello World")
+    ).toBeFalsy();
+
+    expect(
+        preload.isBase64("123")
+    ).toBeFalsy();
+
+    expect(
+        preload.isBase64("//?!0.2.~$1/42mo")
+    ).toBeFalsy();
+
+    expect(
+        preload.isBase64("SGVsbG8gV29ybGQ=")
+    ).toBeTruthy();
+
+    expect(
+        preload.isBase64("SGVsbG8gV29ybGQ")
+    ).toBeFalsy();
+
+    expect(
+        preload.isBase64("ABCDEFG")
+    ).toBeFalsy();
+
+    expect(
+        preload.isBase64("!}~asdfsa~/!?£,52ps.2/1")
+    ).toBeFalsy();
+
+    expect(
+        preload.isBase64("https://regex101.com/")
+    ).toBeFalsy();
+
+    expect(
+        preload.isBase64("aHR0cHM6Ly9ZWe#EwMS5jb20v")
+    ).toBeFalsy();
+
+    expect(
+        preload.isBase64("SGVsbG8gRkYyOTk5IGZhMjk5OSB3b3JsZA==")
+    ).toBeTruthy();
+    
+    expect(
+        preload.isBase64("SGVsbG8gV29ybGQ= SGVsbG8gRkYyOTk5IGZhMjk5OSB3b3JsZA==")
+    ).toBeFalsy();
+});
+
+test('Is Filepath checker', () => {
+    expect(
+        preload.isFilePath("Hello World")
+    ).toBeFalsy();
+
+    expect(
+        preload.isFilePath("123")
+    ).toBeFalsy();
+
+    expect(
+        preload.isFilePath("C:\\Documents\\Newsletters\\Summer2018.pdf")
+    ).toBeTruthy();
+    
+    expect(
+        preload.isFilePath("\\Program Files\\Custom Utilities\\StringFinder.exe")
+    ).toBeFalsy();
+    
+    expect(
+        preload.isFilePath("Z:\\Projects\\apilibrary\\apilibrary")
+    ).toBeTruthy();
+    
+    expect(
+        preload.isFilePath("G:\\Projects\\apilibrary\\apilibrary\\")
+    ).toBeTruthy();
+    
+    expect(
+        preload.isFilePath("T:/Projects/apilibrary/apilibrary")
+    ).toBeTruthy();
+    
+    expect(
+        preload.isFilePath("G:/Projects/apilibrary/apilibrary/")
+    ).toBeTruthy();
+
+    expect(
+        preload.isFilePath("C:/Documents/Newsletters/Summer2018.pdf")
+    ).toBeTruthy();
+
+    expect(
+        preload.isFilePath("C:\\Users\\me\\OneDrive\\Desktop\\Example\\Test\\Q\\BN\\Clipdit\\src")
+    ).toBeTruthy();
+
+    expect(
+        preload.isFilePath("src/hello/")
+    ).toBeFalsy();
+    
+    expect(
+        preload.isFilePath("src/hello")
+    ).toBeFalsy();
+    
+    expect(
+        preload.isFilePath("/src/hello/")
+    ).toBeFalsy();
+
+});
+
 
 preload.clipboardListener.stopListening();
