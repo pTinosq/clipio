@@ -46,7 +46,12 @@ document.addEventListener('DOMContentLoaded', function () {
             );
         }
         if (event.target.id == "browser") {
-            shell.openExternal(localStorage.getItem('clipboard'))
+            shell.openExternal(localStorage.getItem('clipboard'));
+        }
+
+        if (event.target.id == "folder") {
+            
+            shell.openPath(localStorage.getItem('clipboard'));
         }
 
 

@@ -8,11 +8,15 @@ function isBase64(string) {
   return /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/.test(string);
 }
 
+function isFilePath(string) {
+  return /^[a-zA-Z]:[\\\/].*/.test(string.trim());
+}
+
 function isValidHttpUrl(string) {
   let url;
 
   try {
-    url = new URL(string);
+    url = new URL(string.trim());
   } catch (_) {
     return false;
   }
@@ -34,13 +38,14 @@ clipboardListener.on('change', () => {
     popup_width = 150;
     popup_height = 75;
     localStorage.setItem("type", "url");
+    localStorage.setItem('clipboard', text.trim());
 
     // URL popup
     window.open(
       (__dirname, './popup/popup_url.html'),
       '_blank',
       `width=${popup_width},height=${popup_height},x=${globalThis.screen.availWidth - popup_width},y=${globalThis.screen.availHeight - popup_height},frame=false,nodeIntegration=yes,contextIsolation=false,` +
-      `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=true`
+      `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=false`
     );
 
   } else if (isBase64(text)) {
@@ -53,7 +58,7 @@ clipboardListener.on('change', () => {
       (__dirname, './popup/popup.html'),
       '_blank',
       `width=${popup_width},height=${popup_height},x=${globalThis.screen.availWidth - popup_width},y=${globalThis.screen.availHeight - popup_height},frame=false,nodeIntegration=yes,contextIsolation=false,` +
-      `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=true`
+      `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=false`
     );
 
 
@@ -67,8 +72,22 @@ clipboardListener.on('change', () => {
       (__dirname, './popup/popup.html'),
       '_blank',
       `width=${popup_width},height=${popup_height},x=${globalThis.screen.availWidth - popup_width},y=${globalThis.screen.availHeight - popup_height},frame=false,nodeIntegration=yes,contextIsolation=false,` +
-      `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=true`
+      `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=false`
     );
+  } else if (isFilePath(text)) {
+    popup_width = 150;
+    popup_height = 95;
+    localStorage.setItem("type", "fpath");
+    localStorage.setItem('clipboard', text.trim());
+
+    // URL popup
+    window.open(
+      (__dirname, './popup/popup_fpath.html'),
+      '_blank',
+      `width=${popup_width},height=${popup_height},x=${globalThis.screen.availWidth - popup_width},y=${globalThis.screen.availHeight - popup_height},frame=false,nodeIntegration=yes,contextIsolation=false,` +
+      `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=false`
+    );
+
   } else {
     popup_width = 75;
     popup_height = 75;
@@ -90,5 +109,7 @@ clipboardListener.on('change', () => {
 module.exports = {
   isValidHttpUrl,
   clipboardListener,
-  isValidHexColour
+  isValidHexColour,
+  isBase64,
+  isFilePath
 };
