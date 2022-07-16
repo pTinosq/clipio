@@ -1,6 +1,6 @@
 {
   "name": "clipdit",
-  "version": "1.0.2-beta2",
+  "version": "1.0.3",
   "description": "Clipdit is a tool that allows immediate editing of content clipboard content when copying to the clipboard",
   "main": "./src/index.js",
   "scripts": {
