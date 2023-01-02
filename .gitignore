@@ -58,3 +58,4 @@ ts-gen
 patches/mtime-cache.json
 
 spec/fixtures/logo.png
+package-lock.json
