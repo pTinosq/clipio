@@ -1,7 +1,7 @@
 {
-  "name": "clipdit",
-  "version": "1.0.3",
-  "description": "Clipdit is a tool that allows immediate editing of content clipboard content when copying to the clipboard",
+  "name": "clipio",
+  "version": "1.0.3a",
+  "description": "Clipio is a tool that allows immediate editing of content clipboard content when copying to the clipboard",
   "main": "./src/index.js",
   "scripts": {
     "start": "electron .",
@@ -22,7 +22,7 @@
     "jquery": "^3.6.0"
   },
   "build": {
-    "appId": "com.ptinosq.clipdit",
+    "appId": "com.ptinosq.clipio",
     "mac": {
       "icon": "src/icon.png"
     },

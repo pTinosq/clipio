@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /*
     VERSIONS
     */
-    create_li_pair("Clipdit", ipcRenderer.sendSync('get_app_version'), "versions");
+    create_li_pair("Clipio", ipcRenderer.sendSync('get_app_version'), "versions");
     for (var key in process.versions) {
         create_li_pair(key, process.versions[key], "versions");
     }
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     create_li_pair("Platform", process.platform, "details");
     create_li_pair("Architecture", process.arch, "details");
     create_li_pair("PID", process.pid, "details");
-    var clipdit = create_li_pair("Clipdit clipboard", t(localStorage.getItem("clipboard"), 60), "details", false, "clipdit_details");
+    var clipio = create_li_pair("Clipio clipboard", t(localStorage.getItem("clipboard"), 60), "details", false, "clipio_details");
     localStorage.setItem("clipboard_CURRENT", localStorage.getItem("clipboard"));
 
     /*
@@ -84,11 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (localStorage.getItem("clipboard") != localStorage.getItem("clipboard_CURRENT")) {
-            clipdit.className = "blink";
-            clipdit.innerHTML = "Clipdit clipboard: " + t(localStorage.getItem("clipboard"), 60);
+            clipio.className = "blink";
+            clipio.innerHTML = "Clipio clipboard: " + t(localStorage.getItem("clipboard"), 60);
             localStorage.setItem("clipboard_CURRENT", localStorage.getItem("clipboard"));
         } else {
-            clipdit.className = "";
+            clipio.className = "";
         }
 
     }, 1000);

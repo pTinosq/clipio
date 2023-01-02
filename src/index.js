@@ -24,8 +24,8 @@ const createWindow = () => {
     minWidth: 800,
     autoHideMenuBar: true,
     show: store.get('show'),
-    title: 'Clipdit',
-    icon: path.join(__dirname, '/img/clipdit.png'),
+    title: 'Clipio',
+    icon: path.join(__dirname, '/img/clipio.png'),
     webPreferences: {
       nodeIntegration: true,
       preload: path.join(__dirname, 'preload.js'),
@@ -72,14 +72,14 @@ const createPopup = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   let autoLaunch = new AutoLaunch({
-    name: 'Clipdit',
+    name: 'Clipio',
     path: app.getPath('exe'),
   });
   autoLaunch.isEnabled().then((isEnabled) => {
     if (!isEnabled) autoLaunch.enable();
   });
 
-  appIcon = new Tray(path.join(__dirname, 'img/clipdit.png'))
+  appIcon = new Tray(path.join(__dirname, 'img/clipio.png'))
   const contextMenu = Menu.buildFromTemplate([{
       label: 'Developer mode (takes effect on app load)',
       type: 'checkbox',
@@ -102,7 +102,7 @@ app.whenReady().then(() => {
     }
   ])
 
-  appIcon.setToolTip('Clipdit')
+  appIcon.setToolTip('Clipio')
   appIcon.on('click', () => {
     createPopup();
   })

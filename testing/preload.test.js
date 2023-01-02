@@ -34,7 +34,7 @@ test('HTTP URL Checking', () => {
     ).toBeTruthy();
 
     expect(
-        preload.isValidHttpUrl("https://github.com/pTinosq/clipdit")
+        preload.isValidHttpUrl("https://github.com/pTinosq/clipio")
     ).toBeTruthy();
 });
 
@@ -164,7 +164,7 @@ test('Is Filepath checker', () => {
     ).toBeTruthy();
 
     expect(
-        preload.isFilePath("C:\\Users\\me\\OneDrive\\Desktop\\Example\\Test\\Q\\BN\\Clipdit\\src")
+        preload.isFilePath("C:\\Users\\me\\OneDrive\\Desktop\\Example\\Test\\Q\\BN\\Clipio\\src")
     ).toBeTruthy();
 
     expect(

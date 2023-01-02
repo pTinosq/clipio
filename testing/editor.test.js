@@ -159,7 +159,7 @@ test('To Base64 module', () => {
     const test_words = {
         "Hello World": "SGVsbG8gV29ybGQ=",
         "hi": "aGk=",
-        "clipdit": "Y2xpcGRpdA==",
+        "clipio": "Y2xpcGlv",
         "1234567890": "MTIzNDU2Nzg5MA==",
         "!@#$%^&*()_+-=[]{}|;':,./<>?~": "IUAjJCVeJiooKV8rLT1bXXt9fDsnOiwuLzw+P34=",
         "(⌐■_■)": "KOKMkOKWoF/ilqAp",
