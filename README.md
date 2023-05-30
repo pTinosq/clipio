@@ -1,7 +1,7 @@
 
 # Clipio
 
-[Clipio banner](https://raw.githubusercontent.com/pTinosq/clipio/main/content/clipio-banner.png)
+![Clipio banner](https://raw.githubusercontent.com/pTinosq/clipio/main/content/clipio-banner.png)
 
 # Rapid clipboard management
 
