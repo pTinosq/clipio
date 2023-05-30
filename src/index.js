@@ -64,7 +64,7 @@ const createPopup = () => {
 
 
   // and load the index.html of the app.
-  popup.loadFile(path.join(__dirname, '/edit/edit.html'))
+  popup.loadFile(path.join(__dirname, '/clipio_editor/editor.html'))
 }
 
 // This method will be called when Electron has finished
