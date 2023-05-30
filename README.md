@@ -1,8 +1,7 @@
-<br>
 
-<p align="center">
-  <img alt="Clipio logo" width="400" src="https://raw.githubusercontent.com/pTinosq/clipio/main/content/clipio-banner.png" />
-</p>
+# Clipio
+
+[Clipio banner](https://raw.githubusercontent.com/pTinosq/clipio/main/content/clipio-banner.png)
 
 # Rapid clipboard management
 
@@ -39,14 +38,10 @@ When a user clicks on the clipio edit popup, it opens a small panel with multipl
 
 ## Development
 
-<br>
-
 ### **Prerequisites**
 
 - NodeJS v15+
 - ElectronJS v17+
-
-<br>
 
 ### **Getting Started**
 
@@ -55,15 +50,12 @@ npm install
 npm start
 ```
 
-<br>
-
 ### **Testing**
 
 ```bash
 npm test
 ```
 
-<br>
 
 ### **Building**
 
@@ -73,6 +65,4 @@ npm run app:dist
 
 ---
 
-<p align="center">
-  Made by <a target="_blank" href="https://www.tinosps.com/">Tinos</a> ❤️
-</p>
+Made with ❤️ by [Tinos](https://github.com/pTinosq)
