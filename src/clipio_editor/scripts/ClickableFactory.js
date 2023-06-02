@@ -7,13 +7,16 @@ export class ClickableFactory {
 
   buildOnclickMethod() {
     // Construct onclick method from clickableBuilder
+    return () => {
+      let clipboardContent = localStorage.getItem("clipboard");
+      clipboardContent = this.clickable.run(clipboardContent);
 
-    let clipboardContent = localStorage.getItem("clipboard");
-    clipboardContent = this.clickable.run(clipboardContent);
+      localStorage.setItem("clipboard", clipboardContent);
+      clipboard.writeText(clipboardContent);
 
-    localStorage.setItem("clipboard", clipboardContent);
-    clipboard.writeText(clipboardContent);
-
+      // Close window
+      window.close();
+    };
   }
 
   buildHTML() {
@@ -28,7 +31,7 @@ export class ClickableFactory {
     console.log(this.clickable);
     moduleTitleContent.textContent = this.clickable.title;
     let onClickMethod = this.buildOnclickMethod();
-    moduleTitleContent.onclick = onClickMethod;
+    moduleTitleContent.addEventListener("click", onClickMethod);
 
     moduleTitleContainer.appendChild(moduleTitleContent);
     module.appendChild(moduleTitleContainer);
