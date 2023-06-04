@@ -1,17 +1,18 @@
 import { Clickable } from "../Clickable.js";
 
-class SpaceToUnderscordClickable extends Clickable {
+class SpaceToUnderscoreClickable extends Clickable {
   constructor(run, title) {
     super(run);
     this.title = title;
   }
 }
 
-const spaceToUnderscoreClickable = new SpaceToUnderscordClickable();
+const spaceToUnderscoreClickable = new SpaceToUnderscoreClickable();
 
 spaceToUnderscoreClickable.title = "Space To Underscore";
 
 spaceToUnderscoreClickable.run = (clipboardContent) => {
+  console.log("Spaces");
   return clipboardContent.replaceAll(" ", "_");
 };
 
