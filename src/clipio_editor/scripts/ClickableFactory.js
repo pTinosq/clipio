@@ -1,15 +1,11 @@
 const { clipboard } = require("electron");
 
 export class ClickableFactory {
-  constructor(clickable) {
-    this.clickable = clickable;
-  }
-
-  buildOnclickMethod() {
+  buildOnclickMethod(clickable) {
     // Construct onclick method from clickableBuilder
     return () => {
       let clipboardContent = localStorage.getItem("clipboard");
-      clipboardContent = this.clickable.run(clipboardContent);
+      clipboardContent = clickable.run(clipboardContent);
 
       localStorage.setItem("clipboard", clipboardContent);
       clipboard.writeText(clipboardContent);
@@ -19,7 +15,12 @@ export class ClickableFactory {
     };
   }
 
-  buildHTML() {
+  buildClickable(clickable) {
+    clickable.onClick = this.buildOnclickMethod(clickable);
+    return clickable;
+  }
+
+  buildHTML(clickable) {
     // Construct HTML data from clickableBuilder
     const module = document.createElement("div");
     module.className = "module";
@@ -28,10 +29,9 @@ export class ClickableFactory {
     moduleTitleContainer.className = "module-title";
 
     const moduleTitleContent = document.createElement("h1");
-    console.log(this.clickable);
-    moduleTitleContent.textContent = this.clickable.title;
-    let onClickMethod = this.buildOnclickMethod();
-    moduleTitleContent.addEventListener("click", onClickMethod);
+
+    moduleTitleContent.textContent = clickable.title;
+    moduleTitleContent.addEventListener("click", clickable.onClick);
 
     moduleTitleContainer.appendChild(moduleTitleContent);
     module.appendChild(moduleTitleContainer);

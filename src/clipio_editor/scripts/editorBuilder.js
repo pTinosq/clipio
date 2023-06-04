@@ -1,14 +1,17 @@
 import spaceToUnderscoreClickable from "./clickables/spaceToUnderscoreClickable.js";
+import removeTrailingSpacesClickable from "./clickables/removeTrailingSpacesClickable.js";
 import { ClickableFactory } from "./ClickableFactory.js";
 
+const clickables = [spaceToUnderscoreClickable, removeTrailingSpacesClickable];
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Build HTML for editor
-
   const clickableFactory = new ClickableFactory();
-  clickableFactory.clickable = spaceToUnderscoreClickable;
-  const clickableHTML = clickableFactory.buildHTML();
-
-  // Append to HTML
   const modules = document.getElementById("modules");
-  modules.appendChild(clickableHTML);
+
+  for (let i = 0; i < clickables.length; i++) {
+    // Build the clickable
+    const builtClickable = clickableFactory.buildClickable(clickables[i]);
+
+    modules.appendChild(clickableFactory.buildHTML(builtClickable));
+  }
 });
