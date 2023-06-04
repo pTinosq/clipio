@@ -12,7 +12,6 @@ const spaceToUnderscoreClickable = new SpaceToUnderscoreClickable();
 spaceToUnderscoreClickable.title = "Space to underscore";
 
 spaceToUnderscoreClickable.run = (clipboardContent) => {
-  console.log("Spaces");
   return clipboardContent.replaceAll(" ", "_");
 };
 
