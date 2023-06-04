@@ -3,6 +3,7 @@ import removeTrailingSpacesClickable from "./clickables/removeTrailingSpacesClic
 import uppercaseClickable from "./clickables/uppercaseClickable.js";
 import lowercaseClickable from "./clickables/lowercaseClickable.js";
 import removeFormattingClickable from "./clickables/removeFormattingClickable.js";
+import toBase64Clickable from "./clickables/toBase64Clickable.js";
 import { ClickableFactory } from "./ClickableFactory.js";
 
 const clickables = [
@@ -11,6 +12,7 @@ const clickables = [
   uppercaseClickable,
   lowercaseClickable,
   removeFormattingClickable,
+  toBase64Clickable,
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
