@@ -12,6 +12,7 @@
   "author": "Constantinos Psomadakis",
   "license": "GPL-3.0",
   "devDependencies": {
+    "@babel/preset-env": "^7.22.4",
     "electron": "^17.0.1",
     "jest": "^27.5.1"
   },
