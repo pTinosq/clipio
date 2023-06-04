@@ -9,7 +9,7 @@ class SpaceToUnderscoreClickable extends Clickable {
 
 const spaceToUnderscoreClickable = new SpaceToUnderscoreClickable();
 
-spaceToUnderscoreClickable.title = "Space To Underscore";
+spaceToUnderscoreClickable.title = "Space to underscore";
 
 spaceToUnderscoreClickable.run = (clipboardContent) => {
   console.log("Spaces");
