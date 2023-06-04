@@ -12,6 +12,9 @@ const lowercaseClickable = new LowercaseClickable();
 lowercaseClickable.title = "Lowercase";
 
 lowercaseClickable.run = (clipboardContent) => {
+  if (!clipboardContent) {
+    return "";
+  }
   return clipboardContent.toLowerCase();
 };
 

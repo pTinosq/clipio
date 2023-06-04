@@ -12,6 +12,9 @@ const removeTrailingSpacesClickable = new RemoveTrailingSpacesClickable();
 removeTrailingSpacesClickable.title = "Remove trailing spaces";
 
 removeTrailingSpacesClickable.run = (clipboardContent) => {
+  if (!clipboardContent) {
+    return "";
+  }
   return clipboardContent.trim();
 };
 

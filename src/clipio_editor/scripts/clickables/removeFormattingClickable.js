@@ -14,6 +14,9 @@ removeFormattingClickable.title = "Remove formatting";
 removeFormattingClickable.run = (clipboardContent) => {
   // This removes all formatting from the clipboard content
   // Yeah, it's weird, but it works
+  if (!clipboardContent) {
+    return "";
+  }
   return clipboardContent;
 };
 

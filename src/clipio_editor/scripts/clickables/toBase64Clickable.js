@@ -12,6 +12,9 @@ const toBase64Clickable = new ToBase64Clickable();
 toBase64Clickable.title = "To base64";
 
 toBase64Clickable.run = (clipboardContent) => {
+  if (!clipboardContent) {
+    return "";
+  }
   return Buffer.from(clipboardContent, "utf-8").toString("base64");
 };
 
