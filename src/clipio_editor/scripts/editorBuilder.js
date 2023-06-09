@@ -29,9 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Detect if color exists and add color preview if so
   if (/#[0-9a-fA-F]{3,6}/.test(clipboardContent)) {
     // Extract color from string
-    // TODO: This
     const color = clipboardContent.match(/#[0-9a-fA-F]{3,6}/)[0];
     const colorPreview = new ColorPreview();
+    colorPreview.buildHTML(color);
+    // The colour is #f2f
+    // The colour is #00d9f0
   }
 
   // Add modules
