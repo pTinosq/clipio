@@ -5,6 +5,9 @@ import lowercaseClickable from "./clickables/lowercaseClickable.js";
 import removeFormattingClickable from "./clickables/removeFormattingClickable.js";
 import toBase64Clickable from "./clickables/toBase64Clickable.js";
 import { ClickableFactory } from "./ClickableFactory.js";
+import { ColorPreview } from "./ColorPreview.js";
+
+const { clipboard } = require("electron");
 
 const clickables = [
   spaceToUnderscoreClickable,
@@ -16,6 +19,22 @@ const clickables = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Add information
+  const clipboardContent = clipboard.readText();
+  let data_string = `Length: ${clipboardContent.length}\nSpaces: ${
+    clipboardContent.split(" ").length - 1
+  }`;
+  document.getElementById("information").innerHTML = data_string;
+
+  // Detect if color exists and add color preview if so
+  if (/#[0-9a-fA-F]{3,6}/.test(clipboardContent)) {
+    // Extract color from string
+    // TODO: This
+    const color = clipboardContent.match(/#[0-9a-fA-F]{3,6}/)[0];
+    const colorPreview = new ColorPreview();
+  }
+
+  // Add modules
   const clickableFactory = new ClickableFactory();
   const modules = document.getElementById("modules");
 
