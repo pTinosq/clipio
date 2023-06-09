@@ -4,13 +4,12 @@ export class ClickableFactory {
   buildOnclickMethod(clickable) {
     // Construct onclick method from clickableBuilder
     return () => {
-      let clipboardContent = localStorage.getItem("clipboard");
+      let clipboardContent = clipboard.readText();
+
       clipboardContent = clickable.run(clipboardContent);
 
-      localStorage.setItem("clipboard", clipboardContent);
       clipboard.writeText(clipboardContent);
 
-      // Close window
       window.close();
     };
   }
