@@ -29,11 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Detect if color exists and add color preview if so
   if (/#[0-9a-fA-F]{3,6}/.test(clipboardContent)) {
     // Extract color from string
+    const informationContent = document.getElementById("information-content");
     const color = clipboardContent.match(/#[0-9a-fA-F]{3,6}/)[0];
     const colorPreview = new ColorPreview();
-    colorPreview.buildHTML(color);
-    // The colour is #f2f
-    // The colour is #00d9f0
+    let infoContentElements = colorPreview.buildHTML(color);
+
+    for (let i = 0; i < infoContentElements.length; i++) {
+      informationContent.appendChild(infoContentElements[i]);
+    }
   }
 
   // Add modules
