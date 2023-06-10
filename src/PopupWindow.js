@@ -1,4 +1,4 @@
-class PopupWindow {
+export class PopupWindow {
   constructor() {
     this.url = "";
     this.target = "_blank";
@@ -28,9 +28,6 @@ class PopupWindow {
     const titlebarString = `titlebar=${this.titlebar}`;
     const resizableString = `resizable=${this.resizable}`;
 
-    console.log(
-      `${widthString},${heightString},${xString},${yString},${frameString},${nodeIntegrationString},${contextIsolationString},${transparentString},${alwaysOnTopString},${skipTaskbarString},${titlebarString},${resizableString}`
-    );
     return `${widthString},${heightString},${xString},${yString},${frameString},${nodeIntegrationString},${contextIsolationString},${transparentString},${alwaysOnTopString},${skipTaskbarString},${titlebarString},${resizableString}`;
   }
 
@@ -38,5 +35,3 @@ class PopupWindow {
     window.open(this.url, this.target, this.buildFeatures());
   }
 }
-
-module.exports = PopupWindow;
