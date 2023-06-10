@@ -42,7 +42,7 @@ clipboardListener.on('change', () => {
 
     // URL popup
     window.open(
-      (__dirname, './popup/popup_url.html'),
+      (__dirname, './clipio_popup/popup_url.html'),
       '_blank',
       `width=${popup_width},height=${popup_height},x=${globalThis.screen.availWidth - popup_width},y=${globalThis.screen.availHeight - popup_height},frame=false,nodeIntegration=yes,contextIsolation=false,` +
       `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=false`
@@ -55,7 +55,7 @@ clipboardListener.on('change', () => {
     // BASE64 popup
     localStorage.setItem("type", "base64");
     window.open(
-      (__dirname, './popup/popup.html'),
+      (__dirname, './clipio_popup/popup.html'),
       '_blank',
       `width=${popup_width},height=${popup_height},x=${globalThis.screen.availWidth - popup_width},y=${globalThis.screen.availHeight - popup_height},frame=false,nodeIntegration=yes,contextIsolation=false,` +
       `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=false`
@@ -69,7 +69,7 @@ clipboardListener.on('change', () => {
     // COLOUR popup
     localStorage.setItem("type", "colour");
     window.open(
-      (__dirname, './popup/popup.html'),
+      (__dirname, './clipio_popup/popup.html'),
       '_blank',
       `width=${popup_width},height=${popup_height},x=${globalThis.screen.availWidth - popup_width},y=${globalThis.screen.availHeight - popup_height},frame=false,nodeIntegration=yes,contextIsolation=false,` +
       `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=false`
@@ -82,7 +82,7 @@ clipboardListener.on('change', () => {
 
     // URL popup
     window.open(
-      (__dirname, './popup/popup_fpath.html'),
+      (__dirname, './clipio_popup/popup_fpath.html'),
       '_blank',
       `width=${popup_width},height=${popup_height},x=${globalThis.screen.availWidth - popup_width},y=${globalThis.screen.availHeight - popup_height},frame=false,nodeIntegration=yes,contextIsolation=false,` +
       `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=false`
@@ -94,7 +94,7 @@ clipboardListener.on('change', () => {
     localStorage.setItem("type", "default");
     // Text popup
     window.open(
-      (__dirname, './popup/popup.html'),
+      (__dirname, './clipio_popup/popup.html'),
       '_blank',
       `width=${popup_width},height=${popup_height},x=${globalThis.screen.availWidth - popup_width},y=${globalThis.screen.availHeight - popup_height},frame=false,nodeIntegration=yes,contextIsolation=false,` +
       `transparent=true,alwaysOnTop=true,skipTaskbar=true,titlebar=transparent,resizable=true`
