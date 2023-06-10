@@ -8,7 +8,7 @@ export class Interactor {
 
 export class InteractorElement {
   constructor() {
-    this.element = document.createElement("div");
+    this.element = null;
     this.isClickable = false;
   }
 }
