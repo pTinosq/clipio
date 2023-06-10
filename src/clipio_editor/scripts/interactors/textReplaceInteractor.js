@@ -21,15 +21,15 @@ title.element = titleElement;
 const replaceValueInput = new InteractorElement();
 const replaceValueInputElement = document.createElement("input");
 replaceValueInputElement.type = "text";
-replaceValueInputElement.placeholder = "Replace...";
+replaceValueInputElement.placeholder = "Find this...";
 replaceValueInputElement.id = "replace-value-input";
 
 replaceValueInput.element = replaceValueInputElement;
 
 // Break
 const breakElement = new InteractorElement();
-const breakElementElement = document.createElement("br");
 
+breakElement.element = document.createElement("br");
 
 // Replace with input
 const replaceWithInput = new InteractorElement();
@@ -53,11 +53,12 @@ textReplaceInteractor.run = (clipboardContent) => {
   return replacedContent;
 };
 
+// Add elements to interactor
 textReplaceInteractor.titleElements = [title];
 textReplaceInteractor.contentElements = [
   replaceValueInput,
   breakElement,
-  replaceWithInput
+  replaceWithInput,
 ];
 
 export default textReplaceInteractor;
