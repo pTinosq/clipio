@@ -1,13 +1,21 @@
+import { ColorPreview } from "./ColorPreview.js";
+import { ClickableFactory } from "./ClickableFactory.js";
+import { InteractorFactory } from "./InteractorFactory.js";
+
+// CLICKABLES
 import spaceToUnderscoreClickable from "./clickables/spaceToUnderscoreClickable.js";
 import removeTrailingSpacesClickable from "./clickables/removeTrailingSpacesClickable.js";
 import uppercaseClickable from "./clickables/uppercaseClickable.js";
 import lowercaseClickable from "./clickables/lowercaseClickable.js";
 import removeFormattingClickable from "./clickables/removeFormattingClickable.js";
 import toBase64Clickable from "./clickables/toBase64Clickable.js";
-import { ClickableFactory } from "./ClickableFactory.js";
-import { ColorPreview } from "./ColorPreview.js";
+
+// INTERACTORS
+import textReplaceInteractor from "./interactors/textReplaceInteractor.js";
 
 const { clipboard } = require("electron");
+
+// TODO: Implement REPLACE functionality
 
 const clickables = [
   spaceToUnderscoreClickable,
@@ -17,6 +25,8 @@ const clickables = [
   removeFormattingClickable,
   toBase64Clickable,
 ];
+
+const interactors = [textReplaceInteractor];
 
 document.addEventListener("DOMContentLoaded", () => {
   // Add information
@@ -39,9 +49,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Add modules
-  const clickableFactory = new ClickableFactory();
+  // Add interactors
+  const interactorFactory = new InteractorFactory();
   const modules = document.getElementById("modules");
+
+  for (let i = 0; i < interactors.length; i++) {
+    // Build the interactor
+    const builtInteractor = interactorFactory.buildInteractor(interactors[i]);
+
+    modules.appendChild(interactorFactory.buildHTML(builtInteractor));
+  }
+
+  // Add clickables
+  const clickableFactory = new ClickableFactory();
 
   for (let i = 0; i < clickables.length; i++) {
     // Build the clickable
