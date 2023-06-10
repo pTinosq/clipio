@@ -1,8 +1,9 @@
 let $ = require("jquery");
-const { shell } = require("electron");
+const { clipboard, shell } = require("electron");
 
 document.addEventListener("DOMContentLoaded", function () {
-  var clicked = false;
+  // After 1500ms begin fading out the popup window
+  let clicked = false;
 
   setTimeout(() => {
     $("body").fadeOut(2000, function () {
@@ -14,13 +15,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }, 1500);
 
+  // Right click to close the popup window
   document.addEventListener("contextmenu", function (event) {
     event.preventDefault();
-
     clicked = true;
+
     window.close();
   });
 
+  // Left click to open the editor
   document.addEventListener("click", function (event) {
     clicked = true;
     editor_width = 300;
@@ -39,10 +42,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     if (event.target.id == "browser") {
       shell.openExternal(localStorage.getItem("clipboard"));
+
+      window.close();
     }
 
     if (event.target.id == "folder") {
       shell.openPath(localStorage.getItem("clipboard"));
+
+      window.close();
     }
   });
 });
