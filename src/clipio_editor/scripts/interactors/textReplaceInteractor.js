@@ -55,6 +55,10 @@ textReplaceInteractor.run = (clipboardContent) => {
   const replaceValue = document.getElementById("replace-value-input").value;
   const replaceWith = document.getElementById("replace-with-input").value;
 
+  if (replaceValue === "") {
+    return clipboardContent;
+  }
+
   const replacedContent = clipboardContent.replaceAll(
     replaceValue,
     replaceWith
