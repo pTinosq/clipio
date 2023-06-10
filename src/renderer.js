@@ -1,4 +1,4 @@
-const { ipcRenderer } = require("electron");
+const { ipcRenderer, clipboard } = require("electron");
 const Store = require("electron-store");
 let store = new Store();
 
@@ -54,12 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
   create_li_pair("PID", process.pid, "details");
   var clipio = create_li_pair(
     "Clipio clipboard",
-    t(localStorage.getItem("clipboard"), 60),
+    t(clipboard.readText(), 60),
     "details",
     false,
     "clipio_details"
   );
-  localStorage.setItem("clipboard_CURRENT", localStorage.getItem("clipboard"));
+  localStorage.setItem("clipboard_CURRENT", clipboard.readText());
 
   /*
     PERFORMANCE
@@ -107,17 +107,10 @@ document.addEventListener("DOMContentLoaded", () => {
         " MB";
     }
 
-    if (
-      localStorage.getItem("clipboard") !=
-      localStorage.getItem("clipboard_CURRENT")
-    ) {
+    if (clipboard.readText() != localStorage.getItem("clipboard_CURRENT")) {
       clipio.className = "blink";
-      clipio.innerHTML =
-        "Clipio clipboard: " + t(localStorage.getItem("clipboard"), 60);
-      localStorage.setItem(
-        "clipboard_CURRENT",
-        localStorage.getItem("clipboard")
-      );
+      clipio.innerHTML = "Clipio clipboard: " + t(clipboard.readText(), 60);
+      localStorage.setItem("clipboard_CURRENT", clipboard.readText());
     } else {
       clipio.className = "";
     }

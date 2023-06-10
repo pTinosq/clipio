@@ -2,7 +2,6 @@ const clipboardListener = require('clipboard-event');
 const {
   clipboard
 } = require('electron');
-const path = require('path');
 
 function isBase64(string) {
   return /^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/.test(string);
@@ -35,9 +34,13 @@ clipboardListener.on('change', () => {
   localStorage.setItem('clipboard', text);
 
   if (isValidHttpUrl(text)) {
-    popup_width = 150;
-    popup_height = 75;
-    localStorage.setItem("type", "url");
+
+    const popupWindow = new PopupWindow();
+    popupWindow.url = (__dirname, './clipio_popup/popup_url.html');
+    popupWindow.width = 150;
+    popupWindow.height = 75;
+
+
     localStorage.setItem('clipboard', text.trim());
 
     // URL popup

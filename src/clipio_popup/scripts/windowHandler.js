@@ -40,14 +40,15 @@ document.addEventListener("DOMContentLoaded", function () {
           `alwaysOnTop=true,titlebar=transparent`
       );
     }
+
     if (event.target.id == "browser") {
-      shell.openExternal(localStorage.getItem("clipboard"));
+      shell.openExternal(clipboard.readText());
 
       window.close();
     }
 
     if (event.target.id == "folder") {
-      shell.openPath(localStorage.getItem("clipboard"));
+      shell.openPath(clipboard.readText());
 
       window.close();
     }
