@@ -1,4 +1,4 @@
-import { PopupWindow } from "../src/PopupWindow";
+import { PopupWindow } from "../src/scripts/PopupWindow.js";
 
 describe("PopupWindow", () => {
   let popupWindow;

@@ -1,4 +1,4 @@
-import { isFilePath, isValidHttpUrl } from "../src/preload";
+import { isFilePath, isValidHttpUrl } from "../src/scripts/preload.js";
 
 describe("isFilePath", () => {
   it("should return true for valid Windows-style file paths", () => {
