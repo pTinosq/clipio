@@ -1,4 +1,4 @@
-export class PopupWindow {
+class PopupWindow {
   constructor() {
     this.url = "";
     this.target = "_blank";
@@ -35,3 +35,7 @@ export class PopupWindow {
     window.open(this.url, this.target, this.buildFeatures());
   }
 }
+
+module.exports = {
+  PopupWindow,
+};

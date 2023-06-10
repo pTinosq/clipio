@@ -1,13 +1,13 @@
 const clipboardListener = require("clipboard-event");
 const { clipboard } = require("electron");
-const PopupWindow = require("./PopupWindow.js");
+const { PopupWindow } = require("./PopupWindow.js");
 
-export function isFilePath(string) {
+function isFilePath(string) {
   // Check if string is a valid file path
   return /^[a-zA-Z]:[\\\/].*/.test(string.trim());
 }
 
-export function isValidHttpUrl(string) {
+function isValidHttpUrl(string) {
   // https://stackoverflow.com/a/43467144/9700228
   // Check if string is a valid HTTP URL
   let url;
@@ -41,3 +41,8 @@ clipboardListener.on("change", () => {
 
   popupWindow.open();
 });
+
+module.exports = {
+  isFilePath,
+  isValidHttpUrl,
+};
