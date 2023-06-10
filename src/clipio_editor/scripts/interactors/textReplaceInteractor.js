@@ -26,6 +26,11 @@ replaceValueInputElement.id = "replace-value-input";
 
 replaceValueInput.element = replaceValueInputElement;
 
+// Break
+const breakElement = new InteractorElement();
+const breakElementElement = document.createElement("br");
+
+
 // Replace with input
 const replaceWithInput = new InteractorElement();
 const replaceWithInputElement = document.createElement("input");
@@ -36,7 +41,6 @@ replaceWithInputElement.id = "replace-with-input";
 replaceWithInput.element = replaceWithInputElement;
 
 // Run method
-
 textReplaceInteractor.run = (clipboardContent) => {
   const replaceValue = document.getElementById("replace-value-input").value;
   const replaceWith = document.getElementById("replace-with-input").value;
@@ -50,6 +54,10 @@ textReplaceInteractor.run = (clipboardContent) => {
 };
 
 textReplaceInteractor.titleElements = [title];
-textReplaceInteractor.contentElements = [replaceValueInput, replaceWithInput];
+textReplaceInteractor.contentElements = [
+  replaceValueInput,
+  breakElement,
+  replaceWithInput
+];
 
 export default textReplaceInteractor;
