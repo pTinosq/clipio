@@ -1,5 +1,5 @@
-import $ from "jquery";
-import { shell } from "electron";
+let $ = require("jquery");
+const { shell } = require("electron");
 
 document.addEventListener("DOMContentLoaded", function () {
   var clicked = false;
