@@ -2,10 +2,8 @@ class PopupWindow {
   constructor() {
     this.url = "";
     this.target = "_blank";
-    this.width = 150;
+    this.width = 75;
     this.height = 75;
-    this.x = globalThis.screen.availWidth - this.width;
-    this.y = globalThis.screen.availHeight - this.height;
     this.frame = false;
     this.nodeIntegration = true;
     this.contextIsolation = false;
@@ -16,16 +14,29 @@ class PopupWindow {
     this.resizable = false;
   }
 
-  buildURL(url) {
-    this.url = url;
-    return url;
+  buildFeatures() {
+    const widthString = `width=${this.width}`;
+    const heightString = `height=${this.height}`;
+    const xString = `x=${globalThis.screen.availWidth - this.width}`;
+    const yString = `y=${globalThis.screen.availHeight - this.height}`;
+    const frameString = `frame=${this.frame}`;
+    const nodeIntegrationString = `nodeIntegration=${this.nodeIntegration}`;
+    const contextIsolationString = `contextIsolation=${this.contextIsolation}`;
+    const transparentString = `transparent=${this.transparent}`;
+    const alwaysOnTopString = `alwaysOnTop=${this.alwaysOnTop}`;
+    const skipTaskbarString = `skipTaskbar=${this.skipTaskbar}`;
+    const titlebarString = `titlebar=${this.titlebar}`;
+    const resizableString = `resizable=${this.resizable}`;
+
+    console.log(
+      `${widthString},${heightString},${xString},${yString},${frameString},${nodeIntegrationString},${contextIsolationString},${transparentString},${alwaysOnTopString},${skipTaskbarString},${titlebarString},${resizableString}`
+    );
+    return `${widthString},${heightString},${xString},${yString},${frameString},${nodeIntegrationString},${contextIsolationString},${transparentString},${alwaysOnTopString},${skipTaskbarString},${titlebarString},${resizableString}`;
   }
 
-    buildTarget(target) {
-    this.target = target;
-    return this;
-    }
-
-    buildFeatures(features) {
-
+  open() {
+    window.open(this.url, this.target, this.buildFeatures());
+  }
 }
+
+module.exports = PopupWindow;
