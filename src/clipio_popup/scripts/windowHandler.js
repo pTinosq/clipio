@@ -3,6 +3,7 @@ const { shell } = require("electron");
 
 document.addEventListener("DOMContentLoaded", function () {
   var clicked = false;
+
   setTimeout(() => {
     $("body").fadeOut(2000, function () {
       if (!clicked) {
