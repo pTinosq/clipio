@@ -2,12 +2,12 @@ const clipboardListener = require("clipboard-event");
 const { clipboard } = require("electron");
 const PopupWindow = require("./PopupWindow.js");
 
-function isFilePath(string) {
+export function isFilePath(string) {
   // Check if string is a valid file path
   return /^[a-zA-Z]:[\\\/].*/.test(string.trim());
 }
 
-function isValidHttpUrl(string) {
+export function isValidHttpUrl(string) {
   // https://stackoverflow.com/a/43467144/9700228
   // Check if string is a valid HTTP URL
   let url;
