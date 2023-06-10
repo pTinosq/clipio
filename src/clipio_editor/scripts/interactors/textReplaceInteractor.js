@@ -23,6 +23,11 @@ const replaceValueInputElement = document.createElement("input");
 replaceValueInputElement.type = "text";
 replaceValueInputElement.placeholder = "Find this...";
 replaceValueInputElement.id = "replace-value-input";
+replaceValueInputElement.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    textReplaceInteractor.onClick();
+  }
+});
 
 replaceValueInput.element = replaceValueInputElement;
 
@@ -37,6 +42,11 @@ const replaceWithInputElement = document.createElement("input");
 replaceWithInputElement.type = "text";
 replaceWithInputElement.placeholder = "Replace with...";
 replaceWithInputElement.id = "replace-with-input";
+replaceWithInputElement.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    textReplaceInteractor.onClick();
+  }
+});
 
 replaceWithInput.element = replaceWithInputElement;
 
