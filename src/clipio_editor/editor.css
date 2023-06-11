@@ -1,0 +1,120 @@
+:root {
+  --textColor: #232327;
+  font-size: 12px;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #dfe1e5;
+  font-family: Open sans, sans-serif;
+}
+
+body {
+  height: calc(100vh - 32px);
+}
+
+.titlebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 36px;
+  width: 100%;
+  background: #333333;
+}
+
+.flex-options {
+  height: 100%;
+  width: 50px;
+  display: flex;
+  float: right;
+  justify-content: space-between;
+  margin-right: 16px;
+}
+
+.flex-option {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  background: pink;
+  height: 50%;
+  aspect-ratio: 1;
+  border-radius: 100px;
+}
+
+#information-content p {
+  font-size: 1.25rem;
+  margin: 0;
+  padding: 0;
+  padding-left: 1rem;
+}
+
+#close {
+  background: #f95355;
+  cursor: pointer;
+}
+
+#maxi {
+  background: #24c138;
+  cursor: pointer;
+}
+
+.main {
+  margin-top: 32px;
+  width: 100%;
+}
+
+.module {
+  width: 100%;
+  height: auto;
+  min-height: max-content;
+  border-bottom: 2px solid gray;
+}
+
+.module-title {
+  color: var(--textColor);
+  font-size: 1rem;
+  padding: 1rem 0rem 1rem 1rem;
+}
+
+.module-title h1 {
+  transition: 0.2s;
+  margin: 0;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.module-title h1:hover {
+  color: #204e8a;
+}
+
+.module-content {
+  width: 100%;
+  min-height: 36px;
+  margin-top: 6px;
+}
+
+.module-content input {
+  width: calc(100% - (1rem * 3));
+  height: 2rem;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.module-content p {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.color-display {
+  width: calc(100% - (1rem * 2));
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  height: 16px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+}

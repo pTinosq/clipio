@@ -1,6 +1,6 @@
 {
   "name": "clipio",
-  "version": "1.0.3a",
+  "version": "1.1.0",
   "description": "Clipio is a tool that allows immediate editing of content clipboard content when copying to the clipboard",
   "main": "./src/index.js",
   "scripts": {
@@ -12,6 +12,7 @@
   "author": "Constantinos Psomadakis",
   "license": "GPL-3.0",
   "devDependencies": {
+    "@babel/preset-env": "^7.22.4",
     "electron": "^17.0.1",
     "jest": "^27.5.1"
   },

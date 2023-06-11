@@ -1,32 +1,24 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <title>Clipio developer window</title>
+    <script type="module" src="./scripts/devWindow.js"></script>
+    <script src="./scripts/devWindowUtils.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <title>Clipio developer window</title>
-  <script src="./renderer.js"></script>
-  <link rel="stylesheet" href="style.css">
+  <body>
+    <div class="main" id="main">
+      <button onclick="disable_dev_window()" id="disable_dev">
+        Disable developer window
+      </button>
+      <button onclick="hide_dev_window()" id="hide_dev">
+        Hide developer window
+      </button>
+      <h1>Developer window</h1>
 
-</head>
-
-<body>
-  <div class="main">
-    <button onclick="disable_dev_window()" id="disable_dev">Disable developer window</button>
-    <button onclick="hide_dev_window()" id="hide_dev">Hide developer window</button>
-    <h1>Developer window active</h1>
-    <h2>Versions</h2>
-    <ul id="versions">
-    </ul>
-
-    <h2>Details</h2>
-    <ul id="details">
-    </ul>
-
-    <h2>Performance</h2>
-    <ul id="performance">
-    </ul>
-  </div>
-</body>
-
+    </div>
+  </body>
 </html>

@@ -1,185 +1,45 @@
-const preload = require('../src/preload');
+import { isFilePath, isValidHttpUrl } from "../src/scripts/preload.js";
 
-test('HTTP URL Checking', () => {
-    expect(
-        preload.isValidHttpUrl("Hello World")
-    ).toBeFalsy();
+describe("isFilePath", () => {
+  it("should return true for valid Windows-style file paths", () => {
+    expect(isFilePath("C:\\Program Files")).toBe(true);
+  });
 
-    expect(
-        preload.isValidHttpUrl("123")
-    ).toBeFalsy();
+  it("should return false for non-file paths", () => {
+    expect(isFilePath("Not a file path")).toBe(false);
+  });
 
-    expect(
-        preload.isValidHttpUrl("//?!0.2.2")
-    ).toBeFalsy();
+  it("should ignore leading and trailing whitespace", () => {
+    expect(isFilePath("  C:\\Program Files  ")).toBe(true);
+  });
 
-    expect(
-        preload.isValidHttpUrl("https://google.com")
-    ).toBeTruthy();
-
-    expect(
-        preload.isValidHttpUrl("http://google.co")
-    ).toBeTruthy();
-
-    expect(
-        preload.isValidHttpUrl("http://www3.example.net")
-    ).toBeTruthy();
-
-    expect(
-        preload.isValidHttpUrl("https://www.rat.io")
-    ).toBeTruthy();
-
-    expect(
-        preload.isValidHttpUrl("https://www.bbc.co.uk/news")
-    ).toBeTruthy();
-
-    expect(
-        preload.isValidHttpUrl("https://github.com/pTinosq/clipio")
-    ).toBeTruthy();
+  it("should return false for empty strings", () => {
+    expect(isFilePath("")).toBe(false);
+  });
 });
 
-test('Hex colour validity checker', () => {
-    expect(
-        preload.isValidHexColour("Hello World")
-    ).toBeFalsy();
+describe("isValidHttpUrl", () => {
+  it("should return true for valid http URLs", () => {
+    expect(isValidHttpUrl("http://example.com")).toBe(true);
+  });
 
-    expect(
-        preload.isValidHexColour("123")
-    ).toBeFalsy();
+  it("should return true for valid https URLs", () => {
+    expect(isValidHttpUrl("https://example.com")).toBe(true);
+  });
 
-    expect(
-        preload.isValidHexColour("//?!0.2.2")
-    ).toBeFalsy();
+  it("should return false for non-URL strings", () => {
+    expect(isValidHttpUrl("Not a URL")).toBe(false);
+  });
 
-    expect(
-        preload.isValidHexColour("#ff2")
-    ).toBeTruthy();
+  it("should ignore leading and trailing whitespace", () => {
+    expect(isValidHttpUrl("  https://example.com  ")).toBe(true);
+  });
 
-    expect(
-        preload.isValidHexColour("#ff212c")
-    ).toBeTruthy();
+  it("should return false for empty strings", () => {
+    expect(isValidHttpUrl("")).toBe(false);
+  });
 
-    expect(
-        preload.isValidHexColour("#FF9C22")
-    ).toBeTruthy();
-
-    expect(
-        preload.isValidHexColour("#012345")
-    ).toBeTruthy();
-
-    expect(
-        preload.isValidHexColour("#6789ab")
-    ).toBeTruthy();
-
-    expect(
-        preload.isValidHexColour("test #ff0")
-    ).toBeTruthy();
-
-    expect(
-        preload.isValidHexColour("Hello FF2999 fa2999 world")
-    ).toBeFalsy();
+  it("should return false for non-http/https URLs", () => {
+    expect(isValidHttpUrl("ftp://example.com")).toBe(false);
+  });
 });
-
-test('Is Base64 checker', () => {
-    expect(
-        preload.isBase64("Hello World")
-    ).toBeFalsy();
-
-    expect(
-        preload.isBase64("123")
-    ).toBeFalsy();
-
-    expect(
-        preload.isBase64("//?!0.2.~$1/42mo")
-    ).toBeFalsy();
-
-    expect(
-        preload.isBase64("SGVsbG8gV29ybGQ=")
-    ).toBeTruthy();
-
-    expect(
-        preload.isBase64("SGVsbG8gV29ybGQ")
-    ).toBeFalsy();
-
-    expect(
-        preload.isBase64("ABCDEFG")
-    ).toBeFalsy();
-
-    expect(
-        preload.isBase64("!}~asdfsa~/!?£,52ps.2/1")
-    ).toBeFalsy();
-
-    expect(
-        preload.isBase64("https://regex101.com/")
-    ).toBeFalsy();
-
-    expect(
-        preload.isBase64("aHR0cHM6Ly9ZWe#EwMS5jb20v")
-    ).toBeFalsy();
-
-    expect(
-        preload.isBase64("SGVsbG8gRkYyOTk5IGZhMjk5OSB3b3JsZA==")
-    ).toBeTruthy();
-    
-    expect(
-        preload.isBase64("SGVsbG8gV29ybGQ= SGVsbG8gRkYyOTk5IGZhMjk5OSB3b3JsZA==")
-    ).toBeFalsy();
-});
-
-test('Is Filepath checker', () => {
-    expect(
-        preload.isFilePath("Hello World")
-    ).toBeFalsy();
-
-    expect(
-        preload.isFilePath("123")
-    ).toBeFalsy();
-
-    expect(
-        preload.isFilePath("C:\\Documents\\Newsletters\\Summer2018.pdf")
-    ).toBeTruthy();
-    
-    expect(
-        preload.isFilePath("\\Program Files\\Custom Utilities\\StringFinder.exe")
-    ).toBeFalsy();
-    
-    expect(
-        preload.isFilePath("Z:\\Projects\\apilibrary\\apilibrary")
-    ).toBeTruthy();
-    
-    expect(
-        preload.isFilePath("G:\\Projects\\apilibrary\\apilibrary\\")
-    ).toBeTruthy();
-    
-    expect(
-        preload.isFilePath("T:/Projects/apilibrary/apilibrary")
-    ).toBeTruthy();
-    
-    expect(
-        preload.isFilePath("G:/Projects/apilibrary/apilibrary/")
-    ).toBeTruthy();
-
-    expect(
-        preload.isFilePath("C:/Documents/Newsletters/Summer2018.pdf")
-    ).toBeTruthy();
-
-    expect(
-        preload.isFilePath("C:\\Users\\me\\OneDrive\\Desktop\\Example\\Test\\Q\\BN\\Clipio\\src")
-    ).toBeTruthy();
-
-    expect(
-        preload.isFilePath("src/hello/")
-    ).toBeFalsy();
-    
-    expect(
-        preload.isFilePath("src/hello")
-    ).toBeFalsy();
-    
-    expect(
-        preload.isFilePath("/src/hello/")
-    ).toBeFalsy();
-
-});
-
-
-preload.clipboardListener.stopListening();
