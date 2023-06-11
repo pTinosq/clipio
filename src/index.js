@@ -77,6 +77,8 @@ app.whenReady().then(() => {
       type: "checkbox",
       click: () => {
         store.set("show", !store.get("show"));
+        app.relaunch();
+        app.exit();
       },
       checked: store.get("show"),
     },
