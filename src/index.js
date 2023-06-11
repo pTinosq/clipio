@@ -73,7 +73,7 @@ app.whenReady().then(() => {
   appIcon = new Tray(path.join(__dirname, "img/clipio.png"));
   const contextMenu = Menu.buildFromTemplate([
     {
-      label: "Developer mode (takes effect on app load)",
+      label: "Developer mode",
       type: "checkbox",
       click: () => {
         store.set("show", !store.get("show"));
