@@ -18,12 +18,11 @@ Clipio is a fast and easy way to manage your clipboard. The idea came about when
 
 - Unintrusive interface
 - Auto URL detection
-- Clipboard length counter
-- Clipboard spaces counter
+- Clipboard length and spaces counter
 - Character/text replacement
 - Spaces to underscores conversion
 - Lowercase/uppercase conversion
-- Base64 encoding/decoding
+- Base64 encoding
 - Trailing spaces removal
 - Text formatting removal
 - Intuitive developer window
