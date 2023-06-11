@@ -3,14 +3,17 @@ const { clipboard } = require("electron");
 export class ClickableFactory {
   buildOnclickMethod(clickable) {
     // Construct onclick method from clickableBuilder
-    return () => {
+    return (event) => {
       let clipboardContent = clipboard.readText();
 
       clipboardContent = clickable.run(clipboardContent);
 
       clipboard.writeText(clipboardContent);
 
-      window.close();
+      // When shift-clicked, don't close the window
+      if (!event.shiftKey) {
+        window.close();
+      }
     };
   }
 
