@@ -1,5 +1,5 @@
 const { ipcRenderer, clipboard } = require("electron");
-import { DevInfo, DevInfoItem } from "./devInfo.js";
+import { DevInfo, DevInfoItem } from "./DevInfo.js";
 
 function boxed(str, n) {
   return `<span class='boxed'>${
