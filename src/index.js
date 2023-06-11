@@ -121,6 +121,11 @@ ipcMain.on("minimize", () => {
   BrowserWindow.getFocusedWindow().minimize();
 });
 
+ipcMain.on("relaunch", () => {
+  app.relaunch();
+  app.exit();
+});
+
 ipcMain.on("maximize", () => {
   BrowserWindow.getFocusedWindow().isMaximized()
     ? BrowserWindow.getFocusedWindow().restore()
