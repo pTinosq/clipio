@@ -3,13 +3,21 @@ const path = require("path");
 const Store = require("electron-store");
 const AutoLaunch = require("auto-launch");
 
+const BASE_DIR = __dirname;
+const ICON_PATH = path.join(BASE_DIR, "img/clipio.png");
+
 const store = new Store();
 if (!store.has("show")) {
   store.set("show", false);
 }
 
+const commonWindowPreferences = {
+  nodeIntegration: true,
+  contextIsolation: false,
+  enableRemoteModule: true,
+};
+
 const createWindow = () => {
-  // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -18,59 +26,52 @@ const createWindow = () => {
     autoHideMenuBar: true,
     show: store.get("show"),
     title: "Clipio",
-    icon: path.join(__dirname, "/img/clipio.png"),
+    icon: ICON_PATH,
     webPreferences: {
-      nodeIntegration: true,
-      preload: path.join(__dirname, "/scripts/preload.js"),
-      contextIsolation: false,
-      enableRemoteModule: true,
+      ...commonWindowPreferences,
+      preload: path.join(BASE_DIR, "/scripts/preload.js"),
     },
   });
 
-  // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, "index.html"));
+  mainWindow.loadFile(path.join(BASE_DIR, "index.html"));
 
-  // Open the DevTools.
   if (store.get("show")) {
     mainWindow.webContents.openDevTools();
   }
 };
 
 const createPopup = () => {
-  // Create the browser window.
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+
   const popup = new BrowserWindow({
     width: 300,
     height: 600,
     minHeight: 600,
     minWidth: 300,
-    x: screen.getPrimaryDisplay().workAreaSize.width - 300,
-    y: screen.getPrimaryDisplay().workAreaSize.height - 600,
+    x: width - 300,
+    y: height - 600,
     frame: false,
     alwaysOnTop: true,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-      enableRemoteModule: true,
-    },
+    webPreferences: commonWindowPreferences,
   });
 
-  // and load the index.html of the app.
-  popup.loadFile(path.join(__dirname, "/clipio_editor/editor.html"));
+  popup.loadFile(path.join(BASE_DIR, "/clipio_editor/editor.html"));
 };
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
-  let autoLaunch = new AutoLaunch({
+const initializeAutoLaunch = async () => {
+  const autoLaunch = new AutoLaunch({
     name: "Clipio",
     path: app.getPath("exe"),
   });
-  autoLaunch.isEnabled().then((isEnabled) => {
-    if (!isEnabled) autoLaunch.enable();
-  });
 
-  appIcon = new Tray(path.join(__dirname, "img/clipio.png"));
+  if (!(await autoLaunch.isEnabled())) {
+    autoLaunch.enable();
+  }
+};
+
+const createTray = () => {
+  const appIcon = new Tray(ICON_PATH);
+
   const contextMenu = Menu.buildFromTemplate([
     {
       label: "Developer mode",
@@ -83,7 +84,6 @@ app.whenReady().then(() => {
       checked: store.get("show"),
     },
     {
-      label: "Item2",
       type: "separator",
     },
     {
@@ -97,26 +97,22 @@ app.whenReady().then(() => {
   ]);
 
   appIcon.setToolTip("Clipio");
-  appIcon.on("click", () => {
-    createPopup();
-  });
+  appIcon.on("click", createPopup);
+  appIcon.setContextMenu(contextMenu); // Call this again for Linux because we modified the context menu
+};
 
-  // Call this again for Linux because we modified the context menu
-  appIcon.setContextMenu(contextMenu);
+app.whenReady().then(async () => {
+  await initializeAutoLaunch();
+  createTray();
   createWindow();
-
-  app.on("activate", () => {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  });
 });
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
+});
+
+app.on("activate", () => {
+  if (BrowserWindow.getAllWindows().length === 0) createWindow();
 });
 
 ipcMain.on("minimize", () => {
@@ -129,11 +125,14 @@ ipcMain.on("relaunch", () => {
 });
 
 ipcMain.on("maximize", () => {
-  BrowserWindow.getFocusedWindow().isMaximized()
-    ? BrowserWindow.getFocusedWindow().restore()
-    : BrowserWindow.getFocusedWindow().maximize();
+  const focusedWindow = BrowserWindow.getFocusedWindow();
+  if (focusedWindow.isMaximized()) {
+    focusedWindow.restore();
+  } else {
+    focusedWindow.maximize();
+  }
 });
 
-ipcMain.on("get_app_version", (event, arg) => {
+ipcMain.on("get_app_version", (event) => {
   event.returnValue = app.getVersion();
 });
