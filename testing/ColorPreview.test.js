@@ -8,9 +8,10 @@ describe("ColorPreview", () => {
     // Mock document.createElement
     createElementMock = jest.fn().mockImplementation((tag) => {
       return {
-        innerHTML: "",
         className: "",
+        innerHTML: "",
         style: "",
+        appendChild: jest.fn(),
         tagName: tag.toUpperCase(),
       };
     });
@@ -20,22 +21,50 @@ describe("ColorPreview", () => {
     colorPreview = new ColorPreview();
   });
 
-  it("buildHTML creates elements with correct properties", () => {
-    const color = "#ff0000";
-    const elements = colorPreview.buildHTML(color);
+  it("buildHTML creates correct elements for a single color", () => {
+    const colors = ["#ffffff"];
 
-    // Check that two elements were returned
+    const elements = colorPreview.buildHTML(colors);
+
     expect(elements.length).toBe(2);
 
-    // Check the properties of the first element
-    const detectedColor = elements[0];
+    const [detectedColor, colorDisplays] = elements;
+
     expect(detectedColor.tagName).toBe("P");
     expect(detectedColor.innerHTML).toBe("Detected colour: ");
 
-    // Check the properties of the second element
-    const colorDisplay = elements[1];
+    expect(colorDisplays.tagName).toBe("DIV");
+    expect(colorDisplays.appendChild).toHaveBeenCalledTimes(1);
+
+    const colorDisplay = createElementMock.mock.results[2].value;
     expect(colorDisplay.tagName).toBe("DIV");
     expect(colorDisplay.className).toBe("color-display");
-    expect(colorDisplay.style).toBe(`background: ${color}`);
+    expect(colorDisplay.style).toBe("background: #ffffff");
+  });
+
+  it("buildHTML creates correct elements for multiple colors", () => {
+    const colors = ["#ffffff", "#000000"];
+
+    const elements = colorPreview.buildHTML(colors);
+
+    expect(elements.length).toBe(2);
+
+    const [detectedColor, colorDisplays] = elements;
+
+    expect(detectedColor.tagName).toBe("P");
+    expect(detectedColor.innerHTML).toBe("Detected colours: ");
+
+    expect(colorDisplays.tagName).toBe("DIV");
+    expect(colorDisplays.appendChild).toHaveBeenCalledTimes(2);
+
+    const colorDisplay1 = createElementMock.mock.results[2].value;
+    expect(colorDisplay1.tagName).toBe("DIV");
+    expect(colorDisplay1.className).toBe("color-display");
+    expect(colorDisplay1.style).toBe("background: #ffffff");
+
+    const colorDisplay2 = createElementMock.mock.results[3].value;
+    expect(colorDisplay2.tagName).toBe("DIV");
+    expect(colorDisplay2.className).toBe("color-display");
+    expect(colorDisplay2.style).toBe("background: #000000");
   });
 });
