@@ -3,14 +3,16 @@ const { clipboard } = require("electron");
 export class InteractorFactory {
   buildOnclickMethod(interactor) {
     // Construct onclick method from clickableBuilder
-    return () => {
+    return (event) => {
       let clipboardContent = clipboard.readText();
 
       clipboardContent = interactor.run(clipboardContent);
 
       clipboard.writeText(clipboardContent);
 
-      window.close();
+      if (!event.shiftKey) {
+        window.close();
+      }
     };
   }
 
