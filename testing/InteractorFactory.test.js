@@ -43,10 +43,24 @@ describe("InteractorFactory", () => {
     clipboard.readText.mockImplementation(() => "original text");
 
     const onclick = interactorFactory.buildOnclickMethod(interactor);
-    onclick();
+    const mockEvent = { shiftKey: false };
+    onclick(mockEvent);
 
     expect(interactor.run).toHaveBeenCalledWith("original text");
     expect(clipboard.writeText).toHaveBeenCalledWith("original text modified");
+  });
+
+  it("buildOnclickMethod does not close the window if event.shiftKey is true", () => {
+    const clickable = {
+      run: jest.fn(),
+    };
+    const onclick = interactorFactory.buildOnclickMethod(clickable);
+
+    const mockEvent = { shiftKey: true };
+    window.close = jest.fn(); // Mock window.close
+    onclick(mockEvent);
+
+    expect(window.close).not.toHaveBeenCalled(); // Assert that window.close was not called
   });
 
   it("buildInteractor assigns an onclick method to the interactor", () => {
