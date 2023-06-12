@@ -25,7 +25,7 @@ replaceValueInputElement.placeholder = "Find this...";
 replaceValueInputElement.id = "replace-value-input";
 replaceValueInputElement.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
-    textReplaceInteractor.onClick();
+    textReplaceInteractor.onClick(event);
   }
 });
 
@@ -44,7 +44,7 @@ replaceWithInputElement.placeholder = "Replace with...";
 replaceWithInputElement.id = "replace-with-input";
 replaceWithInputElement.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
-    textReplaceInteractor.onClick();
+    textReplaceInteractor.onClick(event);
   }
 });
 
