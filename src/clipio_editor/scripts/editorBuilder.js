@@ -40,9 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (/#[0-9a-fA-F]{3,6}/.test(clipboardContent)) {
     // Extract color from string
     const informationContent = document.getElementById("information-content");
-    const color = clipboardContent.match(/#[0-9a-fA-F]{3,6}/)[0];
+    const colors = clipboardContent.match(/#[0-9a-fA-F]{3,6}/g);
     const colorPreview = new ColorPreview();
-    let infoContentElements = colorPreview.buildHTML(color);
+    let infoContentElements = colorPreview.buildHTML(colors);
 
     for (let i = 0; i < infoContentElements.length; i++) {
       informationContent.appendChild(infoContentElements[i]);
