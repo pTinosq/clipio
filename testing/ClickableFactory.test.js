@@ -40,8 +40,8 @@ describe("ClickableFactory", () => {
     clipboard.readText.mockImplementation(() => "original text");
 
     const onclick = clickableFactory.buildOnclickMethod(clickable);
-    const mockEvent = { shiftKey: false }; // Add this line
-    onclick(mockEvent); // Update this line
+    const mockEvent = { shiftKey: false };
+    onclick(mockEvent);
 
     expect(clickable.run).toHaveBeenCalledWith("original text");
     expect(clipboard.writeText).toHaveBeenCalledWith("original text modified");
