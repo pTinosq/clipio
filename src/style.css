@@ -1,94 +1,90 @@
 :root {
-    --green: #44bd4e;
+  --green: #44bd4e;
 }
 
 html,
 body {
-    background-color: #202124;
-    color: var(--green);
-    font-family: consolas, monospace, 'Open sans', sans-serif;
-    font-weight: 200;
-    height: 100%;
-    width: 100%;
-    margin: 0;
+  background-color: #202124;
+  color: var(--green);
+  font-family: consolas, monospace, "Open sans", sans-serif;
+  font-weight: 200;
+  height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 .main {
-    /* padding: 12px; */
-    width: 100%;
-    height: 100%;
+  /* padding: 12px; */
+  width: 100%;
+  height: 100%;
 }
 
 button {
-    transition: 0.4s background;
-    position: fixed;
-    right: 0;
-    background: var(--green);
-    color: white;
-    width: 250px;
-    height: 48px;
-    border: none;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
+  transition: 0.4s background;
+  position: fixed;
+  right: 0;
+  background: var(--green);
+  color: white;
+  width: 250px;
+  height: 48px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 button:hover {
-    transition: 0.4s;
-    background: #2e8035;
-    color: #eee;
+  transition: 0.4s;
+  background: #2e8035;
+  color: #eee;
 }
 
-#hide_dev{
-    top: 48px;
-    border-radius: 0px 0px 0px 6px;
-
+#hide_dev {
+  top: 48px;
+  border-radius: 0px 0px 0px 6px;
 }
 
 #disable_dev {
-    top: 0;
-    border-bottom: 1px solid #1b4d1f;   
-    
+  top: 0;
+  border-bottom: 1px solid #1b4d1f;
 }
 
 .main h1 {
-    margin-top: 24px;
+  margin-top: 24px;
 }
 
 .main p,
 .main h2,
 .main h1,
 .main ul {
-    margin-left: 24px;
+  margin-left: 24px;
 }
 
-
-
 .blink {
-    animation: blinker 1s infinite;
+  animation: blinker 1s infinite;
 }
 
 .blinkonce {
-    animation: blinker 1s;
+  animation: blinker 1s;
 }
 
 @keyframes blinker {
-    0% {
-        color: #bdecc1;
-    }
+  0% {
+    color: #bdecc1;
+  }
 
-    20% {
-        color: #44bd4e;
-    }
+  20% {
+    color: #44bd4e;
+  }
 
-    100% {
-        color: #44bd4e;
-    }
+  100% {
+    color: #44bd4e;
+  }
 }
 
 .boxed {
-    font-family: monospace;
-    background: #121212;
-    padding: 6px;
-    color: #bdecc1;
+  font-family: monospace;
+  background: #121212;
+  padding: 6px;
+  color: #bdecc1;
 }

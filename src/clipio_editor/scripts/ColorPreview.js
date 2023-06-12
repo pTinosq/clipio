@@ -1,12 +1,22 @@
 export class ColorPreview {
-  buildHTML(color) {
+  buildHTML(colors) {
     const detectedColor = document.createElement("p");
-    detectedColor.innerHTML = "Detected colour: ";
+    if (colors.length > 1) {
+      detectedColor.innerHTML = "Detected colours: ";
+    } else {
+      detectedColor.innerHTML = "Detected colour: ";
+    }
 
-    var colorDisplay = document.createElement("div");
-    colorDisplay.className = "color-display";
-    colorDisplay.style = `background: ${color}`;
+    const colorDisplays = document.createElement("div");
 
-    return [detectedColor, colorDisplay];
+    for (let i = 0; i < colors.length; i++) {
+      let colorDisplay = document.createElement("div");
+      colorDisplay.className = "color-display";
+      colorDisplay.style = `background: ${colors[i]}`;
+
+      colorDisplays.appendChild(colorDisplay);
+    }
+
+    return [detectedColor, colorDisplays];
   }
 }
