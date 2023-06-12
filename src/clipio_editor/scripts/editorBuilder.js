@@ -51,13 +51,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Add interactors
   const interactorFactory = new InteractorFactory();
-  const modules = document.getElementById("modules");
+  const buildZone = document.getElementById("build-zone");
+  // Prevent text selection when shift clicking
+  buildZone.onselectstart = function () {
+    return false;
+  };
 
   for (let i = 0; i < interactors.length; i++) {
     // Build the interactor
     const builtInteractor = interactorFactory.buildInteractor(interactors[i]);
 
-    modules.appendChild(interactorFactory.buildHTML(builtInteractor));
+    buildZone.appendChild(interactorFactory.buildHTML(builtInteractor));
   }
 
   // Add clickables
@@ -67,6 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Build the clickable
     const builtClickable = clickableFactory.buildClickable(clickables[i]);
 
-    modules.appendChild(clickableFactory.buildHTML(builtClickable));
+    buildZone.appendChild(clickableFactory.buildHTML(builtClickable));
   }
 });
