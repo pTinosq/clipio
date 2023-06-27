@@ -9,6 +9,7 @@ import uppercaseClickable from "./clickables/uppercaseClickable.js";
 import lowercaseClickable from "./clickables/lowercaseClickable.js";
 import removeFormattingClickable from "./clickables/removeFormattingClickable.js";
 import toBase64Clickable from "./clickables/toBase64Clickable.js";
+import googleTranslateClickable from "./clickables/googleTranslateClickable.js";
 
 // INTERACTORS
 import textReplaceInteractor from "./interactors/textReplaceInteractor.js";
@@ -24,6 +25,7 @@ const clickables = [
   lowercaseClickable,
   removeFormattingClickable,
   toBase64Clickable,
+  googleTranslateClickable,
 ];
 
 const interactors = [textReplaceInteractor];
