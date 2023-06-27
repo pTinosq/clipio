@@ -1,23 +1,23 @@
-name: Version Check
+name: Package.json Check
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
-      - main
+      - '*'
 
 jobs:
-  version-check:
+  packagejson-check:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check if version is updated
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check if package.json is modified
         run: |
-          if git diff --unified=0 ${{ github.event.pull_request.base.sha }} ${{ github.sha }} package.json | grep -qE '^\+\s+"version":'; then
-            echo "Version updated in package.json"
+          if git diff --name-only HEAD^ HEAD | grep -qE 'package.json'; then
+            echo "Package.json has been modified"
           else
-            echo "Version not updated in package.json"
+            echo "::error::Package.json has not been modified"
             exit 1
           fi
