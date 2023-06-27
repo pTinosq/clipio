@@ -1,0 +1,26 @@
+name: Check Package Version
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  check_package_version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Compare package version
+        run: |
+          if [[ ${{ github.event_name }} == 'pull_request' ]]; then
+            git fetch origin ${{ github.event.pull_request.base.ref }}:${{ github.event.pull_request.base.ref }}
+            diff=$(git diff --name-only HEAD ${{ github.event.pull_request.base.ref }} -- package.json)
+            if [[ -z "$diff" ]]; then
+              echo "::error::Package.json is the same in both branches. Please update the package version."
+              exit 1
+            fi
+          fi
