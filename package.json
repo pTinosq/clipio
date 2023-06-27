@@ -1,6 +1,6 @@
 {
   "name": "clipio",
-  "version": "1.1.3",
+  "version": "1.1.3a",
   "description": "Clipio is a tool that allows immediate editing of content clipboard content when copying to the clipboard",
   "main": "./src/index.js",
   "scripts": {
