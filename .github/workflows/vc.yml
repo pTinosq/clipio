@@ -1,23 +1,23 @@
-name: Package.json Check
-
+name: Check package.json
 on:
   pull_request:
-    branches:
-      - '*'
+    types: [opened, edited]
 
 jobs:
-  packagejson-check:
+  check_package_json:
+    name: Check package.json
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Check if package.json is modified
+      - uses: actions/checkout@v2
+      - name: Get package info
+        uses: codex-team/action-nodejs-package-info@v1.1
+        id: package
+      - name: Check if package.json has been edited
         run: |
-          if git diff --name-only HEAD~1 HEAD | grep -qE '^package.json$'; then
-            echo "Package.json has been modified"
+          old_version=$(cat package.json | grep -Po '"version": "(.*?)"')
+          new_version=$(steps.package.outputs.version)
+          if [ "$old_version" != "$new_version" ]; then
+            echo "Package.json has been edited."
           else
-            echo "::error::Package.json has not been modified"
-            exit 1
+            echo "Package.json has not been edited."
           fi
