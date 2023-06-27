@@ -13,7 +13,7 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "@babel/preset-env": "^7.22.4",
-    "electron": "^17.0.1",
+    "electron": "^18.3.7",
     "electron-builder": "^24.4.0",
     "jest": "^27.5.1"
   },
