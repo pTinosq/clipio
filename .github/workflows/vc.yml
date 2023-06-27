@@ -1,0 +1,20 @@
+name: Version Check
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  version-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if version is updated
+        run: |
+          if git diff --unified=0 HEAD^ HEAD package.json | grep -qE '^\+\s+"version":'; then
+            echo "Version updated in package.json"
+          else
+            echo "Version not updated in package.json"
+            exit 1
+          fi
