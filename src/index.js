@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain, Menu, screen, Tray } = require("electron");
 const path = require("path");
 const Store = require("electron-store");
 const AutoLaunch = require("auto-launch");
-
+lol
 const BASE_DIR = __dirname;
 const ICON_PATH = path.join(BASE_DIR, "img/clipio.png");
 
