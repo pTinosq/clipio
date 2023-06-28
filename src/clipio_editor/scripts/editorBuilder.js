@@ -11,8 +11,6 @@ const { clipboard } = require("electron");
 const { ipcRenderer } = require("electron");
 const fs = require("fs");
 
-// TODO: Implement REPLACE functionality
-
 const interactors = [textReplaceInteractor];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -63,6 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let module = new ClipioModule(installedModules[i]["id"]);
     module = module.loadManifest();
     module = module.loadData();
+
+    if (!module.succesfullyLoaded) continue;
 
     const clickable = new Clickable();
     clickable.title = module.name;

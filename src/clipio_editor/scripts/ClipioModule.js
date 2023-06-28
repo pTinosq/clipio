@@ -12,6 +12,7 @@ export class ClipioModule {
     this.data = "";
     this.path = ipcRenderer.sendSync("get-app-path", id);
     this.enabled = true;
+    this.succesfullyLoaded = true;
   }
 
   loadManifest() {
@@ -25,7 +26,8 @@ export class ClipioModule {
       this.authors = manifest.authors;
       this.description = manifest.description;
     } else {
-      console.error("Manifest file does not exist");
+      console.error("Manifest file does not exist for module", this.id);
+      this.succesfullyLoaded = false;
     }
 
     return this;
@@ -38,7 +40,8 @@ export class ClipioModule {
       const { run } = require(dataPath);
       this.data = run;
     } else {
-      console.error("Data file does not exist");
+      console.error("Data file does not exist for module", this.id);
+      this.succesfullyLoaded = false;
     }
 
     return this;
