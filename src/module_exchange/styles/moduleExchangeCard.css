@@ -26,26 +26,33 @@
   padding: 1rem 0;
 }
 
+.mebi-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 .mebi-button {
-  
-}
-
-.mebi-button-warning {
-  background: #ff9800;
-  color: #fff;
-}
-
-.mebi-button-info {
-  background: #2196f3;
-  color: #fff;
+  /* from mebi-buttons{ gap: (1rem) * 2 */
+  flex: calc(50% - 2rem);
+  padding: 0.5rem 1rem;
+  color: #222;
+  background: #efefef;
+  border: none;
+  cursor: pointer;
 }
 
 .mebi-button-success {
-  background: #4caf50;
-  color: #fff;
+  background: #6ef175;
 }
 
 .mebi-button-danger {
-  background: #f44336;
-  color: #fff;
+  background: #ffa19c;
+  border: 1px solid #c33030;
+}
+
+.mebi-button-warning {
+  background: #f6cd45;
 }

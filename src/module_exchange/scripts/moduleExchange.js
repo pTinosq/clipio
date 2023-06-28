@@ -82,11 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then((modules) => {
         const localModules = ipcRenderer.sendSync("get-local-modules");
-        /*
-        {
-          'uid': {'enable': true},
-        }
-        */
+
         const localModulesUIDs = Object.keys(localModules);
 
         for (let i = 0; i < modules.length; i++) {

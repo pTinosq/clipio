@@ -33,58 +33,67 @@ export default class ModuleExchangeItem {
     moduleDescription.innerText = this.description;
     moduleExchangeItem.appendChild(moduleDescription);
 
+    let moduleButtons = document.createElement("div");
+    moduleButtons.classList.add("mebi-buttons");
+
     if (this.installed) {
-      // Module is installed so options are to remove or disable or update
-      if (this.installedVersion !== this.version) {
-        // Module is installed but needs to be updated
-        let updateButton = document.createElement("button");
-        updateButton.classList.add("mebi-button");
-        updateButton.classList.add("mebi-button-info");
-        updateButton.innerText = "Update";
-        moduleExchangeItem.appendChild(updateButton);
-      }
+      let removeButton = document.createElement("button");
+      removeButton.classList.add("mebi-button");
+      removeButton.classList.add("mebi-button-danger");
+      removeButton.innerText = "Uninstall";
+
+      moduleButtons.appendChild(removeButton);
 
       if (this.enabled) {
         // Module is installed and enabled so option is to disable
 
         let disableButton = document.createElement("button");
         disableButton.classList.add("mebi-button");
-        disableButton.classList.add("mebi-button-warning");
         disableButton.innerText = "Disable";
 
         disableButton.addEventListener("click", () => {
           disableModule(this.uid);
         });
 
-        moduleExchangeItem.appendChild(disableButton);
+        moduleButtons.appendChild(disableButton);
       } else {
         // Module is installed but disabled so option is to enable
         let enableButton = document.createElement("button");
         enableButton.classList.add("mebi-button");
-        enableButton.classList.add("mebi-button-success");
         enableButton.innerText = "Enable";
-        moduleExchangeItem.appendChild(enableButton);
 
         enableButton.addEventListener("click", () => {
           enableModule(this.uid);
         });
+
+        moduleButtons.appendChild(enableButton);
       }
+      // Module is installed so options are to remove or disable or update
+      if (this.installedVersion !== this.version) {
+        // Module is installed but needs to be updated
+        let updateButton = document.createElement("button");
+        updateButton.classList.add("mebi-button");
+        updateButton.classList.add("mebi-button-warning");
+        updateButton.innerText = "Update";
 
-      let removeButton = document.createElement("button");
-      removeButton.classList.add("mebi-button");
-      removeButton.classList.add("mebi-button-danger");
-      removeButton.innerText = "Remove";
-
-      moduleExchangeItem.appendChild(removeButton);
+        moduleButtons.appendChild(updateButton);
+      }
     } else {
       // Module is not installed so option is to install
       let installButton = document.createElement("button");
       installButton.classList.add("mebi-button");
-      installButton.classList.add("mebi-button-info");
+      installButton.classList.add("mebi-button-success");
       installButton.innerText = "Install";
-      moduleExchangeItem.appendChild(installButton);
+
+      let viewSourceButton = document.createElement("button");
+      viewSourceButton.classList.add("mebi-button");
+      viewSourceButton.innerText = "View Source";
+
+      moduleButtons.appendChild(installButton);
+      moduleButtons.appendChild(viewSourceButton);
     }
 
+    moduleExchangeItem.appendChild(moduleButtons);
     return moduleExchangeItem;
   }
 }
