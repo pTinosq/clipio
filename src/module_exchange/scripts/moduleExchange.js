@@ -41,13 +41,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   launchModuleExchange.addEventListener("click", function () {
-    const moduleEx_width = 770;
-    const moduleEx_height = 420;
+    const settings_width = 770;
+    const settings_height = 420;
 
     window.open(
-      "../module_exchange/moduleExchange.html",
+      "../settings/settings.html",
       "_blank",
-      `width=${moduleEx_width},height=${moduleEx_height},frame=true,autoHideMenuBar=true,nodeIntegration=yes,contextIsolation=false,`
+      `width=${settings_width},height=${settings_height},frame=true,autoHideMenuBar=true, nodeIntegration=yes,contextIsolation=false,`
     );
   });
 });
