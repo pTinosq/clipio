@@ -1,6 +1,5 @@
-[
-    {
-        "uid": "example-test-module",
+{
+    "example-test-module": {
         "enabled": true
     }
-]
+}
