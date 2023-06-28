@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles/button.css" />
     <link rel="stylesheet" href="styles/alert.css" />
     <script src="scripts/settings.js"></script>
+    <script src="scripts/alert.js"></script>
     <title>Clipio Settings</title>
   </head>
   <body>
@@ -17,11 +18,16 @@
     <section>
       <h2>GitHub Integration</h2>
       <div class="alert alert-primary" role="alert">
-        The Clipio Module Exchange is hosted on GitHub, and to enable seamless
-        downloading and installation of modules, Clipio needs to connect with
-        GitHub using a Personal Access Token (PAT).
-        <br /><br />This token allows you to access and install modules directly
-        from the Module Exchange.
+        <span class="alert-content">
+          The Clipio Module Exchange is hosted on GitHub, and to enable seamless
+          downloading and installation of modules, Clipio needs to connect with
+          GitHub using a Personal Access Token (PAT).
+          <br /><br />This token allows you to access and install modules
+          directly from the Module Exchange.
+        </span>
+        <span class="alert-show" style="display: none">
+          Show more information
+        </span>
       </div>
 
       <div class="input-container">
@@ -29,6 +35,22 @@
         <input type="password" name="token" id="tokenInput" />
         <button class="btn btn-success" id="tokenSave">Save</button>
       </div>
+    </section>
+
+    <section>
+      <h2>Clipio Module Exchange</h2>
+      <div class="alert alert-primary" role="alert">
+        <span class="alert-content">
+          The Clipio Module Exchange is a repository of modules that can be
+          installed directly from Clipio. This allows you to easily install
+          modules without having to download them manually. <br /><br />Active
+          internet connection required.
+        </span>
+        <span class="alert-show" style="display: none">
+          Show more information
+        </span>
+      </div>
+      <button class="btn btn-info">Launch Module Exchange</button>
     </section>
   </body>
 </html>

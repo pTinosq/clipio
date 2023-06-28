@@ -7,6 +7,10 @@
   border-radius: 6px;
 }
 
+.alert span {
+  cursor: pointer;
+}
+
 .alert-info {
   background-color: #cff4fc;
   color: #055160;
