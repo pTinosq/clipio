@@ -1,5 +1,6 @@
 import { disableModule } from "./module_buttons/disableButton.js";
 import { enableModule } from "./module_buttons/enableButton.js";
+import { viewSource } from "./module_buttons/viewSourceButton.js";
 
 export default class ModuleExchangeItem {
   constructor() {
@@ -17,6 +18,15 @@ export default class ModuleExchangeItem {
     let moduleExchangeItem = document.createElement("div");
     moduleExchangeItem.id = this.uid;
     moduleExchangeItem.classList.add("module-exchange-body-item");
+
+    // Colour mebi body accordingly
+    if (this.installedVersion !== this.version && this.installed) {
+      moduleExchangeItem.classList.add("mebi-body-yellow");
+    } else if (this.installed && this.enabled) {
+      moduleExchangeItem.classList.add("mebi-body-green");
+    } else if (this.installed && !this.enabled) {
+      moduleExchangeItem.classList.add("mebi-body-dull");
+    }
 
     let moduleName = document.createElement("h2");
     moduleName.innerText = this.name;
@@ -88,6 +98,10 @@ export default class ModuleExchangeItem {
       let viewSourceButton = document.createElement("button");
       viewSourceButton.classList.add("mebi-button");
       viewSourceButton.innerText = "View Source";
+
+      viewSourceButton.addEventListener("click", () => {
+        viewSource(this.uid);
+      });
 
       moduleButtons.appendChild(installButton);
       moduleButtons.appendChild(viewSourceButton);
