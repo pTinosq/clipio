@@ -39,6 +39,18 @@
   padding: 1rem 0;
 }
 
+.mebi-verified {
+  color: #fff;
+  padding: 0.1rem 0.75rem;
+  border-radius: 0.2rem;
+  font-size: 10px;
+  margin-left: 0.5rem;
+  background: rgb(216, 166, 35);
+  background: linear-gradient(24deg, #2d92dd 0%, #27a2ff 53%, #42c5ff 95%);
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
 .mebi-buttons {
   display: flex;
   justify-content: space-between;

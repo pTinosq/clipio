@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // The same for element "settings"
   document.getElementById("settings").addEventListener("click", function () {
     const settings_width = 770;
     const settings_height = 420;
@@ -25,5 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
       "_blank",
       `width=${settings_width},height=${settings_height},frame=true,autoHideMenuBar=true, nodeIntegration=yes,contextIsolation=false,`
     );
+  });
+
+  document.getElementById("refresh").addEventListener("click", function () {
+    window.location.reload();
   });
 });

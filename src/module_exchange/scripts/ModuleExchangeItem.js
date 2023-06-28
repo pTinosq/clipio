@@ -34,9 +34,19 @@ export default class ModuleExchangeItem {
     moduleName.innerText = this.name;
     moduleExchangeItem.appendChild(moduleName);
 
+    // Verified modules get a tick
+
     let moduleAuthor = document.createElement("p");
     moduleAuthor.classList.add("mebi-author");
     moduleAuthor.innerText = `@${this.author} • v${this.version}`;
+
+    if (this.author == "ptinosq") {
+      let verified = document.createElement("span");
+      verified.classList.add("mebi-verified");
+      verified.innerText = "verified";
+      moduleAuthor.appendChild(verified);
+    }
+
     moduleExchangeItem.appendChild(moduleAuthor);
 
     let moduleDescription = document.createElement("p");
