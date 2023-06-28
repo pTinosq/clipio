@@ -7,8 +7,10 @@ const BASE_DIR = __dirname;
 const ICON_PATH = path.join(BASE_DIR, "img/clipio.png");
 
 const store = new Store();
-if (!store.has("show")) {
-  store.set("show", false);
+
+// Set default values
+if (!store.has("showDevWindow")) {
+  store.set("showDevWindow", false);
 }
 
 const commonWindowPreferences = {
@@ -24,7 +26,7 @@ const createWindow = () => {
     minHeight: 200,
     minWidth: 800,
     autoHideMenuBar: true,
-    show: store.get("show"),
+    show: store.get("showDevWindow"),
     title: "Clipio",
     icon: ICON_PATH,
     webPreferences: {
@@ -35,7 +37,7 @@ const createWindow = () => {
 
   mainWindow.loadFile(path.join(BASE_DIR, "index.html"));
 
-  if (store.get("show")) {
+  if (store.get("showDevWindow")) {
     mainWindow.webContents.openDevTools();
   }
 };
@@ -77,11 +79,11 @@ const createTray = () => {
       label: "Developer mode",
       type: "checkbox",
       click: () => {
-        store.set("show", !store.get("show"));
+        store.set("showDevWindow", !store.get("showDevWindow"));
         app.relaunch();
         app.exit();
       },
-      checked: store.get("show"),
+      checked: store.get("showDevWindow"),
     },
     {
       type: "separator",
@@ -135,4 +137,13 @@ ipcMain.on("maximize", () => {
 
 ipcMain.on("get_app_version", (event) => {
   event.returnValue = app.getVersion();
+});
+
+ipcMain.on("relaunch", () => {
+  app.relaunch();
+  app.exit();
+});
+
+ipcMain.on("get-app-path", (event, id) => {
+  event.returnValue = path.join(app.getPath("userData"), "modules", id);
 });

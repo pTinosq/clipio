@@ -1,6 +1,6 @@
 export class DevInfo {
   constructor(title) {
-    this.title = title;
+    this.name = title;
     this.content = [];
   }
 
@@ -39,7 +39,7 @@ export class DevInfo {
 
 export class DevInfoItem {
   constructor(title, value) {
-    this.title = title;
+    this.name = title;
     this.value = value;
     this.isLive = false;
     this.id = null;

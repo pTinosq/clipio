@@ -3,7 +3,7 @@ import { Clickable } from "../Clickable.js";
 class LowercaseClickable extends Clickable {
   constructor(run, title) {
     super(run);
-    this.title = title;
+    this.name = title;
   }
 }
 

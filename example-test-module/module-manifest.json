@@ -1,0 +1,9 @@
+{
+    "name": "Translate",
+    "version": "1.0.0",
+    "description": "Uses Google Translate to translate text.",
+    "main": "module.js",
+    "authors": [
+        "ptinosq"
+    ]
+}

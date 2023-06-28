@@ -1,6 +1,6 @@
 export class Clickable {
   constructor() {
-    this.title = "Unknown";
+    this.name = "Unknown";
     this.run = () => {};
   }
 

@@ -1,16 +1,32 @@
 import { ColorPreview } from "./ColorPreview.js";
 import { ClickableFactory } from "./ClickableFactory.js";
 import { InteractorFactory } from "./InteractorFactory.js";
-import { ClipioModule } from "./ClipioModule.js";
-import { Clickable } from "./Clickable.js";
+
+// CLICKABLES
+import spaceToUnderscoreClickable from "./clickables/spaceToUnderscoreClickable.js";
+import removeTrailingSpacesClickable from "./clickables/removeTrailingSpacesClickable.js";
+import uppercaseClickable from "./clickables/uppercaseClickable.js";
+import lowercaseClickable from "./clickables/lowercaseClickable.js";
+import removeFormattingClickable from "./clickables/removeFormattingClickable.js";
+import toBase64Clickable from "./clickables/toBase64Clickable.js";
+import googleTranslateClickable from "./clickables/googleTranslateClickable.js";
 
 // INTERACTORS
 import textReplaceInteractor from "./interactors/textReplaceInteractor.js";
 
 const { clipboard } = require("electron");
-const { ipcRenderer } = require("electron");
 
 // TODO: Implement REPLACE functionality
+
+const clickables = [
+  spaceToUnderscoreClickable,
+  removeTrailingSpacesClickable,
+  uppercaseClickable,
+  lowercaseClickable,
+  removeFormattingClickable,
+  toBase64Clickable,
+  googleTranslateClickable,
+];
 
 const interactors = [textReplaceInteractor];
 
@@ -50,22 +66,13 @@ document.addEventListener("DOMContentLoaded", () => {
     buildZone.appendChild(interactorFactory.buildHTML(builtInteractor));
   }
 
-  // Fetch installed module data
-  // Load installed-module-data.json file
-  const moduleName = "example-test-module";
-
-  let module = new ClipioModule(moduleName);
-  module = module.loadManifest();
-  module = module.loadData();
-
-  // Create clickable from module
-  const clickable = new Clickable();
-  clickable.title = module.name;
-  clickable.run = module.data;
-
-  // Add module to build zone
+  // Add clickables
   const clickableFactory = new ClickableFactory();
 
-  const builtClickable = clickableFactory.buildClickable(clickable);
-  buildZone.appendChild(clickableFactory.buildHTML(builtClickable));
+  for (let i = 0; i < clickables.length; i++) {
+    // Build the clickable
+    const builtClickable = clickableFactory.buildClickable(clickables[i]);
+
+    buildZone.appendChild(clickableFactory.buildHTML(builtClickable));
+  }
 });

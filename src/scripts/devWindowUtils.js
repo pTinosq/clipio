@@ -4,7 +4,7 @@ const Store = require("electron-store");
 
 function disable_dev_window() {
   const store = new Store();
-  store.set("show", false);
+  store.set("showDevWindow", false);
   ipcRenderer.send("relaunch");
 }
 
