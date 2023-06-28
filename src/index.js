@@ -135,7 +135,7 @@ ipcMain.on("maximize", () => {
   }
 });
 
-ipcMain.on("get_app_version", (event) => {
+ipcMain.on("get-app-version", (event) => {
   event.returnValue = app.getVersion();
 });
 
@@ -146,4 +146,9 @@ ipcMain.on("relaunch", () => {
 
 ipcMain.on("get-app-path", (event, id) => {
   event.returnValue = path.join(app.getPath("userData"), "modules", id);
+});
+
+ipcMain.on("get-local-modules-path", (event) => {
+  const a = path.join(app.getPath("userData"), "modules", "Local Modules");
+  event.returnValue = a;
 });

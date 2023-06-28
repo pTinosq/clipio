@@ -9,6 +9,7 @@ import textReplaceInteractor from "./interactors/textReplaceInteractor.js";
 
 const { clipboard } = require("electron");
 const { ipcRenderer } = require("electron");
+const fs = require("fs");
 
 // TODO: Implement REPLACE functionality
 
@@ -50,22 +51,26 @@ document.addEventListener("DOMContentLoaded", () => {
     buildZone.appendChild(interactorFactory.buildHTML(builtInteractor));
   }
 
-  // Fetch installed module data
-  // Load installed-module-data.json file
-  const moduleName = "example-test-module";
+  // Get installed modules from Local Modules.json file in appdata
 
-  let module = new ClipioModule(moduleName);
-  module = module.loadManifest();
-  module = module.loadData();
+  const installedModulesPath = ipcRenderer.sendSync("get-local-modules-path");
+  const installedModules = JSON.parse(fs.readFileSync(installedModulesPath));
 
-  // Create clickable from module
-  const clickable = new Clickable();
-  clickable.title = module.name;
-  clickable.run = module.data;
+  // Add installed modules to build zone
+  for (let i = 0; i < installedModules.length; i++) {
+    if (!installedModules[i]["enabled"]) continue;
 
-  // Add module to build zone
-  const clickableFactory = new ClickableFactory();
+    let module = new ClipioModule(installedModules[i]["id"]);
+    module = module.loadManifest();
+    module = module.loadData();
 
-  const builtClickable = clickableFactory.buildClickable(clickable);
-  buildZone.appendChild(clickableFactory.buildHTML(builtClickable));
+    const clickable = new Clickable();
+    clickable.title = module.name;
+    clickable.run = module.data;
+
+    const clickableFactory = new ClickableFactory();
+
+    const builtClickable = clickableFactory.buildClickable(clickable);
+    buildZone.appendChild(clickableFactory.buildHTML(builtClickable));
+  }
 });

@@ -40,7 +40,7 @@ describe("DOMContentLoaded event", () => {
 
     require("../src/scripts/devWindow.js"); // replace with the path to your file
 
-    expect(ipcRenderer.sendSync).toHaveBeenCalledWith("get_app_version");
+    expect(ipcRenderer.sendSync).toHaveBeenCalledWith("get-app-version");
     expect(clipboard.readText).toHaveBeenCalledTimes(1);
     expect(process.uptime).toHaveBeenCalled();
     expect(process.memoryUsage).toHaveBeenCalled();

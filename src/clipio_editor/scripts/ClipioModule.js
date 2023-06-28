@@ -11,6 +11,7 @@ export class ClipioModule {
     this.description = "A module";
     this.data = "";
     this.path = ipcRenderer.sendSync("get-app-path", id);
+    this.enabled = true;
   }
 
   loadManifest() {

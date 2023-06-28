@@ -19,9 +19,8 @@ function createDevInfoItem(key, value, id, runFunc) {
 document.addEventListener("DOMContentLoaded", () => {
   // Versions
   const versionsDevInfo = new DevInfo("Versions");
-
   versionsDevInfo.content.push(
-    new DevInfoItem("Clipio", ipcRenderer.sendSync("get_app_version"))
+    new DevInfoItem("Clipio", ipcRenderer.sendSync("get-app-version"))
   );
 
   for (const [key, value] of Object.entries(process.versions)) {

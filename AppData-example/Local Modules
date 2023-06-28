@@ -1,0 +1,10 @@
+[
+    {
+        "id": "example-test-module",
+        "enabled": true
+    },
+    {
+        "id": "example-test-module-2",
+        "enabled": false
+    }
+]

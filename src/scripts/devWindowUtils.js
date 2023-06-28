@@ -1,5 +1,4 @@
 const { ipcRenderer } = require("electron");
-const { app } = require("electron");
 const Store = require("electron-store");
 
 function disable_dev_window() {
