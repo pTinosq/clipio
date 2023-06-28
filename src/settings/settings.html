@@ -1,11 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/settings.css" />
+    <link rel="stylesheet" href="styles/button.css" />
+    <link rel="stylesheet" href="styles/alert.css" />
+    <script src="scripts/settings.js"></script>
     <title>Clipio Settings</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <header>
+      <h1>Settings</h1>
+    </header>
+
+    <section>
+      <h2>GitHub Integration</h2>
+      <div class="alert alert-primary" role="alert">
+        The Clipio Module Exchange is hosted on GitHub, and to enable seamless
+        downloading and installation of modules, Clipio needs to connect with
+        GitHub using a Personal Access Token (PAT).
+        <br /><br />This token allows you to access and install modules directly
+        from the Module Exchange.
+      </div>
+
+      <div class="input-container">
+        <label for="token">GitHub Access Token</label>
+        <input type="password" name="token" id="tokenInput" />
+        <button class="btn btn-success" id="tokenSave">Save</button>
+      </div>
+    </section>
+  </body>
 </html>

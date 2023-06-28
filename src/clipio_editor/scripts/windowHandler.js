@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // The same for element "settings"
   document.getElementById("settings").addEventListener("click", function () {
-    const settings_width = 600;
-    const settings_height = 400;
+    const settings_width = 770;
+    const settings_height = 420;
 
     window.open(
       "../settings/settings.html",

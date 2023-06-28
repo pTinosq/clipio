@@ -1,0 +1,20 @@
+.alert {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 32px;
+  font-size: 12px;
+  padding: 16px;
+  border-radius: 6px;
+}
+
+.alert-info {
+  background-color: #cff4fc;
+  color: #055160;
+  border: 1px solid #9eeaf9;
+}
+
+.alert-primary {
+  background-color: #cfe2ff;
+  color: #052c65;
+  border: 1px solid #9ec5fe;
+}

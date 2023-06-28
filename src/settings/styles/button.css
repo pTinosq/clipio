@@ -1,0 +1,36 @@
+.btn {
+  box-sizing: border-box;
+  height: 100%;
+  width: auto;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.btn-success {
+  background-color: #4da550;
+  color: #ffffff;
+  border: 1px solid #429846;
+}
+
+.btn-success:hover {
+  background-color: #429846;
+}
+
+.btn-success:active {
+  background-color: #3c8640;
+}
+
+.btn-warn {
+  background-color: #f9c100;
+  color: #2c2c2c;
+  border: 1px solid #eea236;
+}
+
+.btn-warn:hover {
+  background-color: #e9b100;
+}
+
+.btn-warn:active {
+  background-color: #d9a100;
+}

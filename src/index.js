@@ -1,4 +1,12 @@
-const { app, BrowserWindow, ipcMain, Menu, screen, Tray } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  Menu,
+  screen,
+  Tray,
+  safeStorage,
+} = require("electron");
 const path = require("path");
 const Store = require("electron-store");
 const AutoLaunch = require("auto-launch");
@@ -151,4 +159,39 @@ ipcMain.on("get-app-path", (event, id) => {
 ipcMain.on("get-local-modules-path", (event) => {
   const a = path.join(app.getPath("userData"), "modules", "Local Modules");
   event.returnValue = a;
+});
+
+ipcMain.on("get-github-token", (event) => {
+  console.log("get");
+  const encryptedToken = store.get("githubToken");
+  console.log('encryptedToken', encryptedToken)
+  if (!encryptedToken) {
+    event.returnValue = false;
+    return;
+  }
+
+  const tokenBuffer = Buffer.from(encryptedToken, "base64");
+
+  const token = safeStorage.decryptString(tokenBuffer);
+
+  if (!token) {
+    event.returnValue = false;
+  }
+
+  event.returnValue = token;
+});
+
+ipcMain.on("set-github-token", (event, token) => {
+  if (!token) {
+    event.returnValue = false;
+    return;
+  }
+
+  console.log(token);
+
+  const encryptedToken = safeStorage.encryptString(token);
+    console.log(encryptedToken);
+  store.set("githubToken", encryptedToken);
+  console.log("set");
+  event.returnValue = true;
 });
