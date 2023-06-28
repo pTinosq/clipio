@@ -1,6 +1,7 @@
 import { disableModule } from "./module_buttons/disableButton.js";
 import { enableModule } from "./module_buttons/enableButton.js";
 import { viewSource } from "./module_buttons/viewSourceButton.js";
+import { uninstallModule } from "./module_buttons/uninstallButton.js";
 
 export default class ModuleExchangeItem {
   constructor() {
@@ -51,6 +52,10 @@ export default class ModuleExchangeItem {
       removeButton.classList.add("mebi-button");
       removeButton.classList.add("mebi-button-danger");
       removeButton.innerText = "Uninstall";
+
+      removeButton.addEventListener("click", () => {
+        uninstallModule(this.uid);
+      });
 
       moduleButtons.appendChild(removeButton);
 
