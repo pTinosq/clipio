@@ -1,7 +1,7 @@
 import { ColorPreview } from "./ColorPreview.js";
 import { ClickableFactory } from "./ClickableFactory.js";
 import { InteractorFactory } from "./InteractorFactory.js";
-import { ClipioModule } from "./ClipioModule.js";
+import { ClipioModule } from "../../ClipioModule.js";
 import { Clickable } from "./Clickable.js";
 
 // INTERACTORS
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
   for (let i = 0; i < installedModules.length; i++) {
     if (!installedModules[i]["enabled"]) continue;
 
-    let module = new ClipioModule(installedModules[i]["id"]);
+    let module = new ClipioModule(installedModules[i]["uid"]);
     module = module.loadManifest();
     module = module.loadData();
 

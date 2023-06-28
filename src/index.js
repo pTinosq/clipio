@@ -10,7 +10,7 @@ const {
 const path = require("path");
 const Store = require("electron-store");
 const AutoLaunch = require("auto-launch");
-
+const fs = require("fs");
 const BASE_DIR = __dirname;
 const ICON_PATH = path.join(BASE_DIR, "img/clipio.png");
 
@@ -152,8 +152,8 @@ ipcMain.on("relaunch", () => {
   app.exit();
 });
 
-ipcMain.on("get-app-path", (event, id) => {
-  event.returnValue = path.join(app.getPath("userData"), "modules", id);
+ipcMain.on("get-app-path", (event, uid) => {
+  event.returnValue = path.join(app.getPath("userData"), "modules", uid);
 });
 
 ipcMain.on("get-local-modules-path", (event) => {
@@ -185,8 +185,44 @@ ipcMain.on("set-github-token", (event, token) => {
     return;
   }
 
-
   const encryptedToken = safeStorage.encryptString(token);
   store.set("githubToken", encryptedToken);
   event.returnValue = true;
+});
+
+ipcMain.on("get-local-modules", (event) => {
+  const localModulesPath = path.join(
+    app.getPath("userData"),
+    "modules",
+    "Local Modules"
+  );
+
+  if (fs.lstatSync(localModulesPath).isFile()) {
+    const localModules = JSON.parse(
+      fs.readFileSync(localModulesPath, { encoding: "utf-8" })
+    );
+
+    event.returnValue = localModules;
+  } else {
+    event.returnValue = [];
+  }
+});
+
+ipcMain.on("get-module-manifest", (event, uid) => {
+  const localModuleManifestPath = path.join(
+    app.getPath("userData"),
+    "modules",
+    uid,
+    "module-manifest.json"
+  );
+
+  if (fs.lstatSync(localModuleManifestPath).isFile()) {
+    const moduleManifest = JSON.parse(
+      fs.readFileSync(localModuleManifestPath, { encoding: "utf-8" })
+    );
+
+    event.returnValue = moduleManifest;
+  } else {
+    event.returnValue = {};
+  }
 });

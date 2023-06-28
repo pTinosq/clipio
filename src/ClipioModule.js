@@ -3,14 +3,14 @@ const fs = require("fs");
 const { ipcRenderer } = require("electron");
 
 export class ClipioModule {
-  constructor(id) {
-    this.id = id;
+  constructor(uid) {
+    this.uid = uid;
     this.name = "Module";
     this.version = "0.0.1";
     this.author = "Author";
     this.contributors = [];
     this.description = "A module";
-    this.path = ipcRenderer.sendSync("get-app-path", id);
+    this.path = ipcRenderer.sendSync("get-app-path", uid);
     this.data = "";
     this.enabled = true;
     this.succesfullyLoaded = true;
@@ -30,7 +30,7 @@ export class ClipioModule {
       this.description = manifest.description;
       this.main = manifest.main;
     } else {
-      console.error("Manifest file does not exist for module", this.id);
+      console.error("Manifest file does not exist for module", this.uid);
       this.succesfullyLoaded = false;
     }
 
@@ -44,7 +44,7 @@ export class ClipioModule {
       const { run } = require(dataPath);
       this.data = run;
     } else {
-      console.error("Data file does not exist for module", this.id);
+      console.error("Data file does not exist for module", this.uid);
       this.succesfullyLoaded = false;
     }
 

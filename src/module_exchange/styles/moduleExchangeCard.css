@@ -1,0 +1,27 @@
+.module-exchange-body-item {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.35rem;
+  background: #fff;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  padding: 1rem;
+  flex: 33%;
+  width: auto;
+}
+
+.module-exchange-body-item h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.module-exchange-body-item p {
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.mebi-description {
+  padding: 1rem 0;
+}

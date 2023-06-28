@@ -16,8 +16,6 @@ import textReplaceInteractor from "./interactors/textReplaceInteractor.js";
 
 const { clipboard } = require("electron");
 
-// TODO: Implement REPLACE functionality
-
 const clickables = [
   spaceToUnderscoreClickable,
   removeTrailingSpacesClickable,

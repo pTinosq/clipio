@@ -1,6 +1,6 @@
 [
     {
-        "id": "example-test-module",
+        "uid": "example-test-module",
         "enabled": true
     }
 ]
