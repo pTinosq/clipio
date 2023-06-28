@@ -25,3 +25,27 @@
 .mebi-description {
   padding: 1rem 0;
 }
+
+.mebi-button {
+  
+}
+
+.mebi-button-warning {
+  background: #ff9800;
+  color: #fff;
+}
+
+.mebi-button-info {
+  background: #2196f3;
+  color: #fff;
+}
+
+.mebi-button-success {
+  background: #4caf50;
+  color: #fff;
+}
+
+.mebi-button-danger {
+  background: #f44336;
+  color: #fff;
+}

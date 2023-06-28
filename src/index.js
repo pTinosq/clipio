@@ -156,11 +156,6 @@ ipcMain.on("get-app-path", (event, uid) => {
   event.returnValue = path.join(app.getPath("userData"), "modules", uid);
 });
 
-ipcMain.on("get-local-modules-path", (event) => {
-  const a = path.join(app.getPath("userData"), "modules", "Local Modules");
-  event.returnValue = a;
-});
-
 ipcMain.on("get-github-token", (event) => {
   const encryptedToken = store.get("githubToken");
   if (!encryptedToken) {
@@ -206,6 +201,15 @@ ipcMain.on("get-local-modules", (event) => {
   } else {
     event.returnValue = [];
   }
+});
+
+ipcMain.on("set-local-modules", (event, localModules) => {
+  const localModulesPath = path.join(
+    app.getPath("userData"),
+    "modules",
+    "Local Modules"
+  );
+  fs.writeFileSync(localModulesPath, JSON.stringify(localModules));
 });
 
 ipcMain.on("get-module-manifest", (event, uid) => {

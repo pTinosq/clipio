@@ -1,3 +1,6 @@
+import { disableModule } from "./module_buttons/disableButton.js";
+import { enableModule } from "./module_buttons/enableButton.js";
+
 export default class ModuleExchangeItem {
   constructor() {
     this.uid = "";
@@ -12,6 +15,7 @@ export default class ModuleExchangeItem {
 
   buildHTML() {
     let moduleExchangeItem = document.createElement("div");
+    moduleExchangeItem.id = this.uid;
     moduleExchangeItem.classList.add("module-exchange-body-item");
 
     let moduleName = document.createElement("h2");
@@ -47,6 +51,11 @@ export default class ModuleExchangeItem {
         disableButton.classList.add("mebi-button");
         disableButton.classList.add("mebi-button-warning");
         disableButton.innerText = "Disable";
+
+        disableButton.addEventListener("click", () => {
+          disableModule(this.uid);
+        });
+
         moduleExchangeItem.appendChild(disableButton);
       } else {
         // Module is installed but disabled so option is to enable
@@ -55,6 +64,10 @@ export default class ModuleExchangeItem {
         enableButton.classList.add("mebi-button-success");
         enableButton.innerText = "Enable";
         moduleExchangeItem.appendChild(enableButton);
+
+        enableButton.addEventListener("click", () => {
+          enableModule(this.uid);
+        });
       }
 
       let removeButton = document.createElement("button");

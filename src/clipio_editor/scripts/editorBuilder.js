@@ -51,18 +51,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Get installed modules from Local Modules.json file in appdata
 
-  const installedModulesPath = ipcRenderer.sendSync("get-local-modules-path");
-  const installedModules = JSON.parse(fs.readFileSync(installedModulesPath));
+  const installedModules = ipcRenderer.sendSync("get-local-modules");
+  console.log(installedModules);
 
-  // Add installed modules to build zone
-  for (let i = 0; i < installedModules.length; i++) {
-    if (!installedModules[i]["enabled"]) continue;
+  Object.keys(installedModules).forEach((moduleUID) => {
+    if (!installedModules[moduleUID]["enabled"]) return;
 
-    let module = new ClipioModule(installedModules[i]["uid"]);
+    let module = new ClipioModule(moduleUID);
     module = module.loadManifest();
     module = module.loadData();
 
-    if (!module.succesfullyLoaded) continue;
+    if (!module.succesfullyLoaded) return;
 
     const clickable = new Clickable();
     clickable.title = module.name;
@@ -72,5 +71,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const builtClickable = clickableFactory.buildClickable(clickable);
     buildZone.appendChild(clickableFactory.buildHTML(builtClickable));
-  }
+  });
+
+  // Add installed modules to build zone
+  // for (let i = 0; i < installedModules.length; i++) {
+  //   const moduleUID = Object.keys(installedModules[i])[0];
+  //   if (!installedModules[i]["enabled"]) continue;
+
+  //   let module = new ClipioModule(installedModules[i]["uid"]);
+  //   module = module.loadManifest();
+  //   module = module.loadData();
+
+  //   if (!module.succesfullyLoaded) continue;
+
+  //   const clickable = new Clickable();
+  //   clickable.title = module.name;
+  //   clickable.run = module.data;
+
+  //   const clickableFactory = new ClickableFactory();
+
+  //   const builtClickable = clickableFactory.buildClickable(clickable);
+  //   buildZone.appendChild(clickableFactory.buildHTML(builtClickable));
+  // }
 });

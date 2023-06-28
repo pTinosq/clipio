@@ -82,8 +82,12 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then((modules) => {
         const localModules = ipcRenderer.sendSync("get-local-modules");
-        const localModulesUIDs = localModules.map((module) => module.uid);
-        // TODO: Show the modules in the exchange
+        /*
+        {
+          'uid': {'enable': true},
+        }
+        */
+        const localModulesUIDs = Object.keys(localModules);
 
         for (let i = 0; i < modules.length; i++) {
           let moduleExchangeItem = new ModuleExchangeItem();
@@ -95,13 +99,16 @@ document.addEventListener("DOMContentLoaded", function () {
           moduleExchangeItem.author = module.author;
           moduleExchangeItem.version = module.version;
           moduleExchangeItem.installed = localModulesUIDs.includes(module.uid);
-          moduleExchangeItem.enabled = localModules[i].enabled;
+
           if (moduleExchangeItem.installed) {
-            let localModuleManifest = ipcRenderer.sendSync(
-              "get-module-manifest",
-              module.uid
-            );
-            moduleExchangeItem.installedVersion = localModuleManifest.version;
+            moduleExchangeItem.enabled = localModules[module.uid].enabled;
+            if (moduleExchangeItem.installed) {
+              let localModuleManifest = ipcRenderer.sendSync(
+                "get-module-manifest",
+                module.uid
+              );
+              moduleExchangeItem.installedVersion = localModuleManifest.version;
+            }
           }
 
           let moduleHTML = moduleExchangeItem.buildHTML();

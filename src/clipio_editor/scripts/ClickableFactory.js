@@ -32,7 +32,6 @@ export class ClickableFactory {
 
     const moduleTitleContent = document.createElement("h1");
 
-    console.log(clickable);
     moduleTitleContent.textContent = clickable.title;
     moduleTitleContent.addEventListener("click", clickable.onClick);
 
