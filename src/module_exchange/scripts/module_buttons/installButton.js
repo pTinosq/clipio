@@ -63,6 +63,25 @@ async function downloadModuleFolder(token, uid, destinationPath) {
   }
 }
 
+async function runInstallation(token, uid, destinationPath) {
+  // return promise
+
+  // fs.mkdirSync(destinationPath, { recursive: true });
+  // downloadModuleFolder(token, uid, destinationPath);
+
+  return new Promise((resolve, reject) => {
+    fs.mkdir(destinationPath, { recursive: true }, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        downloadModuleFolder(token, uid, destinationPath).then(() => {
+          resolve();
+        });
+      }
+    });
+  });
+}
+
 export function installModule(uid) {
   const localModules = ipcRenderer.sendSync("get-local-modules");
   localModules[uid] = {
@@ -73,10 +92,8 @@ export function installModule(uid) {
 
   const destinationPath = ipcRenderer.sendSync("get-app-path", uid);
 
-  fs.mkdirSync(destinationPath, { recursive: true });
-
-  downloadModuleFolder(token, uid, destinationPath);
-
-  ipcRenderer.send("set-local-modules", localModules);
-  // window.location.reload();
+  runInstallation(token, uid, destinationPath).then(() => {
+    ipcRenderer.send("set-local-modules", localModules);
+    window.location.reload();
+  });
 }
