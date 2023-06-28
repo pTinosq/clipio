@@ -19,30 +19,42 @@ body {
 
 .titlebar {
   position: fixed;
+  display: grid;
+  gap: 0px 0px;
+  grid-template-areas: "flex-options-left . flex-options-right";
+  grid-template-columns: 50% 0% 50%;
+  grid-template-rows: 36px;
+  height: 36px;
+
   top: 0;
   left: 0;
-  height: 36px;
   width: 100%;
   background: #333333;
 }
 
-.flex-options {
-  height: 100%;
-  width: 50px;
+.titlebar-right,
+.titlebar-left {
   display: flex;
-  float: right;
-  justify-content: space-between;
-  margin-right: 16px;
+  gap: 1rem;
+  padding: 8px;
 }
 
-.flex-option {
+.titlebar-right {
+  margin-left: auto;
+}
+
+.titlebar-button {
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  background: pink;
-  height: 50%;
   aspect-ratio: 1;
   border-radius: 100px;
+  height: 100%;
+  align-self: center;
+}
+
+.titlebar-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 #information-content p {
