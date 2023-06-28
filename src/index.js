@@ -233,8 +233,7 @@ ipcMain.on("get-module-manifest", (event, uid) => {
 
 ipcMain.on("delete-module", (event, uid) => {
   const modulePath = path.join(app.getPath("userData"), "modules", uid);
-  console.log(modulePath);
 
-  fs.rmdirSync(modulePath, { recursive: true });
-  console.log("Deleted module folder");
+  fs.rmSync(modulePath, { recursive: true });
+  
 });
