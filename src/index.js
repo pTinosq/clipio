@@ -162,9 +162,7 @@ ipcMain.on("get-local-modules-path", (event) => {
 });
 
 ipcMain.on("get-github-token", (event) => {
-  console.log("get");
   const encryptedToken = store.get("githubToken");
-  console.log('encryptedToken', encryptedToken)
   if (!encryptedToken) {
     event.returnValue = false;
     return;
@@ -187,11 +185,8 @@ ipcMain.on("set-github-token", (event, token) => {
     return;
   }
 
-  console.log(token);
 
   const encryptedToken = safeStorage.encryptString(token);
-    console.log(encryptedToken);
   store.set("githubToken", encryptedToken);
-  console.log("set");
   event.returnValue = true;
 });
