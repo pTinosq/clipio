@@ -2,6 +2,7 @@ import { disableModule } from "./module_buttons/disableButton.js";
 import { enableModule } from "./module_buttons/enableButton.js";
 import { viewSource } from "./module_buttons/viewSourceButton.js";
 import { uninstallModule } from "./module_buttons/uninstallButton.js";
+import { installModule } from "./module_buttons/installButton.js";
 
 export default class ModuleExchangeItem {
   constructor() {
@@ -99,6 +100,10 @@ export default class ModuleExchangeItem {
       installButton.classList.add("mebi-button");
       installButton.classList.add("mebi-button-success");
       installButton.innerText = "Install";
+
+      installButton.addEventListener("click", () => {
+        installModule(this.uid);
+      });
 
       let viewSourceButton = document.createElement("button");
       viewSourceButton.classList.add("mebi-button");
