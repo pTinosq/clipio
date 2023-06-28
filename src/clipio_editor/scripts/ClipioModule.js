@@ -14,6 +14,7 @@ export class ClipioModule {
     this.path = ipcRenderer.sendSync("get-app-path", id);
     this.enabled = true;
     this.succesfullyLoaded = true;
+    this.main = "module.js";
   }
 
   loadManifest() {
@@ -27,6 +28,7 @@ export class ClipioModule {
       this.author = manifest.author;
       this.contributors = manifest.contributors;
       this.description = manifest.description;
+      this.main = manifest.main;
     } else {
       console.error("Manifest file does not exist for module", this.id);
       this.succesfullyLoaded = false;
@@ -36,7 +38,7 @@ export class ClipioModule {
   }
 
   loadData() {
-    const dataPath = path.join(this.path, "module.js");
+    const dataPath = path.join(this.path, this.main);
 
     if (fs.existsSync(dataPath)) {
       const { run } = require(dataPath);
