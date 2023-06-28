@@ -2,9 +2,16 @@
   box-sizing: border-box;
   height: 100%;
   width: auto;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+}
+
+.btn-mini {
   padding: 6px 14px;
   font-size: 0.8rem;
-  cursor: pointer;
+  border-radius: 3px;
 }
 
 .btn-success {
@@ -33,4 +40,18 @@
 
 .btn-warn:active {
   background-color: #d9a100;
+}
+
+.btn-info {
+  background-color: #196ce9;
+  color: #ffffff;
+  border: 1px solid #083ba1;
+}
+
+.btn-info:hover {
+  background-color: #0d55d9;
+}
+
+.btn-info:active {
+  background-color: #0c4dc2;
 }
