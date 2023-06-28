@@ -95,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
           moduleExchangeItem.author = module.author;
           moduleExchangeItem.version = module.version;
           moduleExchangeItem.installed = localModulesUIDs.includes(module.uid);
+          moduleExchangeItem.enabled = localModules[i].enabled;
           if (moduleExchangeItem.installed) {
             let localModuleManifest = ipcRenderer.sendSync(
               "get-module-manifest",
@@ -104,7 +105,6 @@ document.addEventListener("DOMContentLoaded", function () {
           }
 
           let moduleHTML = moduleExchangeItem.buildHTML();
-          console.error(moduleHTML);
           document
             .getElementById("module-exchange-body")
             .appendChild(moduleHTML);

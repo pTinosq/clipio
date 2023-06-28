@@ -7,21 +7,10 @@ export default class ModuleExchangeItem {
     this.version = "";
     this.installed = false;
     this.installedVersion = "vx.x.x";
+    this.enabled = false;
   }
 
   buildHTML() {
-    /*
-    <div class="module-exchange-body-item">
-          <h2>Google Translate Module</h2>
-          <p class="mebi-author">@ptinosq • v0.2.4</p>
-          <p class="mebi-description">
-            This module allows you to translate text from one language to
-            another using Google Translate.
-          </p>
-          <button class="mebi-button mebi-button-info">Install</button>
-        </div>
-         */
-
     let moduleExchangeItem = document.createElement("div");
     moduleExchangeItem.classList.add("module-exchange-body-item");
 
@@ -51,17 +40,28 @@ export default class ModuleExchangeItem {
         moduleExchangeItem.appendChild(updateButton);
       }
 
-      let disableButton = document.createElement("button");
-      disableButton.classList.add("mebi-button");
-      disableButton.classList.add("mebi-button-warning");
-      disableButton.innerText = "Disable";
+      if (this.enabled) {
+        // Module is installed and enabled so option is to disable
+
+        let disableButton = document.createElement("button");
+        disableButton.classList.add("mebi-button");
+        disableButton.classList.add("mebi-button-warning");
+        disableButton.innerText = "Disable";
+        moduleExchangeItem.appendChild(disableButton);
+      } else {
+        // Module is installed but disabled so option is to enable
+        let enableButton = document.createElement("button");
+        enableButton.classList.add("mebi-button");
+        enableButton.classList.add("mebi-button-success");
+        enableButton.innerText = "Enable";
+        moduleExchangeItem.appendChild(enableButton);
+      }
 
       let removeButton = document.createElement("button");
       removeButton.classList.add("mebi-button");
       removeButton.classList.add("mebi-button-danger");
       removeButton.innerText = "Remove";
 
-      moduleExchangeItem.appendChild(disableButton);
       moduleExchangeItem.appendChild(removeButton);
     } else {
       // Module is not installed so option is to install
@@ -71,7 +71,6 @@ export default class ModuleExchangeItem {
       installButton.innerText = "Install";
       moduleExchangeItem.appendChild(installButton);
     }
-    console.log(moduleExchangeItem);
 
     return moduleExchangeItem;
   }
