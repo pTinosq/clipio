@@ -1,5 +1,6 @@
 .module-exchange-body-item {
   display: flex;
+  position: relative;
   flex-direction: column;
   border-radius: 0.35rem;
   background: #fff;
@@ -27,7 +28,7 @@
 }
 
 .mebi-body-dull {
-  background: #D0D2DF;
+  background: #d0d2df;
 }
 
 .mebi-body-yellow {
@@ -54,6 +55,11 @@
   background: #efefef;
   border: none;
   cursor: pointer;
+}
+
+.mebi-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .mebi-button-success {

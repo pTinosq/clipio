@@ -2,6 +2,7 @@ const { ipcRenderer } = require("electron");
 const { Octokit } = require("octokit");
 const path = require("path");
 const fs = require("fs");
+import { buildLoader } from "./loadingGenerator.js";
 
 async function getModuleFolderContents(token, uid) {
   const octokit = new Octokit({
@@ -83,6 +84,17 @@ async function runInstallation(token, uid, destinationPath) {
 }
 
 export function installModule(uid) {
+  // Create loading spinner over HTML
+  const moduleElement = document.getElementById(uid);
+  const loadingHTML = buildLoader();
+  moduleElement.prepend(loadingHTML);
+
+  // Disable all `mebi-button` elements
+  const buttons = document.getElementsByClassName("mebi-button");
+  for (const button of buttons) {
+    button.disabled = true;
+  }
+
   const localModules = ipcRenderer.sendSync("get-local-modules");
   localModules[uid] = {
     enabled: true,
