@@ -7,7 +7,8 @@ export class ClipioModule {
     this.id = id;
     this.name = "Module";
     this.version = "0.0.1";
-    this.authors = ["Author"];
+    this.author = "Author";
+    this.contributors = [];
     this.description = "A module";
     this.data = "";
     this.path = ipcRenderer.sendSync("get-app-path", id);
@@ -23,7 +24,8 @@ export class ClipioModule {
       const manifest = JSON.parse(fs.readFileSync(manifestPath));
       this.name = manifest.name;
       this.version = manifest.version;
-      this.authors = manifest.authors;
+      this.author = manifest.author;
+      this.contributors = manifest.contributors;
       this.description = manifest.description;
     } else {
       console.error("Manifest file does not exist for module", this.id);
