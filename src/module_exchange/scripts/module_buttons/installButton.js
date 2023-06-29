@@ -85,27 +85,34 @@ async function runInstallation(token, uid, destinationPath) {
 
 export function installModule(uid) {
   // Create loading spinner over HTML
-  const moduleElement = document.getElementById(uid);
-  const loadingHTML = buildLoader();
-  moduleElement.prepend(loadingHTML);
+  if (navigator.onLine) {
+    const moduleElement = document.getElementById(uid);
+    const loadingHTML = buildLoader();
+    moduleElement.prepend(loadingHTML);
 
-  // Disable all `mebi-button` elements
-  const buttons = document.getElementsByClassName("mebi-button");
-  for (const button of buttons) {
-    button.disabled = true;
+    // Disable all `mebi-button` elements
+    const buttons = document.getElementsByClassName("mebi-button");
+    for (const button of buttons) {
+      button.disabled = true;
+    }
+
+    const localModules = ipcRenderer.sendSync("get-local-modules");
+    localModules[uid] = {
+      enabled: true,
+    };
+
+    const token = ipcRenderer.sendSync("get-github-token");
+
+    const destinationPath = ipcRenderer.sendSync("get-app-path", uid);
+
+    runInstallation(token, uid, destinationPath).then(() => {
+      ipcRenderer.send("set-local-modules", localModules);
+      window.location.reload();
+    });
+  } else {
+    // TODO: Show no internet connection error
+    console.error(
+      "CRITICAL: No internet connection. Cannot run module installation."
+    );
   }
-
-  const localModules = ipcRenderer.sendSync("get-local-modules");
-  localModules[uid] = {
-    enabled: true,
-  };
-
-  const token = ipcRenderer.sendSync("get-github-token");
-
-  const destinationPath = ipcRenderer.sendSync("get-app-path", uid);
-
-  runInstallation(token, uid, destinationPath).then(() => {
-    ipcRenderer.send("set-local-modules", localModules);
-    window.location.reload();
-  });
 }

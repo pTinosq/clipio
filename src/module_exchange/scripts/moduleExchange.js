@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         } else {
           // TODO: Show a message to the user that the exchange is not available
+          console.error("Error fetching exchange data:", data);
           return modules; // Return empty modules array if the exchange is not available
         }
       })
@@ -128,9 +129,12 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   } else if (!gitHubToken) {
     // TODO: Show a message to the user that they need to connect to the internet
+    console.warn("No GitHub token set");
   } else if (!internetConnection) {
     // TODO: Show a message to the user that they need to set a token
+    console.warn("No internet connection");
   } else {
     // TODO: Show a message to the user that there was an unknown error
+    console.error("CRITICAL: Unknown error");
   }
 });
