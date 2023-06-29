@@ -36,7 +36,6 @@ header h1 {
   background-color: #efefef;
   font-size: 14px;
   cursor: pointer;
-
 }
 
 .module-exchange-header {
@@ -56,4 +55,11 @@ header h1 {
   height: 100%;
   width: 100%;
   padding-top: 1rem;
+}
+
+#module-exchange-loading {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 }

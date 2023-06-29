@@ -36,13 +36,15 @@ async function getModuleManifestData(token, module) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-
-  document.getElementById("settingsBackBtn").addEventListener("click", function () {
-    window.location.href = "../settings/settings.html";
-  });
+  document
+    .getElementById("settingsBackBtn")
+    .addEventListener("click", function () {
+      window.location.href = "../settings/settings.html";
+    });
 
   // Load token from storage
   let gitHubToken = ipcRenderer.sendSync("get-github-token");
+  const internetConnection = navigator.onLine;
 
   if (gitHubToken) {
     // Fetch exchange data
@@ -113,12 +115,22 @@ document.addEventListener("DOMContentLoaded", function () {
           }
 
           let moduleHTML = moduleExchangeItem.buildHTML();
+
+          // Delete loading bar
+          if (document.getElementById("module-exchange-loading")) {
+            document.getElementById("module-exchange-loading").remove();
+          }
+
           document
             .getElementById("module-exchange-body")
             .appendChild(moduleHTML);
         }
       });
-  } else {
+  } else if (!gitHubToken) {
+    // TODO: Show a message to the user that they need to connect to the internet
+  } else if (!internetConnection) {
     // TODO: Show a message to the user that they need to set a token
+  } else {
+    // TODO: Show a message to the user that there was an unknown error
   }
 });
