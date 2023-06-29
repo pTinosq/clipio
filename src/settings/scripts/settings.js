@@ -41,13 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   launchModuleExchange.addEventListener("click", function () {
-    const moduleEx_width = 800;
-    const moduleEx_height = 550;
-
-    window.open(
-      "../module_exchange/moduleExchange.html",
-      "_blank",
-      `width=${moduleEx_width},height=${moduleEx_height},frame=true,autoHideMenuBar=true,nodeIntegration=yes,contextIsolation=false`
-    );
+    window.location.href = "../module_exchange/moduleExchange.html";
   });
 });

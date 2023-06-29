@@ -22,7 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
     window.open(
       "../settings/settings.html",
       "_blank",
-      `width=${settings_width},height=${settings_height},frame=true,autoHideMenuBar=true, nodeIntegration=yes,contextIsolation=false,`
+      `width=${settings_width},height=${settings_height},frame=true,autoHideMenuBar=true,nodeIntegration=yes,contextIsolation=false,` +
+        `icon=${__dirname}/../img/clipio.png`
     );
   });
 

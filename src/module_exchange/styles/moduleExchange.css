@@ -9,6 +9,8 @@ body {
 }
 
 header {
+  display: flex;
+  justify-content: space-between;
   padding: 0rem 2rem;
   padding-top: 1rem;
   padding-bottom: 0rem;
@@ -19,9 +21,22 @@ header h1 {
   font-weight: 600;
   margin: 0;
 }
+
 .main {
   padding: 0 2rem;
   padding-top: 1rem;
+}
+
+#settingsBackBtn {
+  max-height: 32px;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: 1px solid #333333;
+  color: #121212;
+  background-color: #efefef;
+  font-size: 14px;
+  cursor: pointer;
+
 }
 
 .module-exchange-header {

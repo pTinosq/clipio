@@ -36,6 +36,11 @@ async function getModuleManifestData(token, module) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+
+  document.getElementById("settingsBackBtn").addEventListener("click", function () {
+    window.location.href = "../settings/settings.html";
+  });
+
   // Load token from storage
   let gitHubToken = ipcRenderer.sendSync("get-github-token");
 
