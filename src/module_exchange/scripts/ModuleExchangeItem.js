@@ -102,6 +102,8 @@ export default class ModuleExchangeItem {
         updateButton.classList.add("mebi-button-warning");
         updateButton.innerText = "Update";
 
+        // TODO: Add update functionality
+
         moduleButtons.appendChild(updateButton);
       }
     } else {
