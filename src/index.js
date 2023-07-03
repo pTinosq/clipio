@@ -68,6 +68,24 @@ const createPopup = () => {
   popup.loadFile(path.join(BASE_DIR, "/clipio_editor/editor.html"));
 };
 
+const createSettingsWindow = () => {
+  const settingsWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    minHeight: 200,
+    minWidth: 800,
+    frame: true,
+    autoHideMenuBar: true,
+    icon: ICON_PATH,
+    webPreferences: {
+      ...commonWindowPreferences,
+      preload: path.join(BASE_DIR, "/scripts/preload.js"),
+    },
+  });
+
+  settingsWindow.loadFile(path.join(BASE_DIR, "settings/settings.html"));
+};
+
 const initializeAutoLaunch = async () => {
   const autoLaunch = new AutoLaunch({
     name: "Clipio",
@@ -84,10 +102,17 @@ const createTray = () => {
 
   const contextMenu = Menu.buildFromTemplate([
     {
-      label: "Open Clipio",
+      label: "Open Clipio editor",
       type: "normal",
       click: () => {
         createPopup();
+      },
+    },
+    {
+      label: "Open settings",
+      type: "normal",
+      click: () => {
+        createSettingsWindow();
       },
     },
     {
