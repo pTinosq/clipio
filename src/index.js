@@ -84,6 +84,13 @@ const createTray = () => {
 
   const contextMenu = Menu.buildFromTemplate([
     {
+      label: "Open Clipio",
+      type: "normal",
+      click: () => {
+        createPopup();
+      },
+    },
+    {
       label: "Developer mode",
       type: "checkbox",
       click: () => {
@@ -235,5 +242,4 @@ ipcMain.on("delete-module", (event, uid) => {
   const modulePath = path.join(app.getPath("userData"), "modules", uid);
 
   fs.rmSync(modulePath, { recursive: true });
-  
 });
