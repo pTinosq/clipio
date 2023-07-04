@@ -9,9 +9,9 @@ const ICON_PATH = path.join(BASE_DIR, "img/clipio.png");
 const store = new Store();
 
 // Set default values
-if (!store.has("showDevWindow")) {
-  store.set("showDevWindow", false);
-}
+store.defaults({
+  showDevWindow: false,
+});
 
 const commonWindowPreferences = {
   nodeIntegration: true,
@@ -69,10 +69,7 @@ const createSettingsWindow = () => {
     frame: true,
     autoHideMenuBar: true,
     icon: ICON_PATH,
-    webPreferences: {
-      ...commonWindowPreferences,
-      preload: path.join(BASE_DIR, "/main/scripts/preload.js"),
-    },
+    webPreferences: commonWindowPreferences,
   });
 
   settingsWindow.loadFile(path.join(BASE_DIR, "settings/settings.html"));
@@ -85,7 +82,7 @@ const initializeAutoLaunch = async () => {
   });
 
   if (!(await autoLaunch.isEnabled())) {
-    autoLaunch.enable();
+    await autoLaunch.enable();
   }
 };
 
@@ -96,16 +93,12 @@ const createTray = () => {
     {
       label: "Open Clipio editor",
       type: "normal",
-      click: () => {
-        createPopup();
-      },
+      click: createPopup,
     },
     {
       label: "Open settings",
       type: "normal",
-      click: () => {
-        createSettingsWindow();
-      },
+      click: createSettingsWindow,
     },
     {
       label: "Developer mode",
@@ -124,9 +117,7 @@ const createTray = () => {
       label: "Exit",
       accelerator: "CmdOrCtrl+Q",
       type: "normal",
-      click: () => {
-        app.quit();
-      },
+      click: app.quit,
     },
   ]);
 
@@ -142,11 +133,15 @@ app.whenReady().then(async () => {
 });
 
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") app.quit();
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
 });
 
 app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
 });
 
 // Register all IPCMain events
