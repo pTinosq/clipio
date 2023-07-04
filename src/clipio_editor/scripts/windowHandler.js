@@ -1,8 +1,8 @@
 const { ipcRenderer } = require("electron");
 
 function openSettings() {
-  const settings_width = 770;
-  const settings_height = 420;
+  const settings_width = 1280;
+  const settings_height = 720;
 
   window.open(
     "../settings/settings.html",

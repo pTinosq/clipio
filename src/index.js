@@ -70,8 +70,8 @@ const createPopup = () => {
 
 const createSettingsWindow = () => {
   const settingsWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 720,
     minHeight: 200,
     minWidth: 800,
     frame: true,
@@ -180,6 +180,8 @@ function resetModulesFolder() {
 
   fs.writeFileSync(localModulesPath, JSON.stringify({}));
 }
+
+// TODO: Refactor ipcMain listeners
 
 ipcMain.on("minimize", () => {
   BrowserWindow.getFocusedWindow().minimize();
