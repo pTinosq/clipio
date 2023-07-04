@@ -4,7 +4,7 @@ const { shell } = require("electron");
 class GoogleTranslateClickable extends Clickable {
   constructor(run, title) {
     super(run);
-    this.name = title;
+    this.title = title;
   }
 }
 

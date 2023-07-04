@@ -3,7 +3,7 @@ import { Clickable } from "../Clickable.js";
 class ToBase64Clickable extends Clickable {
   constructor(run, title) {
     super(run);
-    this.name = title;
+    this.title = title;
   }
 }
 
