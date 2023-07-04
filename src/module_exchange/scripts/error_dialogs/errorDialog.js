@@ -20,6 +20,14 @@ export default class errorDialog {
     });
   }
 
+  setTitle(title) {
+    this.title = title;
+  }
+
+  setMessage(message) {
+    this.message = message;
+  }
+
   show() {
     // Set dialog title and message
     document.getElementById("errorDialogTitle").innerText = this.title;

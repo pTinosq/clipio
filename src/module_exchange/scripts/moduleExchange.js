@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     getExchangeData(gitHubToken)
       .then((data) => {
         let modules = [];
+
         if (data.status == 200) {
           const moduleNames = data.data.map((module) => module.name);
 
@@ -84,10 +85,23 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch((error) => {
               console.error("Error fetching module manifest data:", error);
-              return modules; // Return empty modules array if there was an error
+              return [];
             });
         } else {
-          // TODO: Show a message to the user that the exchange is not available
+          const dialog = new errorDialog("errorDialog");
+
+          dialog.setTitle("Error " + data.status);
+
+          dialog.setMessage(
+            "An error has occurred while fetching exchange data"
+          );
+
+          dialog.addButton("Refresh", () => {
+            window.location.reload();
+          });
+
+          dialog.show();
+
           console.error("Error fetching exchange data:", data);
           return modules; // Return empty modules array if the exchange is not available
         }
