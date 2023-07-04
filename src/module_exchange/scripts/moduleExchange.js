@@ -1,6 +1,9 @@
 const { ipcRenderer } = require("electron");
 const { Octokit } = require("octokit");
 import ModuleExchangeItem from "./ModuleExchangeItem.js";
+import errorDialog from "./error_dialogs/errorDialog.js";
+import invalidTokenDialog from "./error_dialogs/invalidTokenDialog.js";
+import noInternetDialog from "./error_dialogs/noInternetDialog.js";
 
 async function getExchangeData(token) {
   // Octokit.js
@@ -45,8 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Load token from storage
   let gitHubToken = ipcRenderer.sendSync("get-github-token");
   const internetConnection = navigator.onLine;
+  console.log("Internet connection:", internetConnection);
 
-  if (gitHubToken) {
+  if (gitHubToken && internetConnection) {
     // Fetch exchange data
     getExchangeData(gitHubToken)
       .then((data) => {
@@ -88,6 +92,26 @@ document.addEventListener("DOMContentLoaded", function () {
           return modules; // Return empty modules array if the exchange is not available
         }
       })
+      .catch((error) => {
+        if (error.status == 401) {
+          const dialog = new invalidTokenDialog("errorDialog");
+          dialog.addButton("Return to settings", () => {
+            window.location.href = "../settings/settings.html";
+          });
+
+          dialog.show();
+        } else {
+          const dialog = new errorDialog("errorDialog");
+
+          dialog.addButton("Refresh", () => {
+            window.location.reload();
+          });
+
+          dialog.show();
+        }
+
+        return [];
+      })
       .then((modules) => {
         const localModules = ipcRenderer.sendSync("get-local-modules");
 
@@ -128,13 +152,33 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
   } else if (!gitHubToken) {
-    // TODO: Show a message to the user that they need to connect to the internet
-    console.warn("No GitHub token set");
+    const dialog = new invalidTokenDialog("errorDialog");
+
+    dialog.addButton("Return to settings", () => {
+      window.location.href = "../settings/settings.html";
+    });
+
+    dialog.show();
   } else if (!internetConnection) {
-    // TODO: Show a message to the user that they need to set a token
-    console.warn("No internet connection");
+    const dialog = new noInternetDialog("errorDialog");
+
+    dialog.addButton("Return to settings", () => {
+      window.location.href = "../settings/settings.html";
+    });
+
+    dialog.addButton("Retry", () => {
+      window.location.reload();
+    });
+
+    dialog.show();
   } else {
-    // TODO: Show a message to the user that there was an unknown error
+    const dialog = new errorDialog("errorDialog");
+
+    dialog.addButton("Refresh", () => {
+      window.location.reload();
+    });
+
+    dialog.show();
     console.error("CRITICAL: Unknown error");
   }
 });
