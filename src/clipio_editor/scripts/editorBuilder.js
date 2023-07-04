@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Get installed modules from Local Modules.json file in appdata
   const installedModules = ipcRenderer.sendSync("get-local-modules");
-  console.log(installedModules);
 
   Object.keys(installedModules).forEach((moduleUID) => {
     if (!installedModules[moduleUID]["enabled"]) return;
