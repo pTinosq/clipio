@@ -9,9 +9,9 @@ const ICON_PATH = path.join(BASE_DIR, "img/clipio.png");
 const store = new Store();
 
 // Set default values
-store.defaults({
-  showDevWindow: false,
-});
+if (!store.has("showDevWindow")) {
+  store.set("showDevWindow", false);
+}
 
 const commonWindowPreferences = {
   nodeIntegration: true,
