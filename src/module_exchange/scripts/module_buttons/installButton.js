@@ -3,6 +3,7 @@ const { Octokit } = require("octokit");
 const path = require("path");
 const fs = require("fs");
 import { buildLoader } from "./loadingGenerator.js";
+import noInternetDialog from "../error_dialogs/noInternetDialog.js";
 
 async function getModuleFolderContents(token, uid) {
   const octokit = new Octokit({
@@ -110,7 +111,18 @@ export function installModule(uid) {
       window.location.reload();
     });
   } else {
-    // TODO: Show no internet connection error
+    const dialog = new noInternetDialog("errorDialog");
+
+    dialog.addButton("Return to settings", () => {
+      window.location.href = "../settings/settings.html";
+    });
+
+    dialog.addButton("Retry", () => {
+      window.location.reload();
+    });
+
+    dialog.show();
+
     console.error(
       "CRITICAL: No internet connection. Cannot run module installation."
     );
