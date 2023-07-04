@@ -5,8 +5,6 @@
 
 # Rapid clipboard management
 
-![GitHub top language](https://img.shields.io/github/languages/top/ptinosq/clipio)
-![GitHub repo size](https://img.shields.io/github/repo-size/ptinosq/clipio)
 ![GitHub all releases](https://img.shields.io/github/downloads/ptinosq/clipio/total)
 ![GitHub](https://img.shields.io/github/license/ptinosq/clipio)
 ![GitHub issues](https://img.shields.io/github/issues/ptinosq/clipio)
