@@ -10,7 +10,7 @@ export class ClipioModule {
     this.author = "Author";
     this.contributors = [];
     this.description = "A module";
-    this.path = ipcRenderer.sendSync("get-app-path", uid);
+    this.path = ipcRenderer.sendSync("get-module-path", uid);
     this.data = "";
     this.enabled = true;
     this.succesfullyLoaded = true;

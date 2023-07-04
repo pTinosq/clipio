@@ -1,19 +1,11 @@
-const {
-  app,
-  BrowserWindow,
-  ipcMain,
-  Menu,
-  screen,
-  Tray,
-  safeStorage,
-} = require("electron");
+const { app, BrowserWindow, Menu, screen, Tray } = require("electron");
 const path = require("path");
 const Store = require("electron-store");
 const AutoLaunch = require("auto-launch");
-const fs = require("fs");
+const ipcMainChannels = require("./ipcmain-channels/ipcMainChannels");
+
 const BASE_DIR = __dirname;
 const ICON_PATH = path.join(BASE_DIR, "img/clipio.png");
-
 const store = new Store();
 
 // Set default values
@@ -157,142 +149,5 @@ app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow();
 });
 
-function resetModulesFolder() {
-  // Delete modules folder
-  const modulesFolderPath = path.join(app.getPath("userData"), "modules");
-
-  // Try to delete the folder, if it doesn't exist, just continue
-  try {
-    fs.rmSync(modulesFolderPath, { recursive: true });
-  } catch (error) {
-    console.warn("modules folder doesn't exist, continuing");
-  }
-
-  // Create modules folder
-  fs.mkdirSync(modulesFolderPath);
-
-  // Create local modules file
-  const localModulesPath = path.join(
-    app.getPath("userData"),
-    "modules",
-    "Local Modules"
-  );
-
-  fs.writeFileSync(localModulesPath, JSON.stringify({}));
-}
-
-// TODO: Refactor ipcMain listeners
-
-ipcMain.on("minimize", () => {
-  BrowserWindow.getFocusedWindow().minimize();
-});
-
-ipcMain.on("relaunch", () => {
-  app.relaunch();
-  app.exit();
-});
-
-ipcMain.on("maximize", () => {
-  const focusedWindow = BrowserWindow.getFocusedWindow();
-  if (focusedWindow.isMaximized()) {
-    focusedWindow.restore();
-  } else {
-    focusedWindow.maximize();
-  }
-});
-
-ipcMain.on("get-app-version", (event) => {
-  event.returnValue = app.getVersion();
-});
-
-ipcMain.on("relaunch", () => {
-  app.relaunch();
-  app.exit();
-});
-
-ipcMain.on("get-app-path", (event, uid) => {
-  event.returnValue = path.join(app.getPath("userData"), "modules", uid);
-});
-
-ipcMain.on("get-github-token", (event) => {
-  const encryptedToken = store.get("githubToken");
-  if (!encryptedToken) {
-    event.returnValue = false;
-    return;
-  }
-
-  const tokenBuffer = Buffer.from(encryptedToken, "base64");
-
-  const token = safeStorage.decryptString(tokenBuffer);
-
-  if (!token) {
-    event.returnValue = false;
-  }
-
-  event.returnValue = token;
-});
-
-ipcMain.on("set-github-token", (event, token) => {
-  if (!token) {
-    event.returnValue = false;
-    return;
-  }
-
-  const encryptedToken = safeStorage.encryptString(token);
-  store.set("githubToken", encryptedToken);
-  event.returnValue = true;
-});
-
-ipcMain.on("get-local-modules", (event) => {
-  const localModulesPath = path.join(
-    app.getPath("userData"),
-    "modules",
-    "Local Modules"
-  );
-
-  if (!fs.existsSync(localModulesPath)) {
-    resetModulesFolder();
-    event.returnValue = {};
-  } else {
-    // Read local modules file
-    const localModules = JSON.parse(
-      fs.readFileSync(localModulesPath, { encoding: "utf-8" })
-    );
-
-    event.returnValue = localModules;
-  }
-});
-
-ipcMain.on("set-local-modules", (event, localModules) => {
-  const localModulesPath = path.join(
-    app.getPath("userData"),
-    "modules",
-    "Local Modules"
-  );
-  fs.writeFileSync(localModulesPath, JSON.stringify(localModules));
-});
-
-ipcMain.on("get-module-manifest", (event, uid) => {
-  const localModuleManifestPath = path.join(
-    app.getPath("userData"),
-    "modules",
-    uid,
-    "module-manifest.json"
-  );
-
-  if (fs.lstatSync(localModuleManifestPath).isFile()) {
-    const moduleManifest = JSON.parse(
-      fs.readFileSync(localModuleManifestPath, { encoding: "utf-8" })
-    );
-
-    event.returnValue = moduleManifest;
-  } else {
-    event.returnValue = {};
-  }
-});
-
-ipcMain.on("delete-module", (event, uid) => {
-  const modulePath = path.join(app.getPath("userData"), "modules", uid);
-
-  fs.rmSync(modulePath, { recursive: true });
-});
+// Register all IPCMain events
+ipcMainChannels.loadAll();

@@ -104,7 +104,7 @@ export function installModule(uid) {
 
     const token = ipcRenderer.sendSync("get-github-token");
 
-    const destinationPath = ipcRenderer.sendSync("get-app-path", uid);
+    const destinationPath = ipcRenderer.sendSync("get-module-path", uid);
 
     runInstallation(token, uid, destinationPath).then(() => {
       ipcRenderer.send("set-local-modules", localModules);
