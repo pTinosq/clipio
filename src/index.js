@@ -157,6 +157,30 @@ app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow();
 });
 
+function resetModulesFolder() {
+  // Delete modules folder
+  const modulesFolderPath = path.join(app.getPath("userData"), "modules");
+
+  // Try to delete the folder, if it doesn't exist, just continue
+  try {
+    fs.rmSync(modulesFolderPath, { recursive: true });
+  } catch (error) {
+    console.warn("modules folder doesn't exist, continuing");
+  }
+
+  // Create modules folder
+  fs.mkdirSync(modulesFolderPath);
+
+  // Create local modules file
+  const localModulesPath = path.join(
+    app.getPath("userData"),
+    "modules",
+    "Local Modules"
+  );
+
+  fs.writeFileSync(localModulesPath, JSON.stringify({}));
+}
+
 ipcMain.on("minimize", () => {
   BrowserWindow.getFocusedWindow().minimize();
 });
@@ -224,14 +248,16 @@ ipcMain.on("get-local-modules", (event) => {
     "Local Modules"
   );
 
-  if (fs.lstatSync(localModulesPath).isFile()) {
+  if (!fs.existsSync(localModulesPath)) {
+    resetModulesFolder();
+    event.returnValue = {};
+  } else {
+    // Read local modules file
     const localModules = JSON.parse(
       fs.readFileSync(localModulesPath, { encoding: "utf-8" })
     );
 
     event.returnValue = localModules;
-  } else {
-    event.returnValue = [];
   }
 });
 
