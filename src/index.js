@@ -2,7 +2,7 @@ const { app, BrowserWindow, Menu, screen, Tray } = require("electron");
 const path = require("path");
 const Store = require("electron-store");
 const AutoLaunch = require("auto-launch");
-const ipcMainChannels = require("./ipcmain-channels/ipcMainChannels");
+const ipcMainChannels = require("./main/ipcmain-channels/ipcMainChannels");
 
 const BASE_DIR = __dirname;
 const ICON_PATH = path.join(BASE_DIR, "img/clipio.png");
@@ -31,11 +31,11 @@ const createWindow = () => {
     icon: ICON_PATH,
     webPreferences: {
       ...commonWindowPreferences,
-      preload: path.join(BASE_DIR, "/scripts/preload.js"),
+      preload: path.join(BASE_DIR, "/main/scripts/preload.js"),
     },
   });
 
-  mainWindow.loadFile(path.join(BASE_DIR, "index.html"));
+  mainWindow.loadFile(path.join(BASE_DIR, "/main/index.html"));
 
   if (store.get("showDevWindow")) {
     mainWindow.webContents.openDevTools();
@@ -71,7 +71,7 @@ const createSettingsWindow = () => {
     icon: ICON_PATH,
     webPreferences: {
       ...commonWindowPreferences,
-      preload: path.join(BASE_DIR, "/scripts/preload.js"),
+      preload: path.join(BASE_DIR, "/main/scripts/preload.js"),
     },
   });
 

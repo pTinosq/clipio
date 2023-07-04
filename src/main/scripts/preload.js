@@ -26,15 +26,15 @@ clipboardListener.on("change", () => {
   const popupWindow = new PopupWindow();
 
   if (isValidHttpUrl(clipboardContent)) {
-    popupWindow.url = (__dirname, "./clipio_popup/popup_url.html");
+    popupWindow.url = (__dirname, "../clipio_popup/popup_url.html");
     popupWindow.width = 150;
     popupWindow.height = 95;
   } else if (isFilePath(clipboardContent)) {
-    popupWindow.url = (__dirname, "./clipio_popup/popup_fpath.html");
+    popupWindow.url = (__dirname, "../clipio_popup/popup_fpath.html");
     popupWindow.width = 150;
     popupWindow.height = 95;
   } else {
-    popupWindow.url = (__dirname, "./clipio_popup/popup.html");
+    popupWindow.url = (__dirname, "../clipio_popup/popup.html");
     popupWindow.width = 75;
     popupWindow.height = 75;
   }

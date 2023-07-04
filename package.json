@@ -27,10 +27,10 @@
   "build": {
     "appId": "com.ptinosq.clipio",
     "mac": {
-      "icon": "src/icon.png"
+      "icon": "src/img/clipio.png"
     },
     "win": {
-      "icon": "src/icon.png"
+      "icon": "src/img/clipio.png"
     }
   }
 }

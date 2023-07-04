@@ -1,7 +1,7 @@
 import { ColorPreview } from "./ColorPreview.js";
 import { ClickableFactory } from "./ClickableFactory.js";
 import { InteractorFactory } from "./InteractorFactory.js";
-import { ClipioModule } from "../../ClipioModule.js";
+import { ClipioModule } from "./ClipioModule.js";
 import { Clickable } from "./Clickable.js";
 
 // INTERACTORS

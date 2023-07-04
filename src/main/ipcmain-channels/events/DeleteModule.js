@@ -16,4 +16,5 @@ class DeleteModule extends Event {
   }
 }
 
-module.exports = DeleteModule;
+module.exports = DeleteModule;  
+
