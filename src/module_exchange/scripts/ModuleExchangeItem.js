@@ -102,8 +102,13 @@ export default class ModuleExchangeItem {
         updateButton.classList.add("mebi-button-warning");
         updateButton.innerText = "Update";
 
-        // TODO: Add update functionality
+        updateButton.addEventListener("click", () => {
+          // remove module with reload false flag
+          uninstallModule(this.uid, false);
 
+          // install module
+          installModule(this.uid);
+        });
         moduleButtons.appendChild(updateButton);
       }
     } else {
