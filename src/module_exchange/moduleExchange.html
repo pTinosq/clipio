@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="styles/moduleExchange.css" />
     <link rel="stylesheet" href="styles/moduleExchangeCard.css" />
     <link rel="stylesheet" href="styles/loadingIcon.css" />
+    <link rel="stylesheet" href="styles/tagSearch.css" />
     <script type="module" src="scripts/moduleExchange.js"></script>
+    <script src="scripts/tagSearch.js"></script>
     <title>Module Exchange</title>
   </head>
   <body>
@@ -29,7 +31,17 @@
         <div class="error-dialog-footer" id="errorDialogButtons"></div>
       </dialog>
       <div class="module-exchange-header">
-        <!-- TODO: Add search feature, verified only checkmark, connection status -->
+        <!-- Search for modules, verified only checkbox, select tag (development, design etc.) -->
+        <div class="meh-search">
+          <input
+            type="text"
+            id="meh-search-input"
+            placeholder="Search for modules..."
+          />
+          <div class="meh-search-results" id="meh-search-results">
+            <!-- Results are added as user types -->
+          </div>
+        </div>
       </div>
       <div class="module-exchange-body" id="module-exchange-body">
         <div id="module-exchange-loading">
