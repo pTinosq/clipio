@@ -1,18 +1,18 @@
-.meh-search-results {
+.meh-tag-search-results {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.meh-search-result p {
+.meh-tag-search-result p {
   margin: 0;
   padding: 0;
 }
 
-.meh-search-result {
+.meh-tag-search-result {
   background-color: gray;
 }
 
-.meh-search-result-active {
+.meh-tag-search-result-active {
   background-color: red;
 }

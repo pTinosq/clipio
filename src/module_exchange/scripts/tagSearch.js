@@ -13,10 +13,10 @@ const tags = [
 
 document.addEventListener("DOMContentLoaded", function () {
   document
-    .getElementById("meh-search-input")
+    .getElementById("meh-tag-search-input")
     .addEventListener("input", function () {
-      const searchInput = document.getElementById("meh-search-input").value;
-      const searchResults = document.getElementById("meh-search-results");
+      const searchInput = document.getElementById("meh-tag-search-input").value;
+      const searchResults = document.getElementById("meh-tag-search-results");
 
       const options = {
         includeScore: true,
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       results.forEach((result) => {
         const resultElement = document.createElement("div");
-        resultElement.classList.add("meh-search-result");
+        resultElement.classList.add("meh-tag-search-result");
         resultElement.dataset.tag = result.item;
 
         const resultText = document.createElement("span");
@@ -46,11 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
   let selectedElementIndex = -1;
 
   document
-    .getElementById("meh-search-input")
+    .getElementById("meh-tag-search-input")
     .addEventListener("keydown", function (e) {
-      const searchResults = document.getElementById("meh-search-results");
+      const searchResults = document.getElementById("meh-tag-search-results");
       const searchResultElements =
-        searchResults.getElementsByClassName("meh-search-result");
+        searchResults.getElementsByClassName("meh-tag-search-result");
 
       if (e.key == "ArrowDown" && searchResultElements.length > 0) {
         selectedElementIndex++;
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const selectedElement = searchResultElements[selectedElementIndex];
         const selectedTag = selectedElement.dataset.tag;
 
-        const searchInput = document.getElementById("meh-search-input");
+        const searchInput = document.getElementById("meh-tag-search-input");
         searchInput.value = selectedTag;
 
         searchResults.innerHTML = "";
@@ -82,11 +82,11 @@ document.addEventListener("DOMContentLoaded", function () {
         selectedElementIndex < searchResultElements.length
       ) {
         for (let i = 0; i < searchResultElements.length; i++) {
-          searchResultElements[i].classList.remove("meh-search-result-active");
+          searchResultElements[i].classList.remove("meh-tag-search-result-active");
         }
 
         searchResultElements[selectedElementIndex].classList.add(
-          "meh-search-result-active"
+          "meh-tag-search-result-active"
         );
       }
     });
