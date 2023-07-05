@@ -21,6 +21,7 @@
     "auto-launch": "^5.0.5",
     "clipboard-event": "^1.5.0",
     "electron-store": "^8.0.1",
+    "fuse.js": "^6.6.2",
     "jquery": "^3.6.0",
     "octokit": "^2.1.0"
   },
