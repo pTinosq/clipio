@@ -54,6 +54,7 @@ export default class ModuleExchangeItem {
     let moduleTagGroup = document.createElement("div");
     moduleTagGroup.classList.add("mebi-tag-group");
     moduleTagGroup.id = `${this.uid}-tags`;
+    moduleExchangeItem.dataset.tags = this.tags.map((tag) => tag.name);
 
     let tagGroup = new TagGroup(moduleTagGroup.id);
 

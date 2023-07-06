@@ -2,6 +2,7 @@ export default class TagGroup {
   constructor(id) {
     this.id = id;
     this.tags = [];
+    this.onUpdateCallback = () => {};
   }
 
   addTag(tag) {
@@ -49,5 +50,7 @@ export default class TagGroup {
     const newTagGroupElement = this.buildHTML();
 
     tagGroupElement.appendChild(newTagGroupElement);
+
+    this.onUpdateCallback();
   }
 }

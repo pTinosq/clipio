@@ -2,8 +2,29 @@ const Fuse = require("fuse.js");
 import TagGroup from "./tags/TagGroup.js";
 import tags from "./tags/tags.js";
 
+function filterByTags(tags) {
+  const modules = document.getElementById("module-exchange-body");
+
+  for (let i = 0; i < modules.children.length; i++) {
+    let module = modules.children[i];
+    const moduleTags = module.dataset.tags.split(",");
+
+    // Only show modules that have all the tags
+    if (tags.every((tag) => moduleTags.includes(tag))) {
+      module.style.display = "block";
+    }
+    // Hide modules that don't have all the tags
+    else {
+      module.style.display = "none";
+    }
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const tagGroup = new TagGroup("meh-filter-tags");
+  tagGroup.onUpdateCallback = () => {
+    filterByTags(tagGroup.tags.map((tag) => tag.name));
+  };
 
   document
     .getElementById("meh-tag-search-input")
@@ -82,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!tagGroup.containsTag(selectedTag)) {
           tagGroup.addTag(selectedTag);
           tagGroup.updateHTML(tagGroup.id);
+          filterByTags(tagGroup.tags.map((tag) => tag.name));
         }
         selectedElementIndex = -1;
       } else {

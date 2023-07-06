@@ -63,3 +63,7 @@ header h1 {
   transform: translateX(-50%);
   text-align: center;
 }
+
+.hidden {
+  display: none !important;
+}
