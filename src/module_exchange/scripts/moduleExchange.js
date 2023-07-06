@@ -4,6 +4,7 @@ import ModuleExchangeItem from "./ModuleExchangeItem.js";
 import errorDialog from "./error_dialogs/errorDialog.js";
 import invalidTokenDialog from "./error_dialogs/invalidTokenDialog.js";
 import noInternetDialog from "./error_dialogs/noInternetDialog.js";
+import tags from "./tags/tags.js";
 
 async function getExchangeData(token) {
   // Octokit.js
@@ -140,6 +141,32 @@ document.addEventListener("DOMContentLoaded", function () {
           moduleExchangeItem.description = module.description;
           moduleExchangeItem.author = module.author;
           moduleExchangeItem.version = module.version;
+
+          const tagMap = [
+            { name: "conversion", object: tags.conversion },
+            { name: "cryptography", object: tags.cryptography },
+            { name: "design", object: tags.design },
+            { name: "development", object: tags.development },
+            { name: "finance", object: tags.finance },
+            { name: "formatting", object: tags.formatting },
+            { name: "funny", object: tags.funny },
+            { name: "web", object: tags.web },
+            // Add more Tag objects as needed
+          ];
+
+          let tagObjects = [];
+
+          // Find the Tag object with the matching name
+          for (let i = 0; i < tagMap.length; i++) {
+            if (module.tags.includes(tagMap[i].name)) {
+              let tagObject = new tagMap[i].object();
+              tagObject.removable = false;
+              tagObjects.push(tagObject);
+            }
+          }
+
+          moduleExchangeItem.tags = tagObjects;
+
           moduleExchangeItem.installed = localModulesUIDs.includes(module.uid);
 
           if (moduleExchangeItem.installed) {

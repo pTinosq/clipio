@@ -3,6 +3,7 @@ import { enableModule } from "./module_buttons/enableButton.js";
 import { viewSource } from "./module_buttons/viewSourceButton.js";
 import { uninstallModule } from "./module_buttons/uninstallButton.js";
 import { installModule } from "./module_buttons/installButton.js";
+import TagGroup from "./tags/TagGroup.js";
 
 export default class ModuleExchangeItem {
   constructor() {
@@ -11,6 +12,7 @@ export default class ModuleExchangeItem {
     this.description = "";
     this.author = "";
     this.version = "";
+    this.tags = [];
     this.installed = false;
     this.installedVersion = "vx.x.x";
     this.enabled = false;
@@ -34,8 +36,7 @@ export default class ModuleExchangeItem {
     moduleName.innerText = this.name;
     moduleExchangeItem.appendChild(moduleName);
 
-    // Verified modules get a tick
-
+    // Verified modules get a special badge
     let moduleAuthor = document.createElement("p");
     moduleAuthor.classList.add("mebi-author");
     moduleAuthor.innerText = `@${this.author} • v${this.version}`;
@@ -43,11 +44,26 @@ export default class ModuleExchangeItem {
     if (this.author == "ptinosq") {
       let verified = document.createElement("span");
       verified.classList.add("mebi-verified");
+      verified.classList.add("tag");
       verified.innerText = "verified";
       moduleAuthor.appendChild(verified);
     }
 
     moduleExchangeItem.appendChild(moduleAuthor);
+
+    let moduleTagGroup = document.createElement("div");
+    moduleTagGroup.classList.add("mebi-tag-group");
+    moduleTagGroup.id = `${this.uid}-tags`;
+
+    let tagGroup = new TagGroup(moduleTagGroup.id);
+
+    this.tags.forEach((tag) => {
+      tagGroup.addTag(tag);
+    });
+
+    moduleTagGroup.appendChild(tagGroup.buildHTML());
+
+    moduleExchangeItem.appendChild(moduleTagGroup);
 
     let moduleDescription = document.createElement("p");
     moduleDescription.classList.add("mebi-description");

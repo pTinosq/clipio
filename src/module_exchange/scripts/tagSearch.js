@@ -1,17 +1,6 @@
 const Fuse = require("fuse.js");
-import Tag from "./tag_search/Tag.js";
-import TagGroup from "./tag_search/TagGroup.js";
-import tagColors from "./tag_search/tagColors.js";
-
-const tags = [
-  new Tag("development", tagColors.Blue),
-  new Tag("design", tagColors.Green),
-  new Tag("conversion", tagColors.Grey),
-  new Tag("web", tagColors.Purple),
-  new Tag("funny", tagColors.Red),
-  new Tag("cryptography", tagColors.Teal),
-  new Tag("finance", tagColors.Yellow),
-];
+import TagGroup from "./tags/TagGroup.js";
+import tags from "./tags/tags.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   const tagGroup = new TagGroup("meh-filter-tags");
@@ -28,7 +17,18 @@ document.addEventListener("DOMContentLoaded", function () {
         keys: ["name"],
       };
 
-      const fuse = new Fuse(tags, options);
+      const tagData = [
+        new tags.conversion(),
+        new tags.cryptography(),
+        new tags.design(),
+        new tags.development(),
+        new tags.finance(),
+        new tags.formatting(),
+        new tags.funny(),
+        new tags.web(),
+      ];
+
+      const fuse = new Fuse(tagData, options);
 
       const results = fuse.search(searchInput);
 
@@ -72,15 +72,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       } else if (e.key == "Enter" && selectedElementIndex >= 0) {
         const selectedElement = searchResultElements[selectedElementIndex];
-        const selectedTag = selectedElement.dataset.tag;
+        let selectedTag = selectedElement.dataset.tag;
+        selectedTag = new tags[selectedTag]();
 
         const searchInput = document.getElementById("meh-tag-search-input");
         searchInput.value = "";
         searchResults.innerHTML = "";
 
-        const tag = new Tag(selectedTag);
-        tagGroup.addTag(tag.buildHTML());
-
+        if (!tagGroup.containsTag(selectedTag)) {
+          tagGroup.addTag(selectedTag);
+          tagGroup.updateHTML(tagGroup.id);
+        }
         selectedElementIndex = -1;
       } else {
         selectedElementIndex = -1;
