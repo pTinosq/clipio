@@ -20,6 +20,23 @@ function filterByTags(tags) {
   }
 }
 
+function addTagFromSearch(tag, tagGroup) {
+  return () => {
+    let selectedTag = new tags[tag]();
+
+    const searchInput = document.getElementById("meh-tag-search-input");
+    const searchResults = document.getElementById("meh-tag-search-results");
+    searchInput.value = "";
+    searchResults.innerHTML = "";
+
+    if (!tagGroup.containsTag(selectedTag)) {
+      tagGroup.addTag(selectedTag);
+      tagGroup.updateHTML(tagGroup.id);
+      filterByTags(tagGroup.tags.map((tag) => tag.name));
+    }
+  };
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const tagGroup = new TagGroup("meh-filter-tags");
   tagGroup.onUpdateCallback = () => {
@@ -38,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
         keys: ["name"],
       };
 
-      const tagData = [
+      const searchTags = [
         new tags.conversion(),
         new tags.cryptography(),
         new tags.design(),
@@ -49,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         new tags.web(),
       ];
 
-      const fuse = new Fuse(tagData, options);
+      const fuse = new Fuse(searchTags, options);
 
       const results = fuse.search(searchInput);
 
@@ -63,6 +80,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const resultText = document.createElement("span");
 
         resultText.innerHTML = result.item.name;
+
+        resultElement.addEventListener(
+          "click",
+          addTagFromSearch(result.item.name, tagGroup)
+        );
+
         resultElement.appendChild(resultText);
 
         searchResults.appendChild(resultElement);
@@ -94,17 +117,9 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (e.key == "Enter" && selectedElementIndex >= 0) {
         const selectedElement = searchResultElements[selectedElementIndex];
         let selectedTag = selectedElement.dataset.tag;
-        selectedTag = new tags[selectedTag]();
+        
+        addTagFromSearch(selectedTag, tagGroup)();
 
-        const searchInput = document.getElementById("meh-tag-search-input");
-        searchInput.value = "";
-        searchResults.innerHTML = "";
-
-        if (!tagGroup.containsTag(selectedTag)) {
-          tagGroup.addTag(selectedTag);
-          tagGroup.updateHTML(tagGroup.id);
-          filterByTags(tagGroup.tags.map((tag) => tag.name));
-        }
         selectedElementIndex = -1;
       } else {
         selectedElementIndex = -1;
