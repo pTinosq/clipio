@@ -39,8 +39,6 @@
   padding: 1rem 0;
 }
 
-
-
 .mebi-verified {
   color: #fff;
   margin-left: 0.5rem;
@@ -82,4 +80,8 @@
 
 .mebi-button-warning {
   background: #f6cd45;
+}
+
+.mebi-tag-group {
+  padding-top: 1rem;
 }
