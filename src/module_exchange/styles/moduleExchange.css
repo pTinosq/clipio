@@ -39,12 +39,11 @@ header h1 {
 }
 
 .module-exchange-header {
+  padding: 1rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 1rem;
   min-height: 32px;
-  border: 1px solid #333333;
 }
 
 .module-exchange-body {
