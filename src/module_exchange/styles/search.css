@@ -12,6 +12,16 @@
   /* margin-bottom: 1rem; */
 }
 
+.meh-tag-search-large {
+  max-width: 500px;
+  padding-right: 1rem;
+}
+
+.meh-tag-search-large input {
+  max-width: 500px;
+  min-width: 200px;
+}
+
 .meh-tag-search-results {
   position: absolute;
   z-index: 1;
