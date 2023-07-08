@@ -1,8 +1,8 @@
-.meh-tag-search {
+.meh-search {
   position: relative;
 }
 
-.meh-tag-search input {
+.meh-search input {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #ccc;
@@ -12,12 +12,12 @@
   /* margin-bottom: 1rem; */
 }
 
-.meh-tag-search-large {
+.meh-search-large {
   max-width: 500px;
   padding-right: 1rem;
 }
 
-.meh-tag-search-large input {
+.meh-search-large input {
   max-width: 500px;
   min-width: 200px;
 }

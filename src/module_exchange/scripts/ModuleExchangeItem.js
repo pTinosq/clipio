@@ -33,6 +33,7 @@ export default class ModuleExchangeItem {
     }
 
     let moduleName = document.createElement("h2");
+    moduleName.classList.add("mebi-title");
     moduleName.innerText = this.name;
     moduleExchangeItem.appendChild(moduleName);
 
