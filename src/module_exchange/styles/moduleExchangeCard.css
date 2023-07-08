@@ -82,6 +82,7 @@
   background: #f6cd45;
 }
 
-.mebi-tag-group {
-  padding-top: 1rem;
+.mebi-tag-group,
+.mebi-author {
+  padding-top: 0.5rem;
 }
