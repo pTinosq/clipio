@@ -26,6 +26,10 @@ export default class TagGroup {
     tagGroupElement.classList.add("tag-group");
     tagGroupElement.id = this.id;
 
+    if (this.tags.length === 0) {
+      tagGroupElement.classList.add("hidden");
+    }
+
     // Build tag group
     this.tags.forEach((tag) => {
       const tagElement = tag.buildHTML();

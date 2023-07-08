@@ -1,7 +1,23 @@
 .tag {
-  padding: 0.1rem 0.75rem;
+  padding: 0.25rem 0.75rem;
   font-size: 10px;
   border-radius: 0.2rem;
   letter-spacing: 1px;
   font-weight: 500;
+}
+
+.tag-removable {
+  cursor: pointer;
+}
+
+.tag-remove {
+  margin-left: 0.3rem;
+  /* font-size: 10px; */
+  cursor: pointer;
+}
+
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
 }

@@ -72,6 +72,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
       searchResults.innerHTML = "";
 
+      if (results.length === 0) {
+        searchResults.classList.add("hidden");
+      } else {
+        searchResults.classList.remove("hidden");
+      }
+
       results.forEach((result) => {
         const resultElement = document.createElement("div");
         resultElement.classList.add("meh-tag-search-result");
@@ -117,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else if (e.key == "Enter" && selectedElementIndex >= 0) {
         const selectedElement = searchResultElements[selectedElementIndex];
         let selectedTag = selectedElement.dataset.tag;
-        
+
         addTagFromSearch(selectedTag, tagGroup)();
 
         selectedElementIndex = -1;

@@ -20,6 +20,8 @@ class Tag {
       tagRemove.innerHTML = "x";
       tagRemove.classList.add("tag-remove");
       tagElement.appendChild(tagRemove);
+
+      tagElement.classList.add("tag-removable");
     }
     return tagElement;
   }
