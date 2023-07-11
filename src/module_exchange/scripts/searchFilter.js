@@ -110,6 +110,12 @@ class SearchFilter {
         }
       }
     }
+
+    if (titleFilteredModules.length === 0) {
+      document.getElementById("no-modules-found").classList.remove("hidden");
+    } else {
+      document.getElementById("no-modules-found").classList.add("hidden");
+    }
   }
 }
 

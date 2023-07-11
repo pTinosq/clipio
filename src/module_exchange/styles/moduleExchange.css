@@ -125,6 +125,21 @@ header h1 {
   text-align: center;
 }
 
+.no-modules-found {
+
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-modules-found p {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: #495d72;
+  letter-spacing: 0.5px;
+}
+
 .hidden {
   display: none !important;
 }

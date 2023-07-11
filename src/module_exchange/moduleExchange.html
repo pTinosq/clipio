@@ -34,7 +34,6 @@
         <div class="error-dialog-footer" id="errorDialogButtons"></div>
       </dialog>
       <div class="module-exchange-header">
-        <!-- Search for modules, verified only checkbox, select tag (development, design etc.) -->
         <div class="meh-left">
           <div class="meh-search">
             <input
@@ -51,7 +50,6 @@
             <div class="meh-filter-tags" id="meh-filter-tags"></div>
           </div>
           <div class="meh-switchgroup">
-            <!-- Switch input -->
             <div class="meh-switch">
               <input type="checkbox" id="meh-verified-switch" />
               <label for="meh-verified-switch">Verified only</label>
@@ -98,6 +96,9 @@
           </div>
           <p>Loading...</p>
         </div>
+      </div>
+      <div class="no-modules-found hidden" id="no-modules-found">
+        <p>No modules found with applied filters.</p>
       </div>
     </div>
   </body>
