@@ -42,8 +42,11 @@
 .mebi-verified {
   color: #fff;
   margin-left: 0.5rem;
-  background: rgb(216, 166, 35);
-  background: linear-gradient(24deg, #2d92dd 0%, #27a2ff 53%, #42c5ff 95%);
+  background: rgb(255, 200, 62);
+  /* background: linear-gradient(24deg, #2d92dd 0%, #27a2ff 53%, #42c5ff 95%); */
+  /* GOLD!!! */
+  background: linear-gradient(45deg, #d19b2f, #d1991f, #e6bc35, #fbebb7);
+  box-shadow: 0 0 10px 2px rgba(187, 148, 20, 0.75);
 }
 
 .mebi-buttons {
