@@ -1,7 +1,7 @@
 import {
   Interactor,
   InteractorElement,
-} from "../src/clipio_editor/scripts/Interactor.js";
+} from "../../src/clipio_editor/scripts/Interactor.js";
 
 describe("Interactor", () => {
   it("should create an instance with the correct defaults", () => {

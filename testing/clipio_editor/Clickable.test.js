@@ -1,4 +1,4 @@
-import { Clickable } from "../src/clipio_editor/scripts/Clickable.js";
+import { Clickable } from "../../src/clipio_editor/scripts/Clickable.js";
 
 describe("Clickable", () => {
   it("should create an instance with the correct defaults", () => {

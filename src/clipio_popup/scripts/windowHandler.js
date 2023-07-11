@@ -1,6 +1,4 @@
-let $ = require("jquery");
-const { clipboard, shell } = require("electron");
-
+// Main function
 document.addEventListener("DOMContentLoaded", function () {
   // After 1500ms begin fading out the popup window
   let clicked = false;
@@ -54,3 +52,35 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// Helper functions
+function fadeOut() {
+  $("body").fadeOut(2000, function () {
+    if (!clicked) {
+      window.close();
+    } else {
+      document.querySelectorAll("img").innerHTML = "";
+    }
+  });
+}
+
+function openEditor() {
+  window.open(
+    "../clipio_editor/editor.html",
+    "_blank",
+    `width=${editor_width},height=${editor_height},x=${w},y=${h},frame=false,nodeIntegration=yes,contextIsolation=false,` +
+      `alwaysOnTop=true,titlebar=transparent`
+  );
+}
+
+function openBrowser() {
+  shell.openExternal(clipboard.readText());
+
+  window.close();
+}
+
+function openFolder() {
+  shell.openPath(clipboard.readText());
+
+  window.close();
+}

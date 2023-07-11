@@ -1,4 +1,4 @@
-import { ColorPreview } from "../src/clipio_editor/scripts/ColorPreview.js";
+import { ColorPreview } from "../../src/clipio_editor/scripts/ColorPreview.js";
 
 describe("ColorPreview", () => {
   let createElementMock;
