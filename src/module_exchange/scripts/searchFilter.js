@@ -3,9 +3,10 @@ import ModuleExchangeItem from "./ModuleExchangeItem.js";
 class SearchFilter {
   constructor() {
     this.filters = {
-      tags: [],
+      tag: [],
       title: "",
       description: "",
+      checkbox: {},
     };
   }
 
@@ -25,17 +26,16 @@ class SearchFilter {
       m.fromHTML(moduleElements[i]);
       modules.push(m);
     }
+    
 
-    // Filter by tag first
 
-    // if (tags.every((tag) => moduleTags.includes(tag))) {
+    // Filter by tag
     let tagFilteredModules = modules;
-
-    if (this.filters.tags.length > 0) {
+    if (this.filters.tag.length > 0) {
       tagFilteredModules = [];
       for (let i = 0; i < modules.length; i++) {
         let moduleTags = modules[i].tags;
-        let tags = this.filters.tags;
+        let tags = this.filters.tag;
 
         if (tags.every((tag) => moduleTags.map((m) => m.name).includes(tag))) {
           tagFilteredModules.push(modules[i]);
@@ -43,20 +43,60 @@ class SearchFilter {
       }
     }
 
+    console.log(tagFilteredModules);
+
+    // Filter by checkbox
+    let checkboxFilteredModules = tagFilteredModules;
+    if (Object.keys(this.filters.checkbox).length > 0) {
+      checkboxFilteredModules = [];
+      console.log(this.filters.checkbox);
+      for (let i = 0; i < tagFilteredModules.length; i++) {
+        let module = tagFilteredModules[i];
+        let checkboxFilters = this.filters.checkbox;
+
+        // Apply each check until one fails with the module
+        let passed = true;
+
+        if (checkboxFilters["meh-verified-switch"] && !module.verified && passed) {
+          passed = false;
+        } 
+
+        if (!checkboxFilters["meh-installed-switch"] && module.installed && passed) {
+          passed = false;
+        }
+
+        if (!checkboxFilters["meh-uninstalled-switch"] && !module.installed && passed) {
+          passed = false;
+        }
+
+        if (!checkboxFilters["meh-enabled-switch"] && module.enabled && module.installed && passed) {
+          passed = false;
+        }
+
+        if (!checkboxFilters["meh-disabled-switch"] && !module.enabled && module.installed && passed) {
+          passed = false;
+        }
+
+        if (passed) {
+          checkboxFilteredModules.push(module);
+        }
+      }
+    }
+
     // Filter by title and description
-    let titleFilteredModules = tagFilteredModules;
+    let titleFilteredModules = checkboxFilteredModules;
     if (this.filters.title !== "") {
       titleFilteredModules = [];
-      for (let i = 0; i < tagFilteredModules.length; i++) {
+      for (let i = 0; i < checkboxFilteredModules.length; i++) {
         if (
-          tagFilteredModules[i].name
+          checkboxFilteredModules[i].name
             .toLowerCase()
             .includes(this.filters.title.toLowerCase()) ||
-          tagFilteredModules[i].description
+            checkboxFilteredModules[i].description
             .toLowerCase()
             .includes(this.filters.title.toLowerCase())
         ) {
-          titleFilteredModules.push(tagFilteredModules[i]);
+          titleFilteredModules.push(checkboxFilteredModules[i]);
         }
       }
     }

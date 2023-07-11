@@ -7,6 +7,8 @@ import TagGroup from "./tags/TagGroup.js";
 import { getTagByName } from "./tags/tags.js";
 
 export default class ModuleExchangeItem {
+  static VERIFIED_USERS = ["ptinosq"];
+
   constructor() {
     this.uid = "";
     this.name = "";
@@ -17,6 +19,7 @@ export default class ModuleExchangeItem {
     this.installed = false;
     this.installedVersion = "vx.x.x";
     this.enabled = false;
+    this.verified = false;
   }
 
   fromHTML(element) {
@@ -31,6 +34,7 @@ export default class ModuleExchangeItem {
     this.installed = element.dataset.installed === "true";
     this.installedVersion = element.dataset.installedVersion;
     this.enabled = element.dataset.enabled === "true";
+    this.verified = element.dataset.verified === "true";
   }
 
   buildHTML() {
@@ -54,19 +58,22 @@ export default class ModuleExchangeItem {
     moduleExchangeItem.dataset.name = this.name;
     moduleExchangeItem.appendChild(moduleName);
 
-    // Verified modules get a special badge
+    // Author and version
     let moduleAuthor = document.createElement("p");
     moduleAuthor.classList.add("mebi-author");
     moduleExchangeItem.dataset.author = this.author;
     moduleAuthor.innerText = `@${this.author} • v${this.version}`;
 
-    if (this.author == "ptinosq") {
+    // Verified modules get a special badge
+    if (ModuleExchangeItem.VERIFIED_USERS.includes(this.author)) {
       let verified = document.createElement("span");
       verified.classList.add("mebi-verified");
       verified.classList.add("tag");
       verified.innerText = "verified";
       moduleExchangeItem.dataset.verified = true;
       moduleAuthor.appendChild(verified);
+    } else {
+      moduleExchangeItem.dataset.verified = false;
     }
 
     moduleExchangeItem.appendChild(moduleAuthor);

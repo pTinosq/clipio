@@ -11,6 +11,7 @@
     <script type="module" src="scripts/moduleExchange.js"></script>
     <script type="module" src="scripts/tagSearch.js"></script>
     <script type="module" src="scripts/moduleSearch.js"></script>
+    <script type="module" src="scripts/checkboxSearch.js"></script>
     <title>Module Exchange</title>
   </head>
   <body>
@@ -34,27 +35,56 @@
       </dialog>
       <div class="module-exchange-header">
         <!-- Search for modules, verified only checkbox, select tag (development, design etc.) -->
-        <div class="meh-search">
-          <input
-            type="text"
-            id="meh-tag-search-input"
-            placeholder="Filter by tags..."
-          />
-          <div
-            class="meh-tag-search-results hidden"
-            id="meh-tag-search-results"
-          >
-            <!-- Results are added as user types -->
+        <div class="meh-left">
+          <div class="meh-search">
+            <input
+              type="text"
+              id="meh-tag-search-input"
+              placeholder="Filter by tags..."
+            />
+            <div
+              class="meh-tag-search-results hidden"
+              id="meh-tag-search-results"
+            >
+              <!-- Results are added as user types -->
+            </div>
+            <div class="meh-filter-tags" id="meh-filter-tags"></div>
           </div>
-          <div class="meh-filter-tags" id="meh-filter-tags"></div>
-        </div>
 
-        <div class="meh-search meh-search-large">
-          <input
-            type="text"
-            id="meh-module-search-input"
-            placeholder="Search by name and description..."
-          />
+          <!-- Switch input -->
+          <div class="meh-switch">
+            <input type="checkbox" id="meh-verified-switch" />
+            <label for="meh-verified-switch">Verified Only</label>
+          </div>
+
+          <div class="meh-switch">
+            <input type="checkbox" id="meh-installed-switch" checked />
+            <label for="meh-installed-switch">Show Installed</label>
+          </div>
+
+          <div class="meh-switch">
+            <input type="checkbox" id="meh-uninstalled-switch" checked />
+            <label for="meh-uninstalled-switch">Show Uninstalled</label>
+          </div>
+
+          <div class="meh-switch">
+            <input type="checkbox" id="meh-enabled-switch" checked />
+            <label for="meh-enabled-switch">Show Enabled</label>
+          </div>
+
+          <div class="meh-switch">
+            <input type="checkbox" id="meh-disabled-switch" checked />
+            <label for="meh-disabled-switch">Show Disabled</label>
+          </div>
+        </div>
+        <div class="meh-right">
+          <div class="meh-search meh-search-large">
+            <input
+              type="text"
+              id="meh-module-search-input"
+              placeholder="Search by name and description..."
+            />
+          </div>
         </div>
       </div>
       <div class="module-exchange-body" id="module-exchange-body">

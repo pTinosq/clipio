@@ -4,7 +4,7 @@ import { allTags, getTagByName } from "./tags/tags.js";
 import { searchFilter } from "./searchFilter.js";
 
 function filterByTags(tags) {
-  searchFilter.addFilter("tags", tags);
+  searchFilter.addFilter("tag", tags);
   searchFilter.applyFilters();
 }
 
