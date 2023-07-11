@@ -1,11 +1,6 @@
 const { ipcRenderer } = require("electron");
 
-document.addEventListener("DOMContentLoaded", function () {
-  const tokenInput = document.getElementById("tokenInput");
-  const tokenSave = document.getElementById("tokenSave");
-
-  const launchModuleExchange = document.getElementById("launchModuleExchange");
-
+function loadSavedToken() {
   // Load token from storage
   let gitHubToken = ipcRenderer.sendSync("get-github-token");
   if (gitHubToken) {
@@ -17,30 +12,50 @@ document.addEventListener("DOMContentLoaded", function () {
     tokenSave.classList.remove("btn-success");
     tokenSave.classList.add("btn-warn");
   }
+}
+
+function saveToken() {
+  const token = tokenInput.value;
+  if (!token) {
+    tokenSave.classList.remove("btn-success");
+    tokenSave.classList.add("btn-warn");
+    return;
+  }
+
+  if (ipcRenderer.sendSync("set-github-token", token)) {
+    tokenSave.classList.remove("btn-warn");
+    tokenSave.classList.add("btn-success");
+  } else {
+    tokenSave.classList.remove("btn-success");
+    tokenSave.classList.add("btn-warn");
+  }
+}
+
+function launchModuleExchange() {
+  window.location.href = "../module_exchange/moduleExchange.html";
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const tokenInput = document.getElementById("tokenInput");
+  const tokenSave = document.getElementById("tokenSave");
+
+  const launchModuleExchangeElement = document.getElementById(
+    "launchModuleExchange"
+  );
+
+  loadSavedToken();
 
   tokenInput.addEventListener("input", function () {
     tokenSave.classList.remove("btn-success");
     tokenSave.classList.add("btn-warn");
   });
 
-  tokenSave.addEventListener("click", function () {
-    const token = tokenInput.value;
-    if (!token) {
-      tokenSave.classList.remove("btn-success");
-      tokenSave.classList.add("btn-warn");
-      return;
-    }
+  tokenSave.addEventListener("click", saveToken);
 
-    if (ipcRenderer.sendSync("set-github-token", token)) {
-      tokenSave.classList.remove("btn-warn");
-      tokenSave.classList.add("btn-success");
-    } else {
-      tokenSave.classList.remove("btn-success");
-      tokenSave.classList.add("btn-warn");
-    }
-  });
-
-  launchModuleExchange.addEventListener("click", function () {
-    window.location.href = "../module_exchange/moduleExchange.html";
-  });
+  launchModuleExchangeElement.addEventListener("click", launchModuleExchange);
 });
+
+module.exports = {
+  loadSavedToken,
+  saveToken,
+};

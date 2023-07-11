@@ -1,6 +1,6 @@
 const { ipcRenderer, clipboard } = require("electron");
 const Store = require("electron-store");
-const { DevInfo, DevInfoItem } = require("../src/scripts/DevInfo.js");
+const { DevInfo, DevInfoItem } = require("../src/main/scripts/DevInfo.js");
 
 jest.mock("electron", () => ({
   ipcRenderer: { sendSync: jest.fn() },
@@ -38,7 +38,7 @@ describe("DOMContentLoaded event", () => {
     process.uptime.mockReturnValue(123456.789);
     process.memoryUsage.mockReturnValue({ rss: 123456789 });
 
-    require("../src/scripts/devWindow.js"); // replace with the path to your file
+    require("../src/main/scripts/devWindow.js"); // replace with the path to your file
 
     expect(ipcRenderer.sendSync).toHaveBeenCalledWith("get-app-version");
     expect(clipboard.readText).toHaveBeenCalledTimes(1);

@@ -8,7 +8,7 @@ export class InteractorFactory {
 
       clipboardContent = interactor.run(clipboardContent);
 
-      clipboard.writeText(clipboardContent);
+      this.clipboard.writeText(clipboardContent);
 
       if (!event.shiftKey) {
         window.close();
