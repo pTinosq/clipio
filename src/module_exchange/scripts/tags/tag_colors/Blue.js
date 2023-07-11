@@ -1,5 +1,5 @@
 const Blue = {
-  textColor: "#172b4d",
+  textColor: "#0c1a31",
   backgroundColor: "#4c9aff",
 };
 

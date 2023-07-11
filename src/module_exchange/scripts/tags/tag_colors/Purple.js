@@ -1,5 +1,5 @@
 const Purple = {
-  textColor: "#172b4d",
+  textColor: "#0b182d",
   backgroundColor: "#998dd9",
 };
 
