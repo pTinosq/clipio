@@ -4,6 +4,7 @@ import { viewSource } from "./module_buttons/viewSourceButton.js";
 import { uninstallModule } from "./module_buttons/uninstallButton.js";
 import { installModule } from "./module_buttons/installButton.js";
 import TagGroup from "./tags/TagGroup.js";
+import { getTagByName } from "./tags/tags.js";
 
 export default class ModuleExchangeItem {
   constructor() {
@@ -18,9 +19,24 @@ export default class ModuleExchangeItem {
     this.enabled = false;
   }
 
+  fromHTML(element) {
+    this.uid = element.id;
+    this.name = element.dataset.name;
+    this.description = element.querySelector(".mebi-description").innerText;
+    this.author = element.dataset.author;
+    this.version = element
+      .querySelector(".mebi-author")
+      .innerText.split("v")[1];
+    this.tags = element.dataset.tags.split(",").map((tag) => getTagByName(tag));
+    this.installed = element.dataset.installed === "true";
+    this.installedVersion = element.dataset.installedVersion;
+    this.enabled = element.dataset.enabled === "true";
+  }
+
   buildHTML() {
     let moduleExchangeItem = document.createElement("div");
     moduleExchangeItem.id = this.uid;
+    moduleExchangeItem.dataset.installedVersion = this.installedVersion;
     moduleExchangeItem.classList.add("module-exchange-body-item");
 
     // Colour mebi body accordingly
@@ -35,11 +51,13 @@ export default class ModuleExchangeItem {
     let moduleName = document.createElement("h2");
     moduleName.classList.add("mebi-title");
     moduleName.innerText = this.name;
+    moduleExchangeItem.dataset.name = this.name;
     moduleExchangeItem.appendChild(moduleName);
 
     // Verified modules get a special badge
     let moduleAuthor = document.createElement("p");
     moduleAuthor.classList.add("mebi-author");
+    moduleExchangeItem.dataset.author = this.author;
     moduleAuthor.innerText = `@${this.author} • v${this.version}`;
 
     if (this.author == "ptinosq") {
@@ -47,6 +65,7 @@ export default class ModuleExchangeItem {
       verified.classList.add("mebi-verified");
       verified.classList.add("tag");
       verified.innerText = "verified";
+      moduleExchangeItem.dataset.verified = true;
       moduleAuthor.appendChild(verified);
     }
 
@@ -86,6 +105,7 @@ export default class ModuleExchangeItem {
         uninstallModule(this.uid);
       });
 
+      moduleExchangeItem.dataset.installed = true;
       moduleButtons.appendChild(removeButton);
 
       if (this.enabled) {
@@ -99,6 +119,7 @@ export default class ModuleExchangeItem {
           disableModule(this.uid);
         });
 
+        moduleExchangeItem.dataset.enabled = true;
         moduleButtons.appendChild(disableButton);
       } else {
         // Module is installed but disabled so option is to enable
@@ -110,6 +131,7 @@ export default class ModuleExchangeItem {
           enableModule(this.uid);
         });
 
+        moduleExchangeItem.dataset.enabled = false;
         moduleButtons.appendChild(enableButton);
       }
       // Module is installed so options are to remove or disable or update
@@ -148,6 +170,7 @@ export default class ModuleExchangeItem {
         viewSource(this.uid);
       });
 
+      moduleExchangeItem.dataset.installed = false;
       moduleButtons.appendChild(installButton);
       moduleButtons.appendChild(viewSourceButton);
     }

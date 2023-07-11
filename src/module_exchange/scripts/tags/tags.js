@@ -7,7 +7,18 @@ import formatting from "./module_tags/formatting.js";
 import funny from "./module_tags/funny.js";
 import web from "./module_tags/web.js";
 
-function getTagByName(name) {
+export const allTags = [
+  new conversion(),
+  new cryptography(),
+  new design(),
+  new development(),
+  new finance(),
+  new formatting(),
+  new funny(),
+  new web(),
+]
+
+export function getTagByName(name) {
   const tags = [
     new conversion(),
     new cryptography(),

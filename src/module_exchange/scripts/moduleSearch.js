@@ -1,18 +1,9 @@
+import { searchFilter } from "./searchFilter.js";
+
 function filterByTitleDescription(filterString) {
-  const modules = document.getElementById("module-exchange-body");
-
-  for (const module of modules.children) {
-    const title = module.querySelector(".mebi-title").innerText.toLowerCase();
-    const description = module
-      .querySelector(".mebi-description")
-      .innerText.toLowerCase();
-
-    if (title.includes(filterString) || description.includes(filterString)) {
-      module.style.display = "block";
-    } else {
-      module.style.display = "none";
-    }
-  }
+  searchFilter.addFilter("title", filterString);
+  searchFilter.addFilter("description", filterString);
+  searchFilter.applyFilters();
 }
 
 document.addEventListener("DOMContentLoaded", function () {

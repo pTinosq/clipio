@@ -1,28 +1,16 @@
 const Fuse = require("fuse.js");
 import TagGroup from "./tags/TagGroup.js";
-import tags from "./tags/tags.js";
+import { allTags, getTagByName } from "./tags/tags.js";
+import { searchFilter } from "./searchFilter.js";
 
 function filterByTags(tags) {
-  const modules = document.getElementById("module-exchange-body");
-
-  for (let i = 0; i < modules.children.length; i++) {
-    let module = modules.children[i];
-    const moduleTags = module.dataset.tags.split(",");
-
-    // Only show modules that have all the tags
-    if (tags.every((tag) => moduleTags.includes(tag))) {
-      module.style.display = "block";
-    }
-    // Hide modules that don't have all the tags
-    else {
-      module.style.display = "none";
-    }
-  }
+  searchFilter.addFilter("tags", tags);
+  searchFilter.applyFilters();
 }
 
 function addTagFromSearch(tag, tagGroup) {
   return () => {
-    let selectedTag = new tags[tag]();
+    let selectedTag = getTagByName(tag);
 
     const searchInput = document.getElementById("meh-tag-search-input");
     const searchResults = document.getElementById("meh-tag-search-results");
@@ -32,7 +20,6 @@ function addTagFromSearch(tag, tagGroup) {
     if (!tagGroup.containsTag(selectedTag)) {
       tagGroup.addTag(selectedTag);
       tagGroup.updateHTML(tagGroup.id);
-      filterByTags(tagGroup.tags.map((tag) => tag.name));
     }
   };
 }
@@ -55,18 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         keys: ["name"],
       };
 
-      const searchTags = [
-        new tags.conversion(),
-        new tags.cryptography(),
-        new tags.design(),
-        new tags.development(),
-        new tags.finance(),
-        new tags.formatting(),
-        new tags.funny(),
-        new tags.web(),
-      ];
-
-      const fuse = new Fuse(searchTags, options);
+      const fuse = new Fuse(allTags, options);
 
       const results = fuse.search(searchInput);
 
