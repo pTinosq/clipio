@@ -7,13 +7,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Add a click event listener to the alert box
     alertBox.firstElementChild.addEventListener("click", function () {
-      alertBox.firstElementChild.style.display = "none";
-      alertBox.lastElementChild.style.display = "block";
+      hideAlert();
     });
 
     alertBox.lastElementChild.addEventListener("click", function () {
-      alertBox.firstElementChild.style.display = "block";
-      alertBox.lastElementChild.style.display = "none";
+      showAlert();
     });
   }
 });
+
+function hideAlert(alertBox) {
+  alertBox.firstElementChild.style.display = "none";
+  alertBox.lastElementChild.style.display = "block";
+}
+
+function showAlert(alertBox) {
+  alertBox.firstElementChild.style.display = "block";
+  alertBox.lastElementChild.style.display = "none";
+}
+
+module.exports = {
+  hideAlert,
+  showAlert,
+};
