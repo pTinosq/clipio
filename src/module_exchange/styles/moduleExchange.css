@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 html,
 body {
   height: 100%;
@@ -42,8 +44,68 @@ header h1 {
   padding: 1rem 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   min-height: 32px;
+  gap: 1rem;
+}
+
+.meh-left {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.meh-switch {
+  background-color: white;
+  border-radius: 500px;
+  border: 1px solid #aaa;
+  width: fit-content;
+}
+
+/* Style switch checkbox input to be circle */
+.meh-switch input {
+  display: none;
+}
+
+.meh-switch label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px;
+  padding-right: 10px;
+  font-size: 12px;
+  color: #454545;
+  user-select: none;
+}
+.meh-switch label:before {
+  transition: all 0.4s ease;
+}
+
+.meh-switch input:checked + label:before {
+  opacity: 1;
+  content: "✓";
+  font-size: 12px;
+  background-color: #3784ff;
+}
+
+.meh-switch label:before {
+  color: white;
+  content: "";
+  display: flex;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  border-radius: 500px;
+  border: 1px solid #aaa;
+  align-items: center;
+  justify-content: center;
+}
+
+.meh-switchgroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.5rem;
 }
 
 .module-exchange-body {

@@ -65,7 +65,7 @@ const createSettingsWindow = () => {
     width: 1280,
     height: 720,
     minHeight: 200,
-    minWidth: 800,
+    minWidth: 820,
     frame: true,
     autoHideMenuBar: true,
     icon: ICON_PATH,
