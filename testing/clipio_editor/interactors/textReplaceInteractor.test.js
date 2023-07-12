@@ -1,4 +1,4 @@
-import textReplaceInteractor from "../../src/clipio_editor/scripts/interactors/textReplaceInteractor.js";
+import textReplaceInteractor from "../../../src/clipio_editor/scripts/interactors/textReplaceInteractor.js";
 
 // Mock document.getElementById
 const getElementByIdMock = jest.fn();
