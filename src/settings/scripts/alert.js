@@ -7,11 +7,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Add a click event listener to the alert box
     alertBox.firstElementChild.addEventListener("click", function () {
-      hideAlert();
+      hideAlert(alertBox);
     });
 
     alertBox.lastElementChild.addEventListener("click", function () {
-      showAlert();
+      showAlert(alertBox);
     });
   }
 });
