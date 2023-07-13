@@ -1,0 +1,72 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #dfe1e5;
+  font-family: Open sans, sans-serif;
+}
+
+header,
+section {
+  padding: 0rem 2rem;
+}
+
+header {
+  padding-top: 1rem;
+  padding-bottom: 0rem;
+}
+
+section {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 1rem;
+  box-shadow: inset 0 0px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+section h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  padding-bottom: 1rem;
+  color: #333;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  gap: 1rem;
+}
+
+.input-container label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.input-container input {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline-color: #488eff;
+  min-width: 300px;
+  color: #444;
+}
+
+#launchModuleExchange {
+  margin-left: auto;
+  width: 100%;
+  margin-top: 1rem;
+}

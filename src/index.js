@@ -1,14 +1,16 @@
-const { app, BrowserWindow, ipcMain, Menu, screen, Tray } = require("electron");
+const { app, BrowserWindow, Menu, screen, Tray } = require("electron");
 const path = require("path");
 const Store = require("electron-store");
 const AutoLaunch = require("auto-launch");
+const ipcMainChannels = require("./main/ipcmain-channels/ipcMainChannels");
 
 const BASE_DIR = __dirname;
 const ICON_PATH = path.join(BASE_DIR, "img/clipio.png");
-
 const store = new Store();
-if (!store.has("show")) {
-  store.set("show", false);
+
+// Set default values
+if (!store.has("showDevWindow")) {
+  store.set("showDevWindow", false);
 }
 
 const commonWindowPreferences = {
@@ -24,18 +26,18 @@ const createWindow = () => {
     minHeight: 200,
     minWidth: 800,
     autoHideMenuBar: true,
-    show: store.get("show"),
+    show: store.get("showDevWindow"),
     title: "Clipio",
     icon: ICON_PATH,
     webPreferences: {
       ...commonWindowPreferences,
-      preload: path.join(BASE_DIR, "/scripts/preload.js"),
+      preload: path.join(BASE_DIR, "/main/scripts/preload.js"),
     },
   });
 
-  mainWindow.loadFile(path.join(BASE_DIR, "index.html"));
+  mainWindow.loadFile(path.join(BASE_DIR, "/main/index.html"));
 
-  if (store.get("show")) {
+  if (store.get("showDevWindow")) {
     mainWindow.webContents.openDevTools();
   }
 };
@@ -58,6 +60,21 @@ const createPopup = () => {
   popup.loadFile(path.join(BASE_DIR, "/clipio_editor/editor.html"));
 };
 
+const createSettingsWindow = () => {
+  const settingsWindow = new BrowserWindow({
+    width: 1280,
+    height: 720,
+    minHeight: 200,
+    minWidth: 820,
+    frame: true,
+    autoHideMenuBar: true,
+    icon: ICON_PATH,
+    webPreferences: commonWindowPreferences,
+  });
+
+  settingsWindow.loadFile(path.join(BASE_DIR, "settings/settings.html"));
+};
+
 const initializeAutoLaunch = async () => {
   const autoLaunch = new AutoLaunch({
     name: "Clipio",
@@ -65,7 +82,7 @@ const initializeAutoLaunch = async () => {
   });
 
   if (!(await autoLaunch.isEnabled())) {
-    autoLaunch.enable();
+    await autoLaunch.enable();
   }
 };
 
@@ -74,14 +91,24 @@ const createTray = () => {
 
   const contextMenu = Menu.buildFromTemplate([
     {
+      label: "Open Clipio editor",
+      type: "normal",
+      click: createPopup,
+    },
+    {
+      label: "Open settings",
+      type: "normal",
+      click: createSettingsWindow,
+    },
+    {
       label: "Developer mode",
       type: "checkbox",
       click: () => {
-        store.set("show", !store.get("show"));
+        store.set("showDevWindow", !store.get("showDevWindow"));
         app.relaunch();
         app.exit();
       },
-      checked: store.get("show"),
+      checked: store.get("showDevWindow"),
     },
     {
       type: "separator",
@@ -90,9 +117,7 @@ const createTray = () => {
       label: "Exit",
       accelerator: "CmdOrCtrl+Q",
       type: "normal",
-      click: () => {
-        app.quit();
-      },
+      click: app.quit,
     },
   ]);
 
@@ -108,31 +133,16 @@ app.whenReady().then(async () => {
 });
 
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") app.quit();
-});
-
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) createWindow();
-});
-
-ipcMain.on("minimize", () => {
-  BrowserWindow.getFocusedWindow().minimize();
-});
-
-ipcMain.on("relaunch", () => {
-  app.relaunch();
-  app.exit();
-});
-
-ipcMain.on("maximize", () => {
-  const focusedWindow = BrowserWindow.getFocusedWindow();
-  if (focusedWindow.isMaximized()) {
-    focusedWindow.restore();
-  } else {
-    focusedWindow.maximize();
+  if (process.platform !== "darwin") {
+    app.quit();
   }
 });
 
-ipcMain.on("get_app_version", (event) => {
-  event.returnValue = app.getVersion();
+app.on("activate", () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
 });
+
+// Register all IPCMain events
+ipcMainChannels.loadAll();

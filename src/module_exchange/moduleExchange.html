@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/moduleExchange.css" />
+    <link rel="stylesheet" href="styles/moduleExchangeCard.css" />
+    <link rel="stylesheet" href="styles/loadingIcon.css" />
+    <link rel="stylesheet" href="styles/tags.css" />
+    <link rel="stylesheet" href="styles/search.css" />
+    <script type="module" src="scripts/moduleExchange.js"></script>
+    <script type="module" src="scripts/tagSearch.js"></script>
+    <script type="module" src="scripts/moduleSearch.js"></script>
+    <script type="module" src="scripts/checkboxSearch.js"></script>
+    <title>Module Exchange</title>
+  </head>
+  <body>
+    <header>
+      <h1>Module Exchange</h1>
+
+      <button id="settingsBackBtn">Back to Settings</button>
+    </header>
+
+    <div class="main">
+      <dialog id="errorDialog" class="error-dialog">
+        <div class="error-dialog-header">
+          <h2 id="errorDialogTitle">Unknown Error</h2>
+        </div>
+        <div class="error-dialog-body">
+          <p id="errorDialogMessage">
+            An unknown error has occurred. Please try again later.
+          </p>
+        </div>
+        <div class="error-dialog-footer" id="errorDialogButtons"></div>
+      </dialog>
+      <div class="module-exchange-header">
+        <div class="meh-left">
+          <div class="meh-search">
+            <input
+              type="text"
+              id="meh-tag-search-input"
+              placeholder="Filter by tags..."
+            />
+            <div
+              class="meh-tag-search-results hidden"
+              id="meh-tag-search-results"
+            >
+              <!-- Results are added as user types -->
+            </div>
+            <div class="meh-filter-tags" id="meh-filter-tags"></div>
+          </div>
+          <div class="meh-switchgroup">
+            <div class="meh-switch">
+              <input type="checkbox" id="meh-verified-switch" />
+              <label for="meh-verified-switch">Verified only</label>
+            </div>
+
+            <div class="meh-switch">
+              <input type="checkbox" id="meh-installed-switch" checked />
+              <label for="meh-installed-switch">Show installed</label>
+            </div>
+
+            <div class="meh-switch">
+              <input type="checkbox" id="meh-uninstalled-switch" checked />
+              <label for="meh-uninstalled-switch">Show uninstalled</label>
+            </div>
+
+            <div class="meh-switch">
+              <input type="checkbox" id="meh-enabled-switch" checked />
+              <label for="meh-enabled-switch">Show enabled</label>
+            </div>
+
+            <div class="meh-switch">
+              <input type="checkbox" id="meh-disabled-switch" checked />
+              <label for="meh-disabled-switch">Show disabled</label>
+            </div>
+          </div>
+        </div>
+        <div class="meh-right">
+          <div class="meh-search meh-search-large">
+            <input
+              type="text"
+              id="meh-module-search-input"
+              placeholder="Search by name and description..."
+            />
+          </div>
+        </div>
+      </div>
+      <div class="module-exchange-body" id="module-exchange-body">
+        <div id="module-exchange-loading">
+          <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <p>Loading...</p>
+        </div>
+      </div>
+      <div class="no-modules-found hidden" id="no-modules-found">
+        <p>No modules found with applied filters.</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,32 +1,14 @@
 import { ColorPreview } from "./ColorPreview.js";
 import { ClickableFactory } from "./ClickableFactory.js";
 import { InteractorFactory } from "./InteractorFactory.js";
-
-// CLICKABLES
-import spaceToUnderscoreClickable from "./clickables/spaceToUnderscoreClickable.js";
-import removeTrailingSpacesClickable from "./clickables/removeTrailingSpacesClickable.js";
-import uppercaseClickable from "./clickables/uppercaseClickable.js";
-import lowercaseClickable from "./clickables/lowercaseClickable.js";
-import removeFormattingClickable from "./clickables/removeFormattingClickable.js";
-import toBase64Clickable from "./clickables/toBase64Clickable.js";
-import googleTranslateClickable from "./clickables/googleTranslateClickable.js";
+import { ClipioModule } from "./ClipioModule.js";
+import { Clickable } from "./Clickable.js";
 
 // INTERACTORS
 import textReplaceInteractor from "./interactors/textReplaceInteractor.js";
 
 const { clipboard } = require("electron");
-
-// TODO: Implement REPLACE functionality
-
-const clickables = [
-  spaceToUnderscoreClickable,
-  removeTrailingSpacesClickable,
-  uppercaseClickable,
-  lowercaseClickable,
-  removeFormattingClickable,
-  toBase64Clickable,
-  googleTranslateClickable,
-];
+const { ipcRenderer } = require("electron");
 
 const interactors = [textReplaceInteractor];
 
@@ -66,13 +48,30 @@ document.addEventListener("DOMContentLoaded", () => {
     buildZone.appendChild(interactorFactory.buildHTML(builtInteractor));
   }
 
-  // Add clickables
-  const clickableFactory = new ClickableFactory();
+  // Get installed modules from Local Modules.json file in appdata
+  const installedModules = ipcRenderer.sendSync("get-local-modules");
 
-  for (let i = 0; i < clickables.length; i++) {
-    // Build the clickable
-    const builtClickable = clickableFactory.buildClickable(clickables[i]);
-
-    buildZone.appendChild(clickableFactory.buildHTML(builtClickable));
+  // If no modules are installed, show warning
+  if (Object.keys(installedModules).length === 0) {
+    document.getElementById("no-modules-warning").style.display = "flex";
   }
+
+  Object.keys(installedModules).forEach((moduleUID) => {
+    if (!installedModules[moduleUID]["enabled"]) return;
+
+    let module = new ClipioModule(moduleUID);
+    module = module.loadManifest();
+    module = module.loadData();
+
+    if (!module.succesfullyLoaded) return;
+
+    const clickable = new Clickable();
+    clickable.title = module.name;
+    clickable.run = module.data;
+
+    const clickableFactory = new ClickableFactory();
+
+    const builtClickable = clickableFactory.buildClickable(clickable);
+    buildZone.appendChild(clickableFactory.buildHTML(builtClickable));
+  });
 });

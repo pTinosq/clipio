@@ -1,0 +1,46 @@
+.sorting-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: max-content;
+}
+
+.sorting-panel-item {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  background-color: #fff;
+  padding: 0.5rem 2rem;
+  justify-content: space-between;
+}
+
+.sorting-panel-item-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sorting-panel-item p {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sorting-panel-item p span {
+  font-size: 12px;
+}
+
+.sorting-panel-item.disabled {
+  background-color: #cfb4b4;
+  opacity: 0.75;
+}
+
+.sorting-panel-item.disabled p:nth-of-type(1) {
+  color: #680202;
+  font-style: italic;
+}
+
+.sorting-panel-item.disabled p:nth-of-type(2) {
+  color: #680202;
+  font-weight: 600;
+}

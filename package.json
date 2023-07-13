@@ -1,16 +1,17 @@
 {
   "name": "clipio",
-  "version": "1.1.3a",
+  "version": "2.0.0",
   "description": "Clipio is a tool that allows immediate editing of content clipboard content when copying to the clipboard",
   "main": "./src/index.js",
+  "author": "Constantinos Psomadakis",
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/pTinosq/clipio",
   "scripts": {
     "start": "electron .",
     "app:dir": "electron-builder --dir",
     "app:dist": "electron-builder",
     "test": "jest"
   },
-  "author": "Constantinos Psomadakis",
-  "license": "GPL-3.0",
   "devDependencies": {
     "@babel/preset-env": "^7.22.4",
     "electron": "^25.2.0",
@@ -21,15 +22,26 @@
     "auto-launch": "^5.0.5",
     "clipboard-event": "^1.5.0",
     "electron-store": "^8.0.1",
-    "jquery": "^3.6.0"
+    "fuse.js": "^6.6.2",
+    "jquery": "^3.6.0",
+    "octokit": "^2.1.0"
   },
   "build": {
     "appId": "com.ptinosq.clipio",
     "mac": {
-      "icon": "src/icon.png"
+      "icon": "src/img/clipio.png"
     },
     "win": {
-      "icon": "src/icon.png"
+      "icon": "src/img/clipio.png"
+    },
+    "extraFiles": [
+      {
+        "from": "src/_default_install_modules",
+        "to": "default_modules/modules"
+      }
+    ],
+    "nsis": {
+      "include": "build/installer.nsh"
     }
   }
 }

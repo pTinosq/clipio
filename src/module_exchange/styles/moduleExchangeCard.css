@@ -1,0 +1,91 @@
+.module-exchange-body-item {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  border-radius: 0.35rem;
+  background: #fff;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  padding: 1rem;
+  flex: 33%;
+  width: auto;
+}
+
+.module-exchange-body-item h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.module-exchange-body-item p {
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.mebi-body-green {
+  background: #e6ffe6;
+}
+
+.mebi-body-dull {
+  background: #d0d2df;
+}
+
+.mebi-body-yellow {
+  background: #fdebaf;
+}
+
+.mebi-description {
+  padding: 1rem 0;
+}
+
+.mebi-verified {
+  color: #fff;
+  margin-left: 0.5rem;
+  background: rgb(255, 200, 62);
+  /* background: linear-gradient(24deg, #2d92dd 0%, #27a2ff 53%, #42c5ff 95%); */
+  /* GOLD!!! */
+  background: linear-gradient(45deg, #d19b2f, #d1991f, #e6bc35, #fbebb7);
+  box-shadow: 0 0 10px 0px rgba(187, 148, 20, 0.5);
+}
+
+.mebi-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.mebi-button {
+  /* from mebi-buttons{ gap: (1rem) * 2 */
+  flex: calc(50% - 2rem);
+  padding: 0.5rem 1rem;
+  color: #222;
+  background: #efefef;
+  border: none;
+  cursor: pointer;
+}
+
+.mebi-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mebi-button-success {
+  background: #6ef175;
+}
+
+.mebi-button-danger {
+  background: #ffa19c;
+  border: 1px solid #c33030;
+}
+
+.mebi-button-warning {
+  background: #f6cd45;
+}
+
+.mebi-tag-group,
+.mebi-author {
+  padding-top: 0.5rem;
+}

@@ -1,4 +1,4 @@
-import { DevInfo, DevInfoItem } from "../src/scripts/DevInfo.js";
+import { DevInfo, DevInfoItem } from "../src/main/scripts/DevInfo.js";
 
 // Mock document.createElement and document.getElementById
 beforeAll(() => {

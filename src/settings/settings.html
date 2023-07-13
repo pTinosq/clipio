@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/settings.css" />
+    <link rel="stylesheet" href="styles/button.css" />
+    <link rel="stylesheet" href="styles/alert.css" />
+    <link rel="stylesheet" href="styles/sorting.css" />
+    <script src="scripts/settings.js"></script>
+    <script src="scripts/alert.js"></script>
+    <script type="module" src="scripts/sorting.js"></script>
+    <title>Clipio Settings</title>
+  </head>
+  <body>
+    <header>
+      <h1>Settings</h1>
+    </header>
+
+    <section>
+      <h2>GitHub Integration</h2>
+      <div class="alert alert-primary" role="alert">
+        <span class="alert-content">
+          The Clipio Module Exchange is hosted on GitHub, and to enable seamless
+          downloading and installation of modules, Clipio needs to connect with
+          GitHub using a Personal Access Token (PAT).
+          <br /><br />This token allows you to access and install modules
+          directly from the Module Exchange.
+        </span>
+        <span class="alert-show" style="display: none">
+          Show more information
+        </span>
+      </div>
+
+      <div class="input-container">
+        <label for="token">GitHub Access Token</label>
+        <input type="password" name="token" id="tokenInput" />
+        <button class="btn-mini btn-success" id="tokenSave">Save</button>
+        <button class="btn-mini btn-info" id="showPATTutorial">How to get your PAT</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Clipio Module Exchange</h2>
+      <div class="alert alert-primary" role="alert">
+        <span class="alert-content">
+          The Clipio Module Exchange is a repository of modules that can be
+          installed directly from Clipio. This allows you to easily install
+          modules without having to download them manually. <br /><br />Active
+          internet connection required.
+        </span>
+        <span class="alert-show" style="display: none">
+          Show more information
+        </span>
+      </div>
+      <button class="btn btn-info" id="launchModuleExchange">
+        Launch Module Exchange
+      </button>
+    </section>
+    <section>
+      <h2>Sort Modules</h2>
+      <div class="sorting-panel" id="module-sorting-panel"">
+        
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{
+    "name": "Lowercase",
+    "version": "1.0.1",
+    "description": "Converts text to lowercase.",
+    "main": "module.js",
+    "author": "ptinosq",
+    "contributors": [],
+    "tags": [
+        "formatting"
+    ]
+}

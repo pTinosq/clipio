@@ -12,9 +12,23 @@
 
   <body>
     <div class="titlebar">
-      <div class="flex-options">
-        <div class="flex-option" id="maxi"></div>
-        <div class="flex-option" id="close"></div>
+      <div class="titlebar-left">
+        <div class="titlebar-button" id="settings">
+          <img src="../img/icons/settings-cog.svg" alt="Settings cog icon" />
+        </div>
+        <div class="titlebar-button" id="refresh">
+          <!-- scale because svg takes up whole space but only with this one icon haha -->
+          <img
+            src="../img/icons/refresh.svg"
+            style="scale: 0.9"
+            alt="Refresh icon"
+          />
+        </div>
+      </div>
+      <div class="titlebar-center"></div>
+      <div class="titlebar-right">
+        <div class="titlebar-button" id="maxi"></div>
+        <div class="titlebar-button" id="close"></div>
       </div>
     </div>
 
@@ -30,6 +44,21 @@
 
       <!-- Build Clickables and Interactors with JavaScript -->
       <div id="build-zone"></div>
+
+      <footer>
+        <div class="hint" id="no-modules-warning" style="display: none;">
+          <img src="../img/icons/warning.svg" alt="Warning icon" />
+          <p>You do not have any modules installed.</p>
+        </div>
+
+        <div class="hint">
+          <img src="../img/icons/bulb.svg" alt="Bulb hint icon" />
+          <p>
+            Tip: You can install new modules in the
+            <span class="hint-href hint-href-settings">Module Exchange</span>.
+          </p>
+        </div>
+      </footer>
     </div>
   </body>
 </html>
