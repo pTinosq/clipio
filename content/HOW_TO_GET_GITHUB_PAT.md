@@ -23,7 +23,7 @@ This may look like a complex process but it shouldn't take longer than a minute 
 ![Fill in the form](https://i.imgur.com/N6OopxN.png)
 
 1. Token name: `Clipio-PAT` (or whatever you want)
-2. Expiration: Set to `1 year`` from now (maximum length)
+2. Expiration: Set to `1 year` from now (maximum length)
 3. Description: `Clipio` (optional)
 4. Repository access: `Public Repositories (read-only)`
 5. Click on `Generate token`
