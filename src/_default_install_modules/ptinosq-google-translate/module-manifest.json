@@ -1,0 +1,11 @@
+{
+    "name": "Google Translate",
+    "version": "1.0.1",
+    "description": "Uses Google Translate to translate text.",
+    "main": "module.js",
+    "author": "ptinosq",
+    "contributors": [],
+    "tags": [
+        "conversion"
+    ]
+}

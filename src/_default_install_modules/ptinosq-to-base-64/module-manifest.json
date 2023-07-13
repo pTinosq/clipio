@@ -1,0 +1,13 @@
+{
+    "name": "To Base64",
+    "version": "1.0.2",
+    "description": "Converts text to Base64",
+    "main": "module.js",
+    "author": "ptinosq",
+    "contributors": [],
+    "tags": [
+        "development",
+        "conversion",
+        "cryptography"
+    ]
+}
