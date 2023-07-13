@@ -9,7 +9,6 @@ import textReplaceInteractor from "./interactors/textReplaceInteractor.js";
 
 const { clipboard } = require("electron");
 const { ipcRenderer } = require("electron");
-const fs = require("fs");
 
 const interactors = [textReplaceInteractor];
 
@@ -51,6 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Get installed modules from Local Modules.json file in appdata
   const installedModules = ipcRenderer.sendSync("get-local-modules");
+
+  // If no modules are installed, show warning
+  if (Object.keys(installedModules).length === 0) {
+    document.getElementById("no-modules-warning").style.display = "flex";
+  }
 
   Object.keys(installedModules).forEach((moduleUID) => {
     if (!installedModules[moduleUID]["enabled"]) return;

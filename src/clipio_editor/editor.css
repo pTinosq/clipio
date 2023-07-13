@@ -133,17 +133,19 @@ body {
 }
 
 footer {
-  padding: 0 1rem;
+  padding: 1rem;
 }
 
 .hint {
   display: flex;
+  align-items: center;
   gap: 1rem;
   color: #333;
 }
 
 .hint img {
-  width: 16px;
+  max-width: 24px;
+  max-height: 24px;
   aspect-ratio: 1;
 }
 
