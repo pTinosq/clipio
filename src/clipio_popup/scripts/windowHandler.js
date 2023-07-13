@@ -1,4 +1,6 @@
-// Main function
+let $ = require("jquery");
+const { clipboard, shell } = require("electron");
+
 document.addEventListener("DOMContentLoaded", function () {
   // After 1500ms begin fading out the popup window
   let clicked = false;
