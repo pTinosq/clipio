@@ -9,6 +9,7 @@
 ![GitHub](https://img.shields.io/github/license/ptinosq/clipio)
 ![GitHub issues](https://img.shields.io/github/issues/ptinosq/clipio)
 ![GitHub last commit](https://img.shields.io/github/last-commit/ptinosq/clipio)
+[![CodeQL](https://github.com/pTinosq/clipio/actions/workflows/codeql.yml/badge.svg)](https://github.com/pTinosq/clipio/actions/workflows/codeql.yml)
 
 Clipio is a fast and easy way to manage your clipboard. The idea came about when I was working on a project and needed to manually edit the names of certain files to include underscores instead of spaces. I quickly realized that a tool capable of converting spaces to underscores would also be capable of delivering plenty of other useful features.
 
