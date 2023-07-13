@@ -14,13 +14,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Compare package version
+      - name: Compare Package Version (if JavaScript files included)
         run: |
           if [[ ${{ github.event_name }} == 'pull_request' ]]; then
             git fetch origin ${{ github.event.pull_request.base.ref }}:${{ github.event.pull_request.base.ref }}
             diff=$(git diff --name-only HEAD ${{ github.event.pull_request.base.ref }} -- package.json)
             if [[ -z "$diff" ]]; then
               echo "::error::Package.json is the same in both branches. Please update the package version."
+              exit 1
+            fi
+
+            jsFiles=$(git diff --name-only HEAD ${{ github.event.pull_request.base.ref }} -- '*.js')
+            if [[ -z "$jsFiles" ]]; then
+              echo "::error::No JavaScript files found. Please include JavaScript files in your changes."
               exit 1
             fi
           fi
