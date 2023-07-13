@@ -38,6 +38,7 @@ function launchModuleExchange() {
 document.addEventListener("DOMContentLoaded", function () {
   const tokenInput = document.getElementById("tokenInput");
   const tokenSave = document.getElementById("tokenSave");
+  const showPATTutorial = document.getElementById("showPATTutorial");
 
   const launchModuleExchangeElement = document.getElementById(
     "launchModuleExchange"
@@ -51,6 +52,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   tokenSave.addEventListener("click", saveToken);
+
+  showPATTutorial.addEventListener("click", function () {
+    window.open(
+      `https://github.com/pTinosq/clipio/tree/main/content/HOW_TO_GET_GITHUB_PAT.md`,
+      "_blank"
+    );
+  });
 
   launchModuleExchangeElement.addEventListener("click", launchModuleExchange);
 });
