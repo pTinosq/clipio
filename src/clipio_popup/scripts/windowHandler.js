@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "../clipio_editor/editor.html",
         "_blank",
         `width=${editor_width},height=${editor_height},x=${w},y=${h},frame=false,nodeIntegration=yes,contextIsolation=false,` +
-          `alwaysOnTop=true,titlebar=transparent`
+          `alwaysOnTop=true,titlebar=transparent,minHeight=300,minWidth=225`
       );
     }
 
@@ -71,7 +71,7 @@ function openEditor() {
     "../clipio_editor/editor.html",
     "_blank",
     `width=${editor_width},height=${editor_height},x=${w},y=${h},frame=false,nodeIntegration=yes,contextIsolation=false,` +
-      `alwaysOnTop=true,titlebar=transparent`
+      `alwaysOnTop=true,titlebar=transparent,minHeight=300,minWidth=225`
   );
 }
 
