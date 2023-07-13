@@ -2,6 +2,8 @@
 
 This may look like a complex process but it shouldn't take longer than a minute or two. You only need to do this once a year (due to GitHub's token security policies).
 
+## 0. You can skip to step 5 by clicking on this link: [Generate a new token](https://github.com/settings/personal-access-tokens/new)
+
 ## 1. Go to your GitHub settings
 
 ![GitHub Settings](https://i.imgur.com/Lh9w8Uq.png)
