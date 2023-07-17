@@ -1,4 +1,4 @@
-const { ipcRenderer } = require("electron");
+const { ipcRenderer, shell } = require("electron");
 
 function loadSavedToken() {
   // Load token from storage
@@ -54,9 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
   tokenSave.addEventListener("click", saveToken);
 
   showPATTutorial.addEventListener("click", function () {
-    window.open(
-      `https://github.com/pTinosq/clipio/tree/main/content/HOW_TO_GET_GITHUB_PAT.md`,
-      "_blank"
+    shell.openExternal(
+      "https://github.com/pTinosq/clipio/tree/main/content/HOW_TO_GET_GITHUB_PAT.md"
     );
   });
 
