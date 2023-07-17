@@ -9,6 +9,7 @@ const Minimize = require("./events/Minimize");
 const Relaunch = require("./events/Relaunch");
 const SetGithubToken = require("./events/SetGithubToken");
 const SetLocalModules = require("./events/SetLocalModules");
+const LaunchSettingsWindow = require("./events/LaunchSettingsWindow");
 
 const { ipcMain } = require("electron");
 
@@ -26,6 +27,7 @@ function loadAll() {
     new Relaunch(),
     new SetGithubToken(),
     new SetLocalModules(),
+    new LaunchSettingsWindow(),
   ];
 
   events.forEach((event) => {
