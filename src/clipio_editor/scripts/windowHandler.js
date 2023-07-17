@@ -1,15 +1,7 @@
 const { ipcRenderer } = require("electron");
 
 function openSettings() {
-  const settings_width = 1280;
-  const settings_height = 720;
-
-  window.open(
-    "../settings/settings.html",
-    "_blank",
-    `width=${settings_width},height=${settings_height},frame=true,autoHideMenuBar=true,nodeIntegration=yes,contextIsolation=false,` +
-      `icon=${__dirname}/../img/clipio.png`
-  );
+  ipcRenderer.send("launch-settings-window");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
